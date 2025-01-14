@@ -10,14 +10,21 @@ const SignUp = () => {
     dob: "",
     gender: "",
   });
-
+  
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isOtpPopupVisible, setOtpPopupVisible] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [verificationMessage, setVerificationMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleOtpChange = (e) => {
+    setOtp(e.target.value);
   };
 
   const validateForm = () => {
@@ -31,30 +38,36 @@ const SignUp = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-   
- const alertbox = ()=>{
-  document.write(alert("give me email or otp "))
- };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccessMessage("data is filled succesfully");
-    // setErrorMessage("something went wrong");
-
+    setSuccessMessage("Data is filled successfully");
     if (!validateForm()) return;
 
     try {
       const response = await axios.post("http://localhost:3001/users/register", formData);
-      console.log(formData);
-      
-       setSuccessMessage(response.data.message);
-    
+      setSuccessMessage(response.data.message);
+      setOtpPopupVisible(true); // Show OTP popup after successful sign up
     } catch (err) {
       if (err.response && err.response.data) {
         setErrorMessage(err.response.data.error || "Something went wrong.");
       } else {
         setErrorMessage("Unable to connect to the server.");
       }
+    }
+  };
+
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:3001/users/verify-otp", {
+        email: formData.email,
+        otp: otp,
+      });
+      setVerificationMessage(response.data.message); // Display success message
+    } catch (err) {
+      setVerificationMessage("Invalid OTP. Please try again.");
     }
   };
 
@@ -134,8 +147,39 @@ const SignUp = () => {
           {errors.gender && <p className="error">{errors.gender}</p>}
         </div>
 
-        <button type="submit" >Sign Up</button>
+        <button type="submit">Sign Up</button>
       </form>
+
+      {/* OTP Popup */}
+      {isOtpPopupVisible && (
+        <div className="otp-popup">
+          <div className="otp-popup-content">
+            <h3>Verify OTP</h3>
+            <form onSubmit={handleVerifyOtp}>
+              <div className="form-group">
+                <label>Email:</label>
+                <input type="email" value={formData.email} readOnly />
+              </div>
+              <div className="form-group">
+                <label>OTP:</label>
+                <input
+                  type="text"
+                  value={otp}
+                  onChange={handleOtpChange}
+                  required
+                />
+              </div>
+              <button type="submit">Verify OTP</button>
+            </form>
+            {verificationMessage && (
+              <p className={verificationMessage.includes("Invalid") ? "error" : "success"}>
+                {verificationMessage}
+              </p>
+            )}
+            <button onClick={() => setOtpPopupVisible(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
