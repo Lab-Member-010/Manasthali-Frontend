@@ -8,27 +8,11 @@
     "@testing-library/user-event": "^13.5.0",
     "ajv": "^8.17.1",
     "axios": "^1.7.9",
-<<<<<<< HEAD
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-=======
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1",
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/main
     "react-scripts": "5.0.1",
-=======
-    "react-scripts": "^5.0.1",
->>>>>>> origin/Tripti
-=======
-    "react-scripts": "^5.0.1",
-=======
->>>>>>> origin/main
-    "react-scripts": "5.0.1",
->>>>>>> origin/main
->>>>>>> origin/main
+    "socket.io-client": "^4.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
