@@ -16,11 +16,19 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
     "react-scripts": "5.0.1",
 =======
     "react-scripts": "^5.0.1",
 >>>>>>> origin/Tripti
+=======
+    "react-scripts": "^5.0.1",
+=======
+>>>>>>> origin/main
+    "react-scripts": "5.0.1",
+>>>>>>> origin/main
+>>>>>>> origin/main
     "web-vitals": "^2.1.4"
   },
   "scripts": {
