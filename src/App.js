@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Home from "./components/Home"
-import SignUp from "./components/Signup";
-import Signin from "./components/Signin";
-import Verifyotp from "./components/Verifyotp";
-import ForgetPassword from "./components/ForgetPassword";
-import ResetPassword from "./components/ResetPassword";
-import Quiz from "./components/Quiz";
+import Home from "./components/Home/Home"
+import SignUp from "./components/Authentication/Signup";
+import Signin from "./components/Authentication/Signin";
+import Verifyotp from "./components/Authentication/Verifyotp";
+import ForgetPassword from "./components/Authentication/ForgetPassword";
+import ResetPassword from "./components/Authentication/ResetPassword";
+import Quiz from "./components/Quiz/Quiz";
 
 const App = () => {
   return (
