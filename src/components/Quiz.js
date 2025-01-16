@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../public/css/Header.css';
 
 const questions = [
   "How much do you enjoy socializing with new people?",
@@ -39,7 +38,7 @@ const questions = [
   "Are you more comfortable with facts and data than with abstract ideas?",
 ];
 
-const Header = () => {
+const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [personalityType, setPersonalityType] = useState('');
@@ -116,4 +115,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Quiz;
