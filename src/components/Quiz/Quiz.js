@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";  // Import Toastify
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 import Api from "../../apis/Api";
+import "./Quiz.css";
 
 const questions = [
   "How much do you enjoy socializing with new people?",
