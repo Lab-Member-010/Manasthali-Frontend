@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 
 const Feed = () => {
-  const user = useSelector((state) => state.user.user);  // Access user data from Redux
-  const successMessage = useSelector((state) => state.user.successMessage); // Access success message from Redux
+  const user = useSelector((state) => state.user.user);  
+  const successMessage = useSelector((state) => state.user.successMessage); 
 
   return (
     <div>
