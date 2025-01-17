@@ -1,6 +1,7 @@
 import React from "react";
 import './Feed.css'
-import { FaBell } from "react-icons/fa"; // Importing a bell icon from react-icons
+import { FaBell } from "react-icons/fa";
+import { useSelector } from 'react-redux'; 
 
 const Feed = () => {
   const user = useSelector((state) => state.user.user);  
