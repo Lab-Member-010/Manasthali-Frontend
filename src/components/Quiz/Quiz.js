@@ -1,4 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";  // Import Toastify
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
+import Api from "../../apis/Api";
+import "./Quiz.css";
 
 const questions = [
   "How much do you enjoy socializing with new people?",
@@ -35,30 +42,35 @@ const questions = [
   "How often do you feel a sense of accomplishment after completing a task?",
   "Do you often feel the need to be in control of situations?",
   "How often do you find yourself worrying about your performance or success?",
-  "Are you more comfortable with facts and data than with abstract ideas?",
+  "Are you more comfortable with facts and data than with abstract ideas?"
+];
+
+const options = [
+  "Strongly Agree",
+  "Agree",
+  "Average",
+  "Disagree",
+  "Strongly Disagree"
 ];
 
 const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState([]);
-  const [personalityType, setPersonalityType] = useState('');
+  const [answers, setAnswers] = useState(Array(questions.length).fill(null));
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { token, isLoggedIn } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const calculateScores = (answers) => {
     const scores = { E_I: 0, S_N: 0, T_F: 0, J_P: 0 };
-
-    // Add points for each score based on answers
-    scores.E_I += answers[0] + answers[1] + answers[2] + answers[3];
-    scores.E_I -= answers[16] + answers[17] + answers[18] + answers[19];
-
-    scores.S_N += answers[4] + answers[5] + answers[6] + answers[7];
-    scores.S_N -= answers[20] + answers[21] + answers[22] + answers[23];
-
-    scores.T_F += answers[8] + answers[9] + answers[10] + answers[11];
-    scores.T_F -= answers[24] + answers[25] + answers[26] + answers[27];
-
-    scores.J_P += answers[12] + answers[13] + answers[14] + answers[15];
-    scores.J_P -= answers[28] + answers[29] + answers[30] + answers[31];
-
+    scores.E_I += answers[0] + answers[1] + answers[2] + answers[3]; // Extraversion
+    scores.E_I -= answers[16] + answers[17] + answers[18] + answers[19]; // Introversion
+    scores.S_N += answers[4] + answers[5] + answers[6] + answers[7]; // Sensing
+    scores.S_N -= answers[20] + answers[21] + answers[22] + answers[23]; // Intuition
+    scores.T_F += answers[8] + answers[9] + answers[10] + answers[11]; // Thinking
+    scores.T_F -= answers[24] + answers[25] + answers[26] + answers[27]; // Feeling
+    scores.J_P += answers[12] + answers[13] + answers[14] + answers[15]; // Judging
+    scores.J_P -= answers[28] + answers[29] + answers[30] + answers[31]; // Perceiving
     return scores;
   };
 
@@ -71,45 +83,90 @@ const Quiz = () => {
     return personality.join('');
   };
 
-  const calculateAndDisplayResults = () => {
-    const scores = calculateScores(answers);
-    const personality = getPersonalityType(scores);
-    setPersonalityType(personality); // Update the personalityType
+  const handleOptionSelect = (index, answer) => {
+    const newAnswers = [...answers];
+    newAnswers[index] = answer;
+    setAnswers(newAnswers);
   };
 
-  const submitAnswer = (answer) => {
-    const updatedAnswers = [...answers, answer];
-    setAnswers(updatedAnswers); // Update answers
+  const handleSubmit = async () => {
+    if (answers.includes(null)) {
+      toast.error("Please answer all the questions before submitting.");
+      return;
+    }
 
-    // Proceed to next question or show result if it's the last question
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      calculateAndDisplayResults(); // Calculate and display personality when all questions are answered
+    const scores = calculateScores(answers);
+    const personality = getPersonalityType(scores);
+    setIsLoading(true);
+
+    try {
+      if (!isLoggedIn || !token) {
+        toast.error("You are not logged in. Please log in first.");
+        setIsLoading(false);
+        return;
+      }
+
+      const quizResponse = await axios.post(
+        Api.SUBMIT_QUIZ,
+        { answers },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (quizResponse.status !== 200) throw new Error("Error submitting quiz.");
+
+      toast.success("Quiz submitted successfully!");
+      setIsLoading(false);
+      navigate("/feed");
+    } catch (error) {
+      console.error("Error submitting quiz:", error);
+      toast.error("There was an error submitting the quiz. Please try again.");
+      setIsLoading(false);
     }
   };
 
+  const goToPrevious = () => {
+    if (currentQuestionIndex > 0) setCurrentQuestionIndex(currentQuestionIndex - 1);
+  };
+
+  const goToNext = () => {
+    if (currentQuestionIndex < questions.length - 1) setCurrentQuestionIndex(currentQuestionIndex + 1);
+  };
+
   return (
-    <div className="App">
+    <div className="quiz-container">
       <div className="question-container">
-        {personalityType ? (
-          <div id="result" className="result">
-            Your personality type is: {personalityType}
-          </div>
-        ) : (
-          <div>
-            <div id="question" className="question">
-              {questions[currentQuestionIndex]}
-            </div>
-            <div className="options">
-              {[1, 2, 3, 4].map((option) => (
-                <button key={option} onClick={() => submitAnswer(option)}>
-                  {option}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+        <div id="question" className="question">
+          {questions[currentQuestionIndex]}
+        </div>
+        <div className="options">
+          {options.map((option, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleOptionSelect(currentQuestionIndex, idx + 1)}
+              style={{
+                backgroundColor: answers[currentQuestionIndex] === idx + 1 ? "#007bff" : "#ccc",
+              }}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+        <div className="navigation-buttons">
+          <button onClick={goToPrevious} disabled={currentQuestionIndex === 0}>
+            Previous
+          </button>
+          {currentQuestionIndex === questions.length - 1 ? (
+            <button onClick={handleSubmit} disabled={isLoading}>
+              {isLoading ? "Submitting..." : "Submit Quiz"}
+            </button>
+          ) : (
+            <button onClick={goToNext}>Next</button>
+          )}
+        </div>
       </div>
     </div>
   );

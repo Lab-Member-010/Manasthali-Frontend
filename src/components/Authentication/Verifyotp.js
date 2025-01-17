@@ -1,42 +1,55 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Verifyotp.css";
 
 const Verifyotp = () => {
   const [otp, setOtp] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  const email = location.state?.email || ""; // Retrieve email from state
-
+  const email = location.state?.email || ""; 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.post("http://localhost:3001/users/verify-otp", { email, otp });
-      setMessage(response.data.message);
-      setError("");
-      navigate("/signin"); // Navigate to Sign-In on success
+      const response = await axios.post("http://localhost:3001/users/verify-otp", {
+        email,
+        otp,
+      });
+
+      if (response.status === 200) {
+        // Show success toast and navigate to sign-in
+        toast.success(response.data.message);
+        navigate("/signin");
+      }
     } catch (err) {
-      setError(err.response?.data?.error || "Invalid OTP.");
+      // Show error toast
+      const errorMessage = err.response?.data?.error || "Invalid OTP.";
+      toast.error(errorMessage);
     }
   };
 
   return (
     <div className="otp-popup">
-      <form onSubmit={handleSubmit}>
+      <ToastContainer />
+      <div className="otp-box">
         <h2>Verify OTP</h2>
-        <input
-          type="text"
-          value={otp}
-          onChange={(e) => setOtp(e.target.value)}
-          placeholder="Enter OTP"
-          required
-        />
-        <button type="submit">Verify OTP</button>
-        {error && <p className="error-message">{error}</p>}
-        {message && <p className="success-message">{message}</p>}
-      </form>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            placeholder="Enter OTP"
+            required
+          />
+          <button type="submit" className="btn btn-primary w-100">
+            Verify OTP
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
