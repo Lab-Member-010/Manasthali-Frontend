@@ -14,7 +14,7 @@
 .home-container h1 {
   font-size: 4rem;
   font-weight: 600;
-  color: #343a40;
+  color: #474f57;
   margin-bottom: 30px;
   text-transform: uppercase;
 }
@@ -60,21 +60,21 @@
 
  
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .home-container {
       padding: 30px;
       transform: translateY(0);
       animation: none;
       width: 90%;  
-  }
+  } */
 
-  .custom-btn, .custom-btn-outline {
+  /* .custom-btn, .custom-btn-outline {
       width: 100%;
       padding: 16px 0;
       font-size: 1.2rem;
-  }
+  } */
 
-  .home-container h1 {
+  /* .home-container h1 {
       font-size: 2.5rem;
-  }
-}
+  } */
+/* } */
