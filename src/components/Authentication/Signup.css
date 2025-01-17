@@ -1,0 +1,44 @@
+/* Center the signup container within the viewport */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Style the signup box */
+  .signup-box {
+    width: 30%;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  /* Center the heading with a dark background and white text */
+  .signup-box h2 {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  /* Add margin to the bottom of each form group */
+  .signup-box .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Style the error text */
+  .signup-box .error-text {
+    color: red;
+    font-size: 0.875em;
+  }
+  
+  /* Style the submit button */
+  .signup-box .btn-primary {
+    width: 100%;
+  }
+  

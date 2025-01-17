@@ -5,6 +5,8 @@ import { setUser } from "../../redux-config/UserSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Api from "../../apis/Api";
+import "./Signin.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -16,29 +18,26 @@ export default function SignIn() {
   // Handle Sign-in
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await axios.post(Api.SIGN_IN, { email, password });
-
-      // Log the response data to debug
       console.log("API response:", response.data);
 
-      // Dispatch the user data to Redux
-      dispatch(setUser({
-        user: response.data.user,
-        message: response.data.message,
-        token: response.data.token,
-        isLoggedIn: true, // Ensure this is dispatched correctly
-      }));
+      dispatch(
+        setUser({
+          user: response.data.user,
+          message: response.data.message,
+          token: response.data.token,
+          isLoggedIn: true,
+        })
+      );
 
-      // After successful login, navigate to the appropriate page
       if (response.data.user.personality_type) {
-        navigate("/feed"); // Redirect to feed page if user has personality_type
+        navigate("/feed");
       } else {
-        navigate("/quiz-start"); // Redirect to quiz if user doesn't have personality_type
+        navigate("/quiz-start");
       }
     } catch (err) {
-      console.log("Error:", err);
+      console.error("Error:", err);
       toast.error("Invalid credentials");
     }
   };
@@ -46,11 +45,11 @@ export default function SignIn() {
   // Handle Forgot Password
   const handleForgotPassword = async () => {
     try {
-      const response = await axios.post(Api.FORGOT_PASSWORD, { email });
+      await axios.post(Api.FORGOT_PASSWORD, { email });
       toast.success("Password reset link sent to your email.");
-      setForgotPassword(false); // Close the forgot password modal
+      setForgotPassword(false);
     } catch (err) {
-      console.log("Error:", err);
+      console.error("Error:", err);
       toast.error("Failed to send password reset link.");
     }
   };
@@ -58,75 +57,79 @@ export default function SignIn() {
   return (
     <>
       <ToastContainer />
-      <div className="container d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-        <div className="" style={{ width: "30%", height: "auto", boxShadow: "10px 10px 10px 10px grey" }}>
-          <h3 className="bg-dark text-white text-center p-2">Sign in</h3>
-
-          {/* Sign In Form */}
+      <div className="container d-flex justify-content-center align-items-center min-vh-100">
+        <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "400px" }}>
+          <h3 className="text-center mb-4">
+            {forgotPassword ? "Reset Password" : "Sign In"}
+          </h3>
           {!forgotPassword ? (
-            <form className="p-3" onSubmit={handleSubmit}>
-              <div className="form-group">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
                 <input
-                  onChange={(event) => setEmail(event.target.value)}
-                  type="text"
-                  placeholder="Enter email id"
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter email"
                   className="form-control"
+                  required
                 />
               </div>
-              <div className="form-group">
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
                 <input
-                  onChange={(event) => setPassword(event.target.value)}
                   type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter password"
                   className="form-control"
+                  required
                 />
               </div>
-              <div className="form-group">
-                <button style={{ width: "100%" }} className="btn btn-outline-secondary">
-                  Submit
-                </button>
-              </div>
-              <div className="text-center">
-                <button
-                  type="button"
-                  className="btn btn-link"
-                  onClick={() => setForgotPassword(true)} // Switch to forgot password view
-                >
-                  Forgot Password?
-                </button>
-              </div>
+              <button type="submit" className="btn btn-primary w-100">
+                Sign In
+              </button>
+              <button
+                type="button"
+                className="btn btn-link w-100 mt-3"
+                onClick={() => setForgotPassword(true)}
+              >
+                Forgot Password?
+              </button>
             </form>
           ) : (
-            // Forgot Password Form
-            <div className="p-3">
-              <div className="form-group">
+            <form onSubmit={handleForgotPassword}>
+              <div className="mb-3">
+                <label htmlFor="reset-email" className="form-label">
+                  Email
+                </label>
                 <input
-                  onChange={(event) => setEmail(event.target.value)}
-                  type="text"
-                  placeholder="Enter your email to reset password"
+                  type="email"
+                  id="reset-email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
                   className="form-control"
+                  required
                 />
               </div>
-              <div className="form-group">
-                <button
-                  type="button"
-                  onClick={handleForgotPassword}
-                  style={{ width: "100%" }}
-                  className="btn btn-outline-secondary"
-                >
-                  Send Reset Link
-                </button>
-              </div>
-              <div className="text-center">
-                <button
-                  type="button"
-                  className="btn btn-link"
-                  onClick={() => setForgotPassword(false)} // Go back to login view
-                >
-                  Back to Sign In
-                </button>
-              </div>
-            </div>
+              <button type="submit" className="btn btn-secondary w-100">
+                Send Reset Link
+              </button>
+              <button
+                type="button"
+                className="btn btn-link w-100 mt-3"
+                onClick={() => setForgotPassword(false)}
+              >
+                Back to Sign In
+              </button>
+            </form>
           )}
         </div>
       </div>

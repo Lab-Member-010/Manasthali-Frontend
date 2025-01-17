@@ -3,6 +3,10 @@ import './Feed.css'
 import { FaBell } from "react-icons/fa"; // Importing a bell icon from react-icons
 
 function Feed() {
+const Feed = () => {
+  const user = useSelector((state) => state.user.user);  
+  const successMessage = useSelector((state) => state.user.successMessage); 
+
   return (
     <div className="container-fluid vh-100 d-flex flex-column">
       {/* Top Search Bar */}
