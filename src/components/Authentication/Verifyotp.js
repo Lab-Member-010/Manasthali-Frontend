@@ -10,8 +10,7 @@ const Verifyotp = () => {
   const [otp, setOtp] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  const email = location.state?.email || ""; // Retrieve email from state
-
+  const email = location.state?.email || ""; 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
