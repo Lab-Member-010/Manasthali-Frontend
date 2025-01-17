@@ -6,22 +6,19 @@ body {
 }
 
 .signin-container {
-  background-color:aliceblue;
+   
   width: 600px;
   height: 600px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;  
+  align-items: center;  
 }
 
- 
 .signin-box {
   background-color: white;
   border-radius: 8px;
   width: 100%;
   max-width: 400px; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 30px;
 }
 
@@ -34,12 +31,12 @@ body {
 
  
 .form-control:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #555554;
+  box-shadow: 0 0 5px rgba(174, 54, 230, 0.5);
   outline: none;
 }
 
- 
+
 .error-message {
   font-size: 0.9rem;
   color: #e74c3c;
