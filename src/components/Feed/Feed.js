@@ -2,7 +2,6 @@ import React from "react";
 import './Feed.css'
 import { FaBell } from "react-icons/fa"; // Importing a bell icon from react-icons
 
-function Feed() {
 const Feed = () => {
   const user = useSelector((state) => state.user.user);  
   const successMessage = useSelector((state) => state.user.successMessage); 
