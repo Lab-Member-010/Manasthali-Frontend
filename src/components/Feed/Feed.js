@@ -11,7 +11,7 @@ import {
   Notifications as NotificationsIcon,
 } from "@mui/icons-material";
 import "./Feed.css";
-import ManasthaliLogo from "../Feed/Manasthali.png";
+import ManasthaliLogo from "../../images/Manasthali.png";
 
 const Feed = () => {
   const [isLeftHover, setIsLeftHover] = useState(false);
