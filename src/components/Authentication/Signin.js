@@ -59,6 +59,8 @@ export default function SignIn() {
       <ToastContainer />
       <div className="container d-flex justify-content-center align-items-center min-vh-100">
         <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "400px" }}>
+        <div className="signin-box shadow-lg p-4">
+        <div className="signin-logo"></div>  {/* Add the logo here */}
           <h3 className="text-center mb-4">
             {forgotPassword ? "Reset Password" : "Sign In"}
           </h3>
@@ -131,6 +133,7 @@ export default function SignIn() {
               </button>
             </form>
           )}
+        </div>
         </div>
       </div>
     </>

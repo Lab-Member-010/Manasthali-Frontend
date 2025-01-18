@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import SignUp from "./components/Authentication/Signup";
 import Signin from "./components/Authentication/Signin";
@@ -10,10 +10,12 @@ import QuizGetStarted from "./components/Quiz/QuizGetStarted";
 import Quiz from "./components/Quiz/Quiz";
 import Feed from "./components/Feed/Feed";
 import Auth from "./components/Authorization/Auth";
+// import ChatApp from './components/Chats/Chat';
+
 
 const App = () => {
   return (
-    <Router>
+    <>
       <Routes>
         {/* Home Page */}
         <Route path="/" element={<Home />} />
@@ -42,8 +44,13 @@ const App = () => {
         {/* Feed Page */}
         <Route path="/feed" element={<Auth><Feed /></Auth>} />
       </Routes>
-    </Router>
+       
+       {/* Messages Page */}
+       {/* <Route path="/message" element={<Auth><Message /></Auth>} */}
+      {/* <div className="App">
+      <ChatApp/>
+    </div> */}
+    </>
   );
 };
-
 export default App;

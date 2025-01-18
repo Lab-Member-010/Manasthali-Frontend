@@ -1,0 +1,49 @@
+.chat__section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .brand img {
+    margin-right: 10px;
+  }
+  
+  .message__area {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+  
+  .message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    max-width: 75%;
+  }
+  
+  .message.outgoing {
+    background-color: #d1e7dd;
+    align-self: flex-end;
+  }
+  
+  .message.incoming {
+    background-color: #f8d7da;
+    align-self: flex-start;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

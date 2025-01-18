@@ -1,8 +1,18 @@
-  
+ 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color:transparent;
+}
+
+.signin-logo {
+  width: 100px;
+  height: 100px;
+  background-image: url("D:\Projects\Frontend\Manasthali-Frontend\public\Manasthali.png"); /* Replace with your actual logo URL */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 10px auto;
 }
 
 .signin-container {
