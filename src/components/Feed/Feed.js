@@ -9,7 +9,7 @@ import {
   Chat as ChatIcon,
   Groups as GroupsIcon,
   Notifications as NotificationsIcon,
-} from "@mui/icons-material";
+} from "@mui/icons-material";  
 import "./Feed.css";
 import ManasthaliLogo from "../../images/Manasthali.png";
 
