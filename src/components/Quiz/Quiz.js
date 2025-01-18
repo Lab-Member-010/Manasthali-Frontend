@@ -45,14 +45,6 @@ const questions = [
   "Are you more comfortable with facts and data than with abstract ideas?"
 ];
 
-const options = [
-  "Strongly Agree",
-  "Agree",
-  "Average",
-  "Disagree",
-  "Strongly Disagree"
-];
-
 const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
@@ -94,18 +86,19 @@ const Quiz = () => {
       toast.error("Please answer all the questions before submitting.");
       return;
     }
-
+  
     const scores = calculateScores(answers);
     const personality = getPersonalityType(scores);
     setIsLoading(true);
-
+  
     try {
       if (!isLoggedIn || !token) {
         toast.error("You are not logged in. Please log in first.");
         setIsLoading(false);
         return;
       }
-
+  
+      console.log('Submitting quiz...');
       const quizResponse = await axios.post(
         Api.SUBMIT_QUIZ,
         { answers },
@@ -115,9 +108,9 @@ const Quiz = () => {
           },
         }
       );
-
+  
       if (quizResponse.status !== 200) throw new Error("Error submitting quiz.");
-
+  
       toast.success("Quiz submitted successfully!");
       setIsLoading(false);
       navigate("/feed");
@@ -127,6 +120,7 @@ const Quiz = () => {
       setIsLoading(false);
     }
   };
+  
 
   const goToPrevious = () => {
     if (currentQuestionIndex > 0) setCurrentQuestionIndex(currentQuestionIndex - 1);
@@ -137,23 +131,27 @@ const Quiz = () => {
   };
 
   return (
-    <div className="quiz-container">
-      <div className="question-container">
-        <div id="question" className="question">
-          {questions[currentQuestionIndex]}
-        </div>
-        <div className="options">
-          {options.map((option, idx) => (
-            <button
-              key={idx}
-              onClick={() => handleOptionSelect(currentQuestionIndex, idx + 1)}
-              style={{
-                backgroundColor: answers[currentQuestionIndex] === idx + 1 ? "#007bff" : "#ccc",
-              }}
-            >
-              {option}
-            </button>
-          ))}
+    <div className="quiz-wrapper">
+      <div className="quiz-container">
+        <div className="question-container">
+          <div id="question" className="question">
+            {questions[currentQuestionIndex]}
+          </div>
+          <div className="slider-options">
+            <span className="label">Agree</span>
+            <div className="circles">
+              {[1, 2, 3, 4, 5].map((value) => (
+                <div
+                  key={value}
+                  className={`circle circle-${value} ${
+                    answers[currentQuestionIndex] === value ? "active" : ""
+                  }`}
+                  onClick={() => handleOptionSelect(currentQuestionIndex, value)}
+                ></div>
+              ))}
+            </div>
+            <span className="label">Disagree</span>
+          </div>
         </div>
         <div className="navigation-buttons">
           <button onClick={goToPrevious} disabled={currentQuestionIndex === 0}>

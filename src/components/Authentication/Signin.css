@@ -2,7 +2,10 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color:transparent;
+  background-image: url('train.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .signin-container {
@@ -15,7 +18,7 @@ body {
 }
 
 .signin-box {
-  background-color: white;
+  background-color: transparent;
   border-radius: 8px;
   width: 100%;
   max-width: 400px; 
