@@ -1,72 +1,97 @@
-import React from "react";
-import './Feed.css'
-import { FaBell } from "react-icons/fa";
-import { useSelector } from 'react-redux'; 
+import React, { useState } from "react";
+import {
+  Home as HomeIcon,
+  Group as GroupIcon,
+  AutoStories as AutoStoriesIcon,
+  Event as EventIcon,
+  WorkspacePremium as WorkspacePremiumIcon,
+  AccountCircle as AccountCircleIcon,
+  Chat as ChatIcon,
+  Groups as GroupsIcon,
+  Notifications as NotificationsIcon,
+} from "@mui/icons-material";
+import "./Feed.css";
+import ManasthaliLogo from "../Feed/Manasthali.png";
 
 const Feed = () => {
-  const user = useSelector((state) => state.user.user);  
-  const successMessage = useSelector((state) => state.user.successMessage); 
+  const [isLeftHover, setIsLeftHover] = useState(false);
+  const [isRightHover, setIsRightHover] = useState(false);
 
   return (
-    <div className="container-fluid vh-100 d-flex flex-column">
-      {/* Top Search Bar */}
-      <header className="navbar bg-light p-3 d-flex justify-content-between align-items-center">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="form-control"
-          style={{ maxWidth: "500px" }}
-        />
-        {/* Notification Icon */}
-        <div className="ms-3">
-          <button
-            type="button"
-            className="btn btn-outline-secondary position-relative"
-          >
-            <FaBell />
-            <span
-              className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-              style={{ fontSize: "0.75rem" }}
-            >
-              3
-              <span className="visually-hidden">unread notifications</span>
-            </span>
+    <div className="main-container">
+      {/* Header */}
+      <div className="header">
+        <div className="header-left">
+          <img className="rotating-logo" src={ManasthaliLogo} alt="Manasthali Logo" width={70} height={70} />
+          <div className="site-logo">Manasthali</div>
+        </div>
+        <div className="header-right">
+          <input type="text" placeholder="Search..." className="search-bar" />
+          <button className="menu-button">
+            <NotificationsIcon style={{ fontSize: 30, color:"#a06bba" }} />
           </button>
         </div>
-      </header>
+      </div>
 
-      <div className="row flex-grow-1">
+      {/* Content Section */}
+      <div className="content-container">
         {/* Left Navbar */}
-        <nav className="col-md-1 text-white py-3  align-items-center" style={{background:"#c8abd9"}}>
-          <ul className="nav flex-column">
-            <li className="nav-item">Home</li>
-            <li className="nav-item">About</li>
-            <li className="nav-item">Services</li>
-            <li className="nav-item">Contact</li>
-          </ul>
-        </nav>
+        <div
+          className="left-navbar"
+          onMouseEnter={() => setIsLeftHover(true)}
+          onMouseLeave={() => setIsLeftHover(false)}
+        >
+          <div className="nav-item">
+            <HomeIcon style={{ fontSize: 30, color: "black" }} />
+            {isLeftHover && <div className="hover-text">Home</div>}
+          </div>
+          <div className="nav-item">
+            <GroupIcon style={{ fontSize: 30, color: "black" }} />
+            {isLeftHover && <div className="hover-text">Group</div>}
+          </div>
+          <div className="nav-item">
+            <AutoStoriesIcon style={{ fontSize: 30, color: "black" }} />
+            {isLeftHover && <div className="hover-text">Stories</div>}
+          </div>
+          <div className="nav-item">
+            <EventIcon style={{ fontSize: 30, color: "black" }} />
+            {isLeftHover && <div className="hover-text">Events</div>}
+          </div>
+          <div className="nav-item">
+            <WorkspacePremiumIcon style={{ fontSize: 30, color: "black" }} />
+            {isLeftHover && <div className="hover-text">Premium</div>}
+          </div>
+        </div>
 
-        {/* Main Section */}
-        <div className="col-md-10 py-3" >
-        <div className="main">
-        <h1>Wellcome to Manasthali  </h1>
-        <p>this is your social page please scroll it.
-        </p>
-        </div>
-        </div>
+        {/* Main Content */}
+        <div className="mid-part">Main Content Area</div>
 
         {/* Right Navbar */}
-        <nav className="col-md-1  py-3 right-nav" style={{background:"#abc6d9"} }>
-          <ul className="nav flex-column">
-            <li className="nav-item">Profile</li>
-            <li className="nav-item">Settings</li>
-            <li className="nav-item">Notifications</li>
-            <li className="nav-item">Logout</li>
-          </ul>
-        </nav>
+        <div className="right-navbar">
+          <div
+            className="nav-item"
+            onMouseEnter={() => setIsRightHover(true)}
+            onMouseLeave={() => setIsRightHover(false)}
+          >
+            <AccountCircleIcon style={{ fontSize: 30, color: "black" }} />
+          </div>
+          {isRightHover && (
+            <div className="hover-menu right-hover-menu">
+              <div className="hover-item">Account</div>
+              <div className="hover-item">Settings</div>
+              <div className="hover-item">Logout</div>
+            </div>
+          )}
+          <div className="nav-item">
+            <GroupsIcon style={{ fontSize: 30, color: "black" }} />
+          </div>
+          <div className="nav-item">
+            <ChatIcon style={{ fontSize: 30, color: "black" }} />
+          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default Feed;
