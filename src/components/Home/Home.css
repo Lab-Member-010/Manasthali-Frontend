@@ -1,3 +1,4 @@
+/* Background container */
 .background-container {
   background-image: url('../../images/amusement-park.jpg');
   background-size: cover;
@@ -5,52 +6,37 @@
   background-attachment: fixed;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end; /* Align content to the right */
   align-items: center;
+  padding-right: 50px; /* Space from the right edge */
 }
 
-/* Home container with white background */
+/* Home container with transparent background */
 .home-container {
-  background-color: transparent; /* White background with opacity */
+  background-color: transparent; /* No background color */
   padding: 50px;
   border-radius: 20px;
   text-align: center;
   width: 500px;
   max-width: 1000px;
+  position: relative; /* Ensure correct positioning */
+  right: 0; /* Align to the right of the container */
 }
 
 /* Style the title */
-.home-container h1 {
+.home-container h3 {
   font-size: 4rem;
   font-weight: 600;
-  color: #000;
+  color: #000; /* Black text color */
   margin-bottom: 30px;
 }
 
-/* Button styles - light purple */
-.custom-btn {
-  background-color: #c0a0d8; /* Light purple color */
-  color: #c0a0d8;
-  font-weight: bold;
-  padding: 14px 24px;
-  border-radius: 10px;
-  border: none;
-  transition: all 0.4s ease;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Button hover effect - dark purple */
-.custom-btn.custom-btn:hover {
-  background-color: #059e9c !important; /* Dark purple color */
-  transform: scale(1);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Button outline styles - light purple */
+/* Button styles - black border and text */
+.custom-btn,
 .custom-btn-outline {
-  border-color: white; /* Light purple border */
-  color: white; /* Light purple text color */
+  border-color: black; /* Black border */
+  color: black; /* Black text */
+  background-color: transparent; /* Transparent background */
   font-weight: bold;
   padding: 14px 24px;
   border-radius: 10px;
@@ -60,10 +46,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Button outline hover effect - dark purple */
+/* Button hover effect - light blue fill */
+.custom-btn:hover,
 .custom-btn-outline:hover {
-  background-color: #3ef0ed; /* Dark purple background */
-  color: white; /* White text on hover */
-  transform: scale(1.1);
+  background-color: transparent; /* Light blue background on hover */
+  color: black; /* Keep text black on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
