@@ -1,44 +1,92 @@
-
 .signup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  /* Style the signup box */
-  .signup-box {
-    width: 30%;
-    max-width: 400px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
-  }
-  
-  /* Center the heading with a dark background and white text */
-  .signup-box h2 {
-    background-color: #343a40;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-  }
-  
-  /* Add margin to the bottom of each form group */
-  .signup-box .form-group {
-    margin-bottom: 15px;
-  }
-  
-  /* Style the error text */
-  .signup-box .error-text {
-    color: red;
-    font-size: 0.875em;
-  }
-  
-  /* Style the submit button */
-  .signup-box .btn-primary {
-    width: 100%;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1); /* Slightly translucent background */
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+}
+
+.signup-box {
+  background-color: transparent; /* Matching sign-in page style */
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  text-align: left;
+}
+
+.signup-box h2 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.signup-box .form-group {
+  margin-bottom: 20px;
+}
+
+.signup-box .form-group label {
+  font-size: 0.9rem;
+  color: #ccc; /* Lighter label for contrast */
+  margin-bottom: 5px;
+}
+
+.signup-box .form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: rgba(0, 0, 0, 0.5); /* Darker background for better visibility */
+  color: white;
+}
+
+.signup-box .form-control:focus {
+  border-color: #555554;
+  box-shadow: 0 0 5px rgba(174, 54, 230, 0.5);
+  outline: none;
+}
+
+.signup-box .error-text {
+  font-size: 0.9rem;
+  color: #e74c3c;
+  margin: 5px 0 0 5px;
+}
+
+.signup-box .btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  background: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.signup-box .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.signup-box .alert {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.signup-logo {
+  width: 100px;
+  height: 100px;
+  background-image: url("../../images/Manasthali.png"); /* Ensure the logo path is correct */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 10px auto;
+}
