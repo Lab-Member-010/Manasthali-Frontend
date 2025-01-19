@@ -41,7 +41,7 @@ const SignUp = () => {
     if (!validateForm()) return;
 
     try {
-      const response = await axios.post(Api.SIGN_UP,formData);
+      const response = await axios.post(Api.SIGN_UP, formData);
       setSuccessMessage(response.data.message);
       setErrorMessage("");
       navigate("/verify-otp", { state: { email: formData.email } });
@@ -53,6 +53,8 @@ const SignUp = () => {
   return (
     <div className="signup-container">
       <div className="signup-box">
+         {/* Ensure the logo path is correct */}
+        <div className="signup-logo"></div>
         <h2>Sign Up</h2>
         {successMessage && (
           <p className="alert alert-success">{successMessage}</p>
@@ -67,6 +69,7 @@ const SignUp = () => {
               value={formData.email}
               onChange={handleChange}
               className="form-control"
+              required
             />
             {errors.email && <p className="error-text">{errors.email}</p>}
           </div>
@@ -78,6 +81,7 @@ const SignUp = () => {
               value={formData.password}
               onChange={handleChange}
               className="form-control"
+              required
             />
             {errors.password && <p className="error-text">{errors.password}</p>}
           </div>
@@ -89,6 +93,7 @@ const SignUp = () => {
               value={formData.username}
               onChange={handleChange}
               className="form-control"
+              required
             />
             {errors.username && <p className="error-text">{errors.username}</p>}
           </div>
@@ -100,6 +105,7 @@ const SignUp = () => {
               value={formData.contact}
               onChange={handleChange}
               className="form-control"
+              required
             />
             {errors.contact && <p className="error-text">{errors.contact}</p>}
           </div>
@@ -111,6 +117,7 @@ const SignUp = () => {
               value={formData.dob}
               onChange={handleChange}
               className="form-control"
+              required
             />
             {errors.dob && <p className="error-text">{errors.dob}</p>}
           </div>
@@ -121,6 +128,7 @@ const SignUp = () => {
               value={formData.gender}
               onChange={handleChange}
               className="form-control"
+              required
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
