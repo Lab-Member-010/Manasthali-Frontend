@@ -1,0 +1,69 @@
+.background-container {
+  background-image: url('../../images/amusement-park.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Home container with white background */
+.home-container {
+  background-color: transparent; /* White background with opacity */
+  padding: 50px;
+  border-radius: 20px;
+  text-align: center;
+  width: 500px;
+  max-width: 1000px;
+}
+
+/* Style the title */
+.home-container h1 {
+  font-size: 4rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+/* Button styles - light purple */
+.custom-btn {
+  background-color: #c0a0d8; /* Light purple color */
+  color: #c0a0d8;
+  font-weight: bold;
+  padding: 14px 24px;
+  border-radius: 10px;
+  border: none;
+  transition: all 0.4s ease;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Button hover effect - dark purple */
+.custom-btn.custom-btn:hover {
+  background-color: #059e9c !important; /* Dark purple color */
+  transform: scale(1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Button outline styles - light purple */
+.custom-btn-outline {
+  border-color: white; /* Light purple border */
+  color: white; /* Light purple text color */
+  font-weight: bold;
+  padding: 14px 24px;
+  border-radius: 10px;
+  border: 2px solid;
+  transition: all 0.4s ease;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Button outline hover effect - dark purple */
+.custom-btn-outline:hover {
+  background-color: #3ef0ed; /* Dark purple background */
+  color: white; /* White text on hover */
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}

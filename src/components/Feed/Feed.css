@@ -10,6 +10,7 @@
   display: flex;
   flex: 1;
   width: 100%;
+  margin-top: 18px;
 }
 
 /* Left Navbar */
@@ -24,6 +25,7 @@
   justify-content: start;
   border-right: 1px solid #ccc;
   overflow-y: auto;
+
 }
 
 .right-navbar {
@@ -89,6 +91,12 @@
   padding: 10px 20px;
   background-color: #ead6e8;
   border-bottom: 1px solid #ddd;
+  position: fixed; 
+  top: 0;
+  left: 0; 
+  right: 0; 
+  z-index: 1000; 
+ 
 }
 
 .header-left,
@@ -146,8 +154,7 @@
   background: linear-gradient(45deg, 
     #1a5a6d, 
     #39a4bf, 
-    #2d9ec0, 
-    #4c5fa0, 
+    #25768a, 
     #8d7fd2, 
     #7c5fb5, 
     #a06bba, 
@@ -155,7 +162,7 @@
     #e0718e
   );
    -webkit-background-clip: text;
-   background-clip: border-box ;
+   /* background-clip: border-box ; */
   -webkit-text-fill-color: transparent;
   color: transparent; 
   display:inline;
@@ -201,5 +208,105 @@
 
 /* Optional: Add hover effect to navbar */
 .left-navbar:hover {
-  background-color: #f4f4f4; /* Optional: Change background on hover */
+  background-color: #cfc4de; /* Optional: Change background on hover */
+}
+/* Add styles for dropdown menu */
+.left-navbar {
+  position: relative;
+  width: 70px; /* Default collapsed width */
+  transition: width 0.3s ease;
+}
+
+.left-navbar.hovered {
+  width: 200px; /* Expanded width on hover */
+}
+
+.left-navbar .nav-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.left-navbar .icon-text {
+  margin-left: 10px;
+  display: none; /* Initially hidden */
+}
+
+.left-navbar.hovered .icon-text {
+  display: inline; /* Show text on hover */
+}      
+
+
+.dropdown-menu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: rgb(206, 171, 171);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #a1729c;
+}
+/* Styling for the mid-part container */
+.mid-part {
+  width: 100%; /* Adjust width as needed */
+  height: 700px; 
+  overflow: hidden; /* Prevent overflow outside the container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #b59dc9; */
+  border: 2px solid #a6a0ca; 
+  position: relative; 
+  background: linear-gradient(
+    to right, 
+    #2d9bbd, 
+    #aac9d1, 
+    #8d7fd2, 
+    #7c5fb5, 
+    #a06bba, 
+    #e584b5, 
+    #e9bdc9
+  );
+}     
+
+
+.mid-part > div {
+  width: 70%; 
+  max-height: 100%;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  padding: 15px; 
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); 
+  scrollbar-width: thin; 
+  scrollbar-color: #e889e0 #f5f5f5; 
+  background-color: rgb(189, 189, 215);
+}
+
+/* For modern browsers: Custom scrollbar */
+.mid-part > div::-webkit-scrollbar {
+  width: 8px; /* Scrollbar width */
+}
+
+.mid-part > div::-webkit-scrollbar-thumb {
+  background: #b09db9; 
+  border-radius: 4px; /* Rounded corners */
+}
+
+.mid-part > div::-webkit-scrollbar-thumb:hover {
+  background: #8a4d9e; /* Darker thumb on hover */
+}
+
+.mid-part > div::-webkit-scrollbar-track {
+  background: #638190; /* Scrollbar track color */
 }
