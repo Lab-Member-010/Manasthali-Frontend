@@ -17,13 +17,13 @@ const Home = () => {
             </p>
             <div className="d-grid gap-3 col-6 mx-auto mt-4">
               <button
-                className="btn btn-outline-secondary btn-lg custom-btn"
+                className="btn custom-btn"
                 onClick={() => navigate("/signup")}
               >
                 Sign Up
               </button>
               <button
-                className="btn btn-outline-secondary btn-lg custom-btn"
+                className="btn custom-btn"
                 onClick={() => navigate("/signin")}
               >
                 Sign In

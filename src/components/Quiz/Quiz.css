@@ -156,3 +156,161 @@ button:disabled {
 button:hover:not(:disabled) {
   background-color: #804ba4;
 }
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.quiz-wrapper {
+  background-image: url("https://i.pinimg.com/originals/cf/85/d9/cf85d966c302f3728a0e8f81805c132a.gif"); /* Replace with your actual image path */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.quiz-container {
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent background for glass effect */
+  border-radius: 15px;
+  padding: 40px;
+  width: 700px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px); /* Adds the glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Semi-transparent border */
+}
+
+.question-container {
+  text-align: center;
+}
+
+.question {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: #333; /* Ensure text is readable */
+}
+
+.slider-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: 1.2rem;
+  width: 15%;
+  text-align: center;
+  color: #333; /* Ensure text is readable */
+}
+
+.circles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid yellow;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.circle-1 {
+  width: 50px;
+  height: 50px;
+  border-color:  #66BB6A;
+}
+
+.circle-2 {
+  width: 40px;
+  height: 40px;
+  border-color: #9CCC65;
+}
+
+.circle-3 {
+  border-color:  #269af9 ;
+  width: 30px;
+  height: 30px;
+}
+
+.circle-4 {
+  width: 40px;
+  height: 40px;
+  border-color: #FFA726;
+}
+
+.circle-5 {
+  width: 50px;
+  height: 50px;
+  border-color:  #EF5350;
+}
+
+.circle.active {
+  background-color: currentColor;
+}
+
+/* For individual circles with active state */
+.circle-1.active {
+  color: #66BB6A;
+  background-color: #66BB6A;
+}
+
+.circle-2.active {
+  color: #9CCC65;
+  background-color: #9CCC65;
+}
+
+.circle-3.active {
+  color: #90CAF9;
+  background-color: #269af9 ;
+}
+
+.circle-4.active {
+  color: #FFA726;
+  background-color: #FFA726;
+}
+
+.circle-5.active {
+  color: #EF5350;
+  background-color: #EF5350;
+}
+
+.circle:hover {
+  transform: scale(1.2);
+  box-shadow: 0px 0px 5px currentColor;
+}
+
+.navigation-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #c093fc;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #804ba4;
+}
