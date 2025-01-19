@@ -1,81 +1,69 @@
-
-.home-container {
-  background-color: #f8f9fa;
-  padding: 50px;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transform: translateY(-20px);
-  animation: slideIn 1s ease-out forwards;
-  width: 500px;  
-  max-width: 1000px;  
-  margin: 0 auto;  
+.background-container {
+  background-image: url('../../images/amusement-park.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Home container with white background */
+.home-container {
+  background-color: transparent; /* White background with opacity */
+  padding: 50px;
+  border-radius: 20px;
+  text-align: center;
+  width: 500px;
+  max-width: 1000px;
+}
+
+/* Style the title */
 .home-container h1 {
   font-size: 4rem;
   font-weight: 600;
-  color: #474f57;
+  color: #000;
   margin-bottom: 30px;
-  text-transform: uppercase;
 }
 
+/* Button styles - light purple */
 .custom-btn {
-  background-color: #6c757d;
-  color: white;
+  background-color: #c0a0d8; /* Light purple color */
+  color: #c0a0d8;
   font-weight: bold;
   padding: 14px 24px;
   border-radius: 10px;
   border: none;
-  text-transform: uppercase;
   transition: all 0.4s ease;
   font-size: 1.1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.custom-btn:hover {
-  background-color: #5a6268;
-  transform: scale(1.1);
+/* Button hover effect - dark purple */
+.custom-btn.custom-btn:hover {
+  background-color: #059e9c !important; /* Dark purple color */
+  transform: scale(1);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Button outline styles - light purple */
 .custom-btn-outline {
-  border-color: #28a745;
-  color: #28a745;
+  border-color: white; /* Light purple border */
+  color: white; /* Light purple text color */
   font-weight: bold;
   padding: 14px 24px;
   border-radius: 10px;
   border: 2px solid;
-  text-transform: uppercase;
   transition: all 0.4s ease;
   font-size: 1.1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Button outline hover effect - dark purple */
 .custom-btn-outline:hover {
-  background-color: #28a745;
-  color: white;
+  background-color: #3ef0ed; /* Dark purple background */
+  color: white; /* White text on hover */
   transform: scale(1.1);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
-
- 
-
-/* @media (max-width: 768px) {
-  .home-container {
-      padding: 30px;
-      transform: translateY(0);
-      animation: none;
-      width: 90%;  
-  } */
-
-  /* .custom-btn, .custom-btn-outline {
-      width: 100%;
-      padding: 16px 0;
-      font-size: 1.2rem;
-  } */
-
-  /* .home-container h1 {
-      font-size: 2.5rem;
-  } */
-/* } */
