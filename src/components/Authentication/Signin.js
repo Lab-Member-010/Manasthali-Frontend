@@ -8,10 +8,10 @@ import Api from "../../apis/Api";
 import "./Signin.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function SignIn() {
+const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [forgotPassword, setForgotPassword] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false); // Toggle state for Forgot Password
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ export default function SignIn() {
     try {
       await axios.post(Api.FORGOT_PASSWORD, { email });
       toast.success("Password reset link sent to your email.");
-      setForgotPassword(false);
+      setForgotPassword(false); // Toggle back to SignIn after sending reset email
     } catch (err) {
       console.error("Error:", err);
       toast.error("Failed to send password reset link.");
@@ -57,17 +57,17 @@ export default function SignIn() {
   return (
     <>
       <ToastContainer />
-      <div className="container d-flex justify-content-center align-items-center min-vh-100">
-        <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "400px" }}>
+      <div className="signin-container">
         <div className="signin-box shadow-lg p-4">
-        <div className="signin-logo"></div>  {/* Add the logo here */}
+          <div className="signin-logo"></div> {/* Add your logo here */}
           <h3 className="text-center mb-4">
             {forgotPassword ? "Reset Password" : "Sign In"}
           </h3>
           {!forgotPassword ? (
+            // Sign In Form
             <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">
+              <div className="input-container">
+                <label htmlFor="email" className={email ? "active" : ""}>
                   Email
                 </label>
                 <input
@@ -76,12 +76,13 @@ export default function SignIn() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter email"
-                  className="form-control"
+                  className="form-control inputField"
                   required
                 />
               </div>
-              <div className="mb-3">
-                <label htmlFor="password" className="form-label">
+
+              <div className="input-container">
+                <label htmlFor="password" className={password ? "active" : ""}>
                   Password
                 </label>
                 <input
@@ -90,25 +91,28 @@ export default function SignIn() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter password"
-                  className="form-control"
+                  className="form-control inputField"
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-primary w-100">
+
+              <button type="submit" className="btn custom-btn w-100">
                 Sign In
               </button>
+
               <button
                 type="button"
                 className="btn btn-link w-100 mt-3"
-                onClick={() => setForgotPassword(true)}
+                onClick={() => setForgotPassword(true)} // Set forgotPassword to true
               >
                 Forgot Password?
               </button>
             </form>
           ) : (
+            // Forgot Password Form
             <form onSubmit={handleForgotPassword}>
-              <div className="mb-3">
-                <label htmlFor="reset-email" className="form-label">
+              <div className="input-container">
+                <label htmlFor="reset-email" className={email ? "active" : ""}>
                   Email
                 </label>
                 <input
@@ -117,25 +121,28 @@ export default function SignIn() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="form-control"
+                  className="form-control inputField"
                   required
                 />
               </div>
+
               <button type="submit" className="btn btn-secondary w-100">
                 Send Reset Link
               </button>
+
               <button
                 type="button"
                 className="btn btn-link w-100 mt-3"
-                onClick={() => setForgotPassword(false)}
+                onClick={() => setForgotPassword(false)} // Switch back to SignIn form
               >
                 Back to Sign In
               </button>
             </form>
           )}
         </div>
-        </div>
       </div>
     </>
   );
-}
+};
+
+export default SignIn;
