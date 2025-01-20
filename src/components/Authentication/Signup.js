@@ -84,7 +84,7 @@ const SignUp = () => {
           </div>
           <div className="form-group">
             <label>Username:</label>
-            <input
+            <input placeholder="Enter your username"
               type="text"
               name="username"
               value={formData.username}
@@ -94,7 +94,8 @@ const SignUp = () => {
             {errors.username && <p className="error-text">{errors.username}</p>}
           </div>
   
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary"
+          onClick={() => navigate("/signin")}>
             Sign Up
           </button>
         </form>
