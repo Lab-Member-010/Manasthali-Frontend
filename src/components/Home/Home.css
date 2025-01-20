@@ -7,7 +7,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Background container with an image */
 .background-container {
   background: url('../../images/amusement-park.jpg ') no-repeat center center/cover ;
   width: 100%;
@@ -85,4 +84,53 @@ body {
 }
 p{
   font-weight: bolder;
+}
+
+  justify-content: flex-end; /* Align content to the right */
+  align-items: center;
+  padding-right: 50px; /* Space from the right edge */
+}
+
+/* Home container with transparent background */
+.home-container {
+  background-color: transparent; /* No background color */
+  padding: 50px;
+  border-radius: 20px;
+  text-align: center;
+  width: 500px;
+  max-width: 1000px;
+  position: relative; /* Ensure correct positioning */
+  right: 0; /* Align to the right of the container */
+}
+
+/* Style the title */
+.home-container h3 {
+  font-size: 4rem;
+  font-weight: 600;
+  color: #000; /* Black text color */
+  margin-bottom: 30px;
+}
+
+/* Button styles - black border and text */
+.custom-btn,
+.custom-btn-outline {
+  border-color: black; /* Black border */
+  color: black; /* Black text */
+  background-color: transparent; /* Transparent background */
+  font-weight: bold;
+  padding: 14px 24px;
+  border-radius: 10px;
+  border: 2px solid;
+  transition: all 0.4s ease;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Button hover effect - light blue fill */
+.custom-btn:hover,
+.custom-btn-outline:hover {
+  background-color: transparent; /* Light blue background on hover */
+  color: black; /* Keep text black on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
