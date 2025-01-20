@@ -1,5 +1,5 @@
 /* Background container */
-.background-container {
+.backgroundContainer {
   background-image: url('../../images/spore.gif');
   background-size: cover;
   background-position: center;
@@ -11,7 +11,7 @@
   padding-right: 50px;
 }
 
-.home-container {
+.homeContainer {
   background-color: transparent !important; 
   padding: 50px;
   border-radius: 20px;
@@ -24,15 +24,15 @@
   right: 0; 
 }
 
-.home-container h3 {
+.homeContainer h3 {
   font-size: 3rem;
   font-weight: 400;
   color: #000; 
   margin-bottom: 30px;
 }
 
-.custom-btn,
-.custom-btn-outline {
+.customBtn,
+.customBtnOutline {
   color: black; 
   background-color: transparent !important;
   font-weight: bold;
@@ -42,8 +42,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.custom-btn:hover,
-.custom-btn-outline:hover {
+.customBtn:hover,
+.customOtnOutline:hover {
   background-color: transparent !important; 
   color: black;
   transform: scale(1.05);

@@ -1,4 +1,4 @@
-.signin-container {
+.signinContainer {
   background-image: url('../../images/spore.gif');
   background-size: cover;
   background-position: center;
@@ -10,7 +10,7 @@
   padding-right: 50px;
 }
 
-.signin-box {
+.signinBox {
   background-color: transparent !important;
   padding: 10px;
   border-radius: 20px;
@@ -23,16 +23,14 @@
   right: 0;
 }
 
-/* Styling for SignIn header */
-.signin-box h3 {
+.signinBox h3 {
   font-size: 1.8rem;
   color: #333;
   font-weight: bold;
-  margin-bottom: 20px; /* Space below the header */
+  margin-bottom: 20px;
 }
 
-/* Logo styling */
-.signin-logo {
+.signinLogo {
   width: 100px;
   height: 100px;
   background-image: url("../../images/Manasthali.png"); 
@@ -42,10 +40,10 @@
   margin: 10px auto 20px; /* Center the logo and add spacing */
 }
 
-/* Styling for Input Fields and Labels */
-.input-container {
+.inputContainer {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -53,16 +51,21 @@
 
 .inputField {
   width: 445px;
-  height: auto;
-  border: none;  
-  border-bottom: 1px solid grey;
+  background-color: transparent;
+  border-bottom: 1px solid black;
   font-size: 1rem;
   transition: font-size 0.3s, transform 0.3s;
 }
 
 .inputField:focus {
-  border: none; 
-  outline: none;
+  border: 1px solid black; 
+  outline: none; 
+  background-color: transparent;
+  box-shadow: none; 
+}
+
+.inputField:focus ~ label {
+  color: #007bff; 
 }
 
 label {
@@ -74,30 +77,30 @@ label {
   transition: font-size 0.3s, transform 0.3s, color 0.3s;
 }
 
-.password-field-container {
+.passwordFieldContainer {
   position: relative;
   width: 100%;
 }
 
-.toggle-password {
+.togglePassword {
   position: absolute;
-  right: 10px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
-  color: #007bff;
+  color: Black;
+  font-weight: bold;
   cursor: pointer;
 }
 
-/* Error Text */
-.error-text {
+.errorText {
   color: #fa8072;
   font-size: 0.8rem;
   margin-top: 5px;
 }
 
-.custom-btn,
-.custom-btn-outline {
+.inBtn,
+.inBtnOutline {
   color: black;
   background-color: transparent !important;
   font-weight: bold;
@@ -107,11 +110,11 @@ label {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.custom-btn:hover,
-.custom-btn-outline:hover {
+.inBtn:hover,
+.inBtnOutline:hover {
   background-color: transparent !important;
   color: black;
   transform: scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
 }
 

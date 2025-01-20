@@ -5,13 +5,14 @@ import { setUser } from "../../redux-config/UserSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Api from "../../apis/Api";
-import "./Signin.css";
+import styles from "./Signin.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [forgotPassword, setForgotPassword] = useState(false); // Toggle state for Forgot Password
+  const [passwordVisible, setPasswordVisible] = useState(false); // Password visibility toggle
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -42,31 +43,35 @@ const SignIn = () => {
     }
   };
 
-  // Handle Forgot Password
   const handleForgotPassword = async () => {
     try {
       await axios.post(Api.FORGOT_PASSWORD, { email });
       toast.success("Password reset link sent to your email.");
-      setForgotPassword(false); // Toggle back to SignIn after sending reset email
+      setForgotPassword(false);
     } catch (err) {
       console.error("Error:", err);
       toast.error("Failed to send password reset link.");
     }
   };
 
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
     <>
       <ToastContainer />
-      <div className="signin-container">
-        <div className="signin-box shadow-lg p-4">
-          <div className="signin-logo"></div> {/* Add your logo here */}
+      <div className={styles.signinContainer}>
+        <div className={`${styles.signinBox} shadow-lg p-4`}>
+          <div className={styles.signinLogo}></div> {/* Add your logo here */}
           <h3 className="text-center mb-4">
             {forgotPassword ? "Reset Password" : "Sign In"}
           </h3>
           {!forgotPassword ? (
             // Sign In Form
             <form onSubmit={handleSubmit}>
-              <div className="input-container">
+              <div className={styles.inputContainer}>
                 <label htmlFor="email" className={email ? "active" : ""}>
                   Email
                 </label>
@@ -76,42 +81,50 @@ const SignIn = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter email"
-                  className="form-control inputField"
+                  className={`form-control ${styles.inputField}`}
                   required
                 />
               </div>
 
-              <div className="input-container">
+              <div className={styles.inputContainer}>
                 <label htmlFor="password" className={password ? "active" : ""}>
                   Password
                 </label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter password"
-                  className="form-control inputField"
-                  required
-                />
+                <div className="password-field-container">
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter password"
+                    className={`form-control ${styles.inputField}`}
+                    required
+                  />
+                  <span
+                    className={styles.togglePassword}
+                    onClick={togglePasswordVisibility}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {passwordVisible ? "Hide" : "Show"}
+                  </span>
+                </div>
               </div>
 
-              <button type="submit" className="btn custom-btn w-100">
+              <button type="submit" className={`btn ${styles.inBtn} w-100`}>
                 Sign In
               </button>
 
               <button
                 type="button"
-                className="btn btn-link w-100 mt-3"
-                onClick={() => setForgotPassword(true)} // Set forgotPassword to true
+                className={`btn ${styles.inBtn} btn-link mt-3 w-100`}
+                onClick={() => setForgotPassword(true)}
               >
                 Forgot Password?
               </button>
             </form>
           ) : (
-            // Forgot Password Form
             <form onSubmit={handleForgotPassword}>
-              <div className="input-container">
+              <div className={styles.inputContainer}>
                 <label htmlFor="reset-email" className={email ? "active" : ""}>
                   Email
                 </label>
@@ -121,7 +134,7 @@ const SignIn = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="form-control inputField"
+                  className={`form-control ${styles.inputField}`}
                   required
                 />
               </div>
@@ -133,7 +146,7 @@ const SignIn = () => {
               <button
                 type="button"
                 className="btn btn-link w-100 mt-3"
-                onClick={() => setForgotPassword(false)} // Switch back to SignIn form
+                onClick={() => setForgotPassword(false)}
               >
                 Back to Sign In
               </button>
