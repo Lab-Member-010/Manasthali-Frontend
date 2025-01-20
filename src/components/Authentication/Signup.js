@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Signup.css";
+import styles from "./Signup.module.css";
 import Api from "../../apis/Api";
 
 const SignUp = () => {
@@ -51,67 +51,67 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signup-container">
-      <div className="signup-box container text-center mt-5">
+    <div className={styles.signupContainer}>
+      <div className={`${styles.signupBox} container text-center mt-5`}>
         <div className="row justify-content-center">
-          <div className="signup-logo"></div>
+          <div className={styles.signupLogo}></div>
           <h1>Sign Up</h1>
           {successMessage && (
             <p className="alert alert-success">{successMessage}</p>
           )}
           {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
           <form onSubmit={handleSubmit}>
-            <div className="form-group input-container">
+            <div className={`form-group ${styles.inputContainer}`}>
               <label className={formData.email ? "active" : ""}>Email:</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="form-control inputfield"
+                className={`form-control ${styles.inputField}`}
                 placeholder="Enter your email"
                 autoComplete="off"
                 required
               />
-              {errors.email && <p className="error-text">{errors.email}</p>}
+              {errors.email && <p className={styles.errorText}>{errors.email}</p>}
             </div>
-            <div className="form-group input-container">
+            <div className={`form-group ${styles.inputContainer}`}>
               <label className={formData.username ? "active" : ""}>Username:</label>
               <input
                 type="text"
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="form-control inputfield"
+                className={`form-control ${styles.inputField}`}
                 placeholder="Enter your username"
                 autoComplete="off"
                 required
               />
-              {errors.username && <p className="error-text">{errors.username}</p>}
+              {errors.username && <p className={styles.errorText}>{errors.username}</p>}
             </div>
-            <div className="form-group input-container">
+            <div className={`form-group ${styles.inputContainer}`}>
               <label className={formData.password ? "active" : ""}>Password:</label>
-              <div className="password-field-container">
+              <div className={styles.passwordFieldContainer}>
                 <input
                   type={passwordVisible ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="form-control inputfield"
+                  className={`form-control ${styles.inputField}`}
                   placeholder="Enter your Password"
                   autoComplete="off"
                   required
                 />
                 <span
-                  className="toggle-password"
+                  className={styles.togglePassword}
                   onClick={togglePasswordVisibility}
                 >
                   {passwordVisible ? "Hide" : "Show"}
                 </span>
               </div>
-              {errors.password && <p className="error-text">{errors.password}</p>}
+              {errors.password && <p className={styles.errorText}>{errors.password}</p>}
             </div>
-            <button type="submit" className="btn custom-btn custom-outline-btn">
+            <button type="submit" className={`btn custom-btn ${styles.upBtnOutline}`}>
               Sign Up
             </button>
           </form>

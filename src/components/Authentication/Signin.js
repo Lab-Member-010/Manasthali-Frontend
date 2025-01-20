@@ -11,7 +11,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [forgotPassword, setForgotPassword] = useState(false); // Toggle state for Forgot Password
   const [passwordVisible, setPasswordVisible] = useState(false); // Password visibility toggle
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,18 +42,6 @@ const SignIn = () => {
     }
   };
 
-  const handleForgotPassword = async () => {
-    try {
-      await axios.post(Api.FORGOT_PASSWORD, { email });
-      toast.success("Password reset link sent to your email.");
-      setForgotPassword(false);
-    } catch (err) {
-      console.error("Error:", err);
-      toast.error("Failed to send password reset link.");
-    }
-  };
-
-  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -66,10 +53,8 @@ const SignIn = () => {
         <div className={`${styles.signinBox} shadow-lg p-4`}>
           <div className={styles.signinLogo}></div> {/* Add your logo here */}
           <h3 className="text-center mb-4">
-            {forgotPassword ? "Reset Password" : "Sign In"}
+            Sign In
           </h3>
-          {!forgotPassword ? (
-            // Sign In Form
             <form onSubmit={handleSubmit}>
               <div className={styles.inputContainer}>
                 <label htmlFor="email" className={email ? "active" : ""}>
@@ -110,48 +95,17 @@ const SignIn = () => {
                 </div>
               </div>
 
-              <button type="submit" className={`btn ${styles.inBtn} w-100`}>
+              <button type="submit" className={`btn ${styles.inBtn}`}>
                 Sign In
               </button>
 
-              <button
-                type="button"
-                className={`btn ${styles.inBtn} btn-link mt-3 w-100`}
-                onClick={() => setForgotPassword(true)}
+              <a
+                className={`${styles.inAnchor} mt-5 w-100`}
+                href={"/forgot-password/"}
               >
                 Forgot Password?
-              </button>
+              </a>
             </form>
-          ) : (
-            <form onSubmit={handleForgotPassword}>
-              <div className={styles.inputContainer}>
-                <label htmlFor="reset-email" className={email ? "active" : ""}>
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="reset-email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className={`form-control ${styles.inputField}`}
-                  required
-                />
-              </div>
-
-              <button type="submit" className="btn btn-secondary w-100">
-                Send Reset Link
-              </button>
-
-              <button
-                type="button"
-                className="btn btn-link w-100 mt-3"
-                onClick={() => setForgotPassword(false)}
-              >
-                Back to Sign In
-              </button>
-            </form>
-          )}
         </div>
       </div>
     </>

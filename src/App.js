@@ -1,27 +1,3 @@
-// import React from "react";
-// import { Routes, Route } from "react-router-dom";
-// import Home from "./components/Home/Home";
-// import SignUp from "./components/Authentication/Signup";
-// import Signin from "./components/Authentication/Signin";
-// import Verifyotp from "./components/Authentication/Verifyotp";
-// import ForgetPassword from "./components/Authentication/ForgetPassword";
-// import ResetPassword from "./components/Authentication/ResetPassword";
-// import QuizGetStarted from "./components/Quiz/QuizGetStarted";
-// import Quiz from "./components/Quiz/Quiz";
-// import Feed from "./components/Feed/Feed";
-// import Auth from "./components/Authorization/Auth";
-// import ChatApp from './components/Chats/Chat';
-
-// const App = () => {
-//   return (
-//     <div>
-//      <Feed/>
-//     </div>
-//   );
-// };
-// export default App;
-
-
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
@@ -34,8 +10,6 @@ import QuizGetStarted from "./components/Quiz/QuizGetStarted";
 import Quiz from "./components/Quiz/Quiz";
 import Feed from "./components/Feed/Feed";
 import Auth from "./components/Authorization/Auth";
-// import ChatApp from './components/Chats/Chat';
-
 
 const App = () => {
   return (

@@ -1,5 +1,5 @@
 /* General Styles */
-.signup-container {
+.signupContainer {
   background-image: url('../../images/spore.gif');
   background-size: cover;
   background-position: center;
@@ -11,20 +11,20 @@
   padding-right: 50px;
 }
 
-.signup-box {
+.signupBox {
   background-color: transparent !important;
   padding: 10px;
   border-radius: 20px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   text-align: center;
-  width: 500px;
+  width: 480px;
   max-width: 1000px;
   position: relative;
   right: 0;
 }
 
-.signup-logo {
+.signupLogo {
   width: 100px;
   height: 100px;
   background-image: url("../../images/Manasthali.png");
@@ -35,10 +35,10 @@
   display: block;
 }
 
-/* Styling for Input Fields and Labels */
-.input-container {
+.inputContainer {
   width: 100%;
-  margin-bottom: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -47,15 +47,21 @@
 .inputField {
   width: 445px;
   height: auto;
-  border: none;  
-  border-bottom: 1px solid grey;
+  background-color: transparent;
+  border-bottom: 1px solid black;
   font-size: 1rem;
   transition: font-size 0.3s, transform 0.3s;
 }
 
 .inputField:focus {
-  border: none; 
-  outline: none;
+  border: 1px solid black; 
+  outline: none; 
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.inputField:focus ~ label {
+  color: #007bff; 
 }
 
 label {
@@ -67,61 +73,47 @@ label {
   transition: font-size 0.3s, transform 0.3s, color 0.3s;
 }
 
-/* Toggle Password Visibility */
-.password-field-container {
+.passwordFieldContainer {
   position: relative;
   width: 100%;
 }
 
-.toggle-password {
+.togglePassword {
   position: absolute;
-  right: 10px;
+  right: 55px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
-  color: #007bff;
+  color: Black;
+  font-weight: bold;
   cursor: pointer;
 }
 
 /* Error Text */
-.error-text {
+.errorText {
   color: #fa8072;
   font-size: 0.8rem;
   margin-top: 5px;
 }
 
-/* Button Styles */
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.custom-btn,
-.custom-btn-outline {
+.upBtn,
+.upBtnOutline {
   color: black;
   background-color: transparent !important;
   font-weight: bold;
   padding: 14px 24px;
+  width:320px;
+  margin-bottom: 10px;
   transition: all 0.4s ease;
   font-size: 1.1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.3);
 }
 
-.custom-btn:hover,
-.custom-btn-outline:hover {
+.upBtn:hover,
+.upBtnOutline:hover {
   background-color: transparent !important;
   color: black;
-  transform: scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.025);
+  box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.1);
 }
 

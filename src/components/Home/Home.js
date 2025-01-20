@@ -8,7 +8,7 @@ const Home = () => {
 
   return (
     <div className={styles.backgroundContainer}>
-      <div className={`${styles.homeContainer} container text-center mt-5`}>
+      <div className={`${styles.homeContainer} container-fluid text-center`}>
         <div className="row justify-content-center">
           <div className="col-md-8">
             <h3 className="display-4 mb-4">Welcome to Manasthali</h3>
