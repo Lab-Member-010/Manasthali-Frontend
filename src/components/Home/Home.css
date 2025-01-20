@@ -67,8 +67,7 @@ body {
   #995fb6,
   #e376ac,
   #e294a9 ); /* Define your gradient colors */
-  -webkit-background-clip: text;
-  background-clip: initial; /* Ensures gradient is clipped to the text */
+  -webkit-background-clip: text; /* Ensures gradient is clipped to the text */
   -webkit-text-fill-color: transparent; /* Makes the text itself transparent */
   font-weight: bold; /* Optional: Adjust text weight for better appearance */
 }
