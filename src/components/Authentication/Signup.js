@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Signup.css";
+import "./Signup.css"; // Ensure your CSS file path is correct
 import Api from "../../apis/Api";
 
 const SignUp = () => {
@@ -10,9 +10,6 @@ const SignUp = () => {
     email: "",
     password: "",
     username: "",
-    contact: "",
-    dob: "",
-    gender: "",
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -29,9 +26,6 @@ const SignUp = () => {
     if (!formData.email) newErrors.email = "Email is required.";
     if (!formData.password) newErrors.password = "Password is required.";
     if (!formData.username) newErrors.username = "Username is required.";
-    if (!formData.contact) newErrors.contact = "Contact is required.";
-    if (!formData.dob) newErrors.dob = "Date of Birth is required.";
-    if (!formData.gender) newErrors.gender = "Gender is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -41,7 +35,7 @@ const SignUp = () => {
     if (!validateForm()) return;
 
     try {
-      const response = await axios.post(Api.SIGN_UP,formData);
+      const response = await axios.post(Api.SIGN_UP, formData);
       setSuccessMessage(response.data.message);
       setErrorMessage("");
       navigate("/verify-otp", { state: { email: formData.email } });
@@ -52,57 +46,62 @@ const SignUp = () => {
 
   return (
     <div className="sign">
-    <div className="signup-container">
-      <div className="signup-box">
-        <h2>Sign Up</h2>
-        {successMessage && (
-          <p className="alert alert-success">{successMessage}</p>
-        )}
-        {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Email:</label>
-            <input  placeholder="Enter your email"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="form-control"
-            />
-            {errors.email && <p className="error-text">{errors.email}</p>}
-          </div>
-          <div className="form-group">
-            <label>Password:</label>
-            <input placeholder="Enter your password"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="form-control"
-            />
-            {errors.password && <p className="error-text">{errors.password}</p>}
-          </div>
-          <div className="form-group">
-            <label>Username:</label>
-            <input placeholder="Enter your username"
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className="form-control"
-            />
-            {errors.username && <p className="error-text">{errors.username}</p>}
-          </div>
-  
-          <button type="submit" className="btn btn-primary"
-          onClick={() => navigate("/signin")}>
-            Sign Up
-          </button>
-        </form>
+      <div className="signup-container">
+        <div className="signup-box">
+          <h2>Sign Up</h2>
+          {successMessage && (
+            <p className="alert alert-success">{successMessage}</p>
+          )}
+          {errorMessage && (
+            <p className="alert alert-danger">{errorMessage}</p>
+          )}
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="form-control"
+                required
+              />
+              {errors.email && <p className="error-text">{errors.email}</p>}
+            </div>
+            <div className="form-group">
+              <label>Password:</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="form-control"
+                required
+              />
+              {errors.password && <p className="error-text">{errors.password}</p>}
+            </div>
+            <div className="form-group">
+              <label>Username:</label>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className="form-control"
+                required
+              />
+              {errors.username && (
+                <p className="error-text">{errors.username}</p>
+              )}
+            </div>
+            <button type="submit" className="btn btn-primary signup-button">
+              Sign Up
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-  
   );
 };
+
 export default SignUp;
