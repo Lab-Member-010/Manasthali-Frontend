@@ -51,6 +51,7 @@ const SignUp = () => {
   };
 
   return (
+    <div className="sign">
     <div className="signup-container">
       <div className="signup-box">
          {/* Ensure the logo path is correct */}
@@ -63,7 +64,7 @@ const SignUp = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email:</label>
-            <input
+            <input  placeholder="Enter your email"
               type="email"
               name="email"
               value={formData.email}
@@ -75,7 +76,7 @@ const SignUp = () => {
           </div>
           <div className="form-group">
             <label>Password:</label>
-            <input
+            <input placeholder="Enter your password"
               type="password"
               name="password"
               value={formData.password}
@@ -143,6 +144,8 @@ const SignUp = () => {
         </form>
       </div>
     </div>
+  </div>
+  
   );
 };
 

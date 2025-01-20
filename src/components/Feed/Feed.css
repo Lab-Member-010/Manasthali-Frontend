@@ -54,11 +54,13 @@
 }
 
 .left-hover-menu {
-  left: 110px; /* Appears to the right of the left navbar */
+  left: 110px;
+  /* Appears to the right of the left navbar */
 }
 
 .right-hover-menu {
-  right: 110px; /* Appears to the left of the right navbar */
+  right: 110px;
+  /* Appears to the left of the right navbar */
 }
 
 .hover-item {
@@ -91,12 +93,12 @@
   padding: 10px 20px;
   background-color: #ead6e8;
   border-bottom: 1px solid #ddd;
-  position: fixed; 
+  position: fixed;
   top: 0;
-  left: 0; 
-  right: 0; 
-  z-index: 1000; 
- 
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
 }
 
 .header-left,
@@ -119,7 +121,7 @@
   padding: 5px 10px;
   font-size: 16px;
   border: 2px solid #9b99c8;
-  border-radius: 15px ;
+  border-radius: 15px;
   margin-right: 15px;
 }
 
@@ -132,49 +134,35 @@
 .menu-button:hover {
   transform: scale(1.1);
 }
-.rotating-logo{
+
+.rotating-logo {
 
   animation: animate 5s infinite ease-in-out;
 }
 
-@keyframes animate{
-  0%{
+@keyframes animate {
+  0% {
     transform: rotateY(0deg);
   }
-  50%{
+
+  50% {
     transform: rotateY(180deg);
   }
-  100%{
+
+  100% {
     transform: rotateY(360deg);
   }
 }
-.site-logo {
-  font-size: 40px;
-  font-weight: bold;
-  background: linear-gradient(45deg, 
-    #1a5a6d, 
-    #39a4bf, 
-    #25768a, 
-    #8d7fd2, 
-    #7c5fb5, 
-    #a06bba, 
-    #e584b5, 
-    #e0718e
-  );
-   -webkit-background-clip: text;
-   /* background-clip: border-box ; */
-  -webkit-text-fill-color: transparent;
-  color: transparent; 
-  display:inline;
-  filter: brightness(1.2);
-}
+
+
 
 /* Basic Layout */
 .left-navbar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* Make it a parent container */
+  position: relative;
+  /* Make it a parent container */
 }
 
 .nav-item {
@@ -189,36 +177,43 @@
 /* Hover Text on Icons */
 .nav-item .hover-text {
   position: absolute;
-  left: 50px; /* Position the hover text to the right of the icon */
+  left: 50px;
+  /* Position the hover text to the right of the icon */
   top: 50%;
   transform: translateY(-50%);
   background-color: #fff;
   padding: 5px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  display: none; /* Initially hidden */
+  display: none;
+  /* Initially hidden */
   font-size: 14px;
   color: #333;
 }
 
 /* Show hover text when navbar is hovered */
 .left-navbar:hover .nav-item .hover-text {
-  display: block; /* Show the text when hovering over left navbar */
+  display: block;
+  /* Show the text when hovering over left navbar */
 }
 
 /* Optional: Add hover effect to navbar */
 .left-navbar:hover {
-  background-color: #cfc4de; /* Optional: Change background on hover */
+  background-color: #cfc4de;
+  /* Optional: Change background on hover */
 }
+
 /* Add styles for dropdown menu */
 .left-navbar {
   position: relative;
-  width: 70px; /* Default collapsed width */
+  width: 70px;
+  /* Default collapsed width */
   transition: width 0.3s ease;
 }
 
 .left-navbar.hovered {
-  width: 200px; /* Expanded width on hover */
+  width: 200px;
+  /* Expanded width on hover */
 }
 
 .left-navbar .nav-item {
@@ -230,12 +225,14 @@
 
 .left-navbar .icon-text {
   margin-left: 10px;
-  display: none; /* Initially hidden */
+  display: none;
+  /* Initially hidden */
 }
 
 .left-navbar.hovered .icon-text {
-  display: inline; /* Show text on hover */
-}      
+  display: inline;
+  /* Show text on hover */
+}
 
 
 .dropdown-menu {
@@ -257,56 +254,83 @@
 .dropdown-item:hover {
   background-color: #a1729c;
 }
+
 /* Styling for the mid-part container */
 .mid-part {
-  width: 100%; /* Adjust width as needed */
-  height: 700px; 
+  width: 100%;
+  height: 700px;
   overflow: hidden; /* Prevent overflow outside the container */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #b59dc9; */
-  border: 2px solid #a6a0ca; 
-  position: relative; 
-  background: linear-gradient(
-    to right, 
-    #2d9bbd, 
-    #aac9d1, 
-    #8d7fd2, 
-    #7c5fb5, 
-    #a06bba, 
-    #e584b5, 
-    #e9bdc9
-  );
-}     
-
+  border: 2px solid #a6a0ca;
+  position: relative;
+  background: linear-gradient(to right,
+      #2d9bbd,
+      #aac9d1,
+      #8d7fd2,
+      #7c5fb5,
+      #a06bba,
+      #e584b5,
+      #e9bdc9);
+}
 
 .mid-part > div {
-  width: 70%; 
+  width: 70%;
   max-height: 100%;
-  overflow-y: auto; 
-  overflow-x: hidden; 
-  padding: 15px; 
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); 
-  scrollbar-width: thin; 
-  scrollbar-color: #e889e0 #f5f5f5; 
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden;
+  padding: 15px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  scrollbar-width: none; /* Hide scrollbar in modern browsers */
   background-color: rgb(189, 189, 215);
 }
 
-/* For modern browsers: Custom scrollbar */
+/* For modern browsers: Custom scrollbar hidden */
 .mid-part > div::-webkit-scrollbar {
-  width: 8px; /* Scrollbar width */
+  display: none; /* Hide scrollbar for Chrome, Safari, Edge */
 }
 
-.mid-part > div::-webkit-scrollbar-thumb {
-  background: #b09db9; 
-  border-radius: 4px; /* Rounded corners */
+.mid-part > div {
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+/* Falling Animation */
+@keyframes fallIn {
+  0% {
+    transform: translateY(-200px); /* Start above the viewport */
+    opacity: 0; /* Invisible at the start */
+  }
+  50% {
+    opacity: 1; /* Gradually become visible */
+  }
+  100% {
+    transform: translateY(0); /* End at the original position */
+    opacity: 1; /* Fully visible */
+  }
 }
 
-.mid-part > div::-webkit-scrollbar-thumb:hover {
-  background: #8a4d9e; /* Darker thumb on hover */
+/* Apply the animation to the site logo */
+.site-logo {
+  font-size: 40px;
+  font-weight: bold;
+  background: linear-gradient(45deg,
+      #1a5a6d,
+      #39a4bf,
+      #25768a,
+      #8d7fd2,
+      #7c5fb5,
+      #a06bba,
+      #e584b5,
+      #e0718e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline;
+  filter: brightness(1.2);
+
+  /* Animation properties */
+  animation: fallIn 1.5s ease-in-out; /* Adjust duration and timing */
+  position: relative; /* Ensure proper placement */
 }
 
-.mid-part > div::-webkit-scrollbar-track {
-  background: #638190; /* Scrollbar track color */
-}
