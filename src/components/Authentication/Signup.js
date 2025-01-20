@@ -51,6 +51,7 @@ const SignUp = () => {
   };
 
   return (
+    <div className="sign">
     <div className="signup-container">
       <div className="signup-box">
         <h2>Sign Up</h2>
@@ -61,7 +62,7 @@ const SignUp = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email:</label>
-            <input
+            <input  placeholder="Enter your email"
               type="email"
               name="email"
               value={formData.email}
@@ -72,7 +73,7 @@ const SignUp = () => {
           </div>
           <div className="form-group">
             <label>Password:</label>
-            <input
+            <input placeholder="Enter your password"
               type="password"
               name="password"
               value={formData.password}
@@ -92,49 +93,15 @@ const SignUp = () => {
             />
             {errors.username && <p className="error-text">{errors.username}</p>}
           </div>
-          <div className="form-group">
-            <label>Contact:</label>
-            <input
-              type="text"
-              name="contact"
-              value={formData.contact}
-              onChange={handleChange}
-              className="form-control"
-            />
-            {errors.contact && <p className="error-text">{errors.contact}</p>}
-          </div>
-          <div className="form-group">
-            <label>Date of Birth:</label>
-            <input
-              type="date"
-              name="dob"
-              value={formData.dob}
-              onChange={handleChange}
-              className="form-control"
-            />
-            {errors.dob && <p className="error-text">{errors.dob}</p>}
-          </div>
-          <div className="form-group">
-            <label>Gender:</label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className="form-control"
-            >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-            {errors.gender && <p className="error-text">{errors.gender}</p>}
-          </div>
+  
           <button type="submit" className="btn btn-primary">
             Sign Up
           </button>
         </form>
       </div>
     </div>
+  </div>
+  
   );
 };
 

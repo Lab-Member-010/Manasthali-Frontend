@@ -1,25 +1,56 @@
+.sign {
+  background: url("../../images/amusement-park.jpg") no-repeat center center/cover;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: flex-end; /* Align the form to the right */
+  align-items: flex-start; /* Start positioning from the top */
+  position: relative;
+}
 
 .signup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  max-width: 400px;
+  padding: 20px;
+  background: rgb(218 227 236 / 90%); /* Slightly transparent white background */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-right: 80px; /* Move further away from the right edge */
+  margin-top: 70px; /* Add spacing from the top */
+  animation: slideIn 2s ease-in-out; /* Apply slide-in animation */
+  position: relative; /* Ensure animation works correctly */
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(200px, -200px); /* Start above and slightly to the right */
+    opacity: 0; /* Start fully transparent */
   }
+  to {
+    transform: translate(0, 0); /* End in the normal position */
+    opacity: 1; /* End fully visible */
+  }
+}
+
+
   
   /* Style the signup box */
   .signup-box {
-    width: 30%;
+   
     max-width: 400px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    background-color: #fff;
+    background-color: #94bfdb;
   }
   
   /* Center the heading with a dark background and white text */
   .signup-box h2 {
-    background-color: #343a40;
-    color: #fff;
+    color: linear-gradient(to right,#0b556c,
+    #2f7e92,
+    #806fd3,
+    #995fb6,
+    #e376ac,
+    #e294a9 );
     text-align: center;
     padding: 10px;
     border-radius: 4px;
@@ -41,4 +72,11 @@
   .signup-box .btn-primary {
     width: 100%;
   }
-  
+ 
+ .btn{
+  color: black !important;
+  background-color: #5298aa !important;
+ }
+ .btn:hover{
+  background-color: #94bfdb !important;
+ }

@@ -1,69 +1,88 @@
+/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  background: #f8f9fa; /* Light gray background */
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Background container with an image */
 .background-container {
-  background-image: url('../../images/amusement-park.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  min-height: 100vh;
+  background: url('../../images/amusement-park.jpg ') no-repeat center center/cover ;
+  width: 100%;
+  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: center; /* Center vertically */
+  justify-content: flex-end; /* Position content to the right */
 }
 
-/* Home container with white background */
+/* Home container styling */
 .home-container {
-  background-color: transparent; /* White background with opacity */
-  padding: 50px;
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.6); /* Transparent white background */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow */
+  width: 80%; /* Responsive width */
+  max-width: 400px; /* Limit the maximum width */
   text-align: center;
-  width: 500px;
-  max-width: 1000px;
+  font-family:fantasy;
+  /* Positioning */
+  position: absolute;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  right: 100px; /* 30px away from the right edge */
 }
 
-/* Style the title */
-.home-container h1 {
-  font-size: 4rem;
-  font-weight: 600;
-  color: #000;
-  margin-bottom: 30px;
+/* Typography */
+.display-4 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
 }
 
-/* Button styles - light purple */
+.lead {
+  font-size: 1rem;
+  color: #212020;
+}
+
+/* Buttons */
 .custom-btn {
-  background-color: #c0a0d8; /* Light purple color */
-  color: #c0a0d8;
-  font-weight: bold;
-  padding: 14px 24px;
-  border-radius: 10px;
-  border: none;
-  transition: all 0.4s ease;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ border-radius: 50px !important;
+
 }
 
-/* Button hover effect - dark purple */
-.custom-btn.custom-btn:hover {
-  background-color: #059e9c !important; /* Dark purple color */
-  transform: scale(1);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-}
 
-/* Button outline styles - light purple */
-.custom-btn-outline {
-  border-color: white; /* Light purple border */
-  color: white; /* Light purple text color */
-  font-weight: bold;
-  padding: 14px 24px;
-  border-radius: 10px;
-  border: 2px solid;
-  transition: all 0.4s ease;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .home-container {
+    width: 100%;
+    margin-right: 10px; /* Add some spacing for small screens */
+  }
 
-/* Button outline hover effect - dark purple */
-.custom-btn-outline:hover {
-  background-color: #3ef0ed; /* Dark purple background */
-  color: white; /* White text on hover */
-  transform: scale(1.1);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+  .display-4 {
+    font-size: 1.8rem;
+  }
+
+  .lead {
+    font-size: 0.9rem;
+  }
+
+  .custom-btn {
+    font-size: 1rem;
+  }
+}
+.gradient-text {
+  background: linear-gradient(to right,#0b556c,
+  #2f7e92,
+  #806fd3,
+  #995fb6,
+  #e376ac,
+  #e294a9 ); /* Define your gradient colors */
+  -webkit-background-clip: text; /* Ensures gradient is clipped to the text */
+  -webkit-text-fill-color: transparent; /* Makes the text itself transparent */
+  font-weight: bold; /* Optional: Adjust text weight for better appearance */
+}
+p{
+  font-weight: bolder;
 }
