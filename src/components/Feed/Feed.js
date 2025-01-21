@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Home as HomeIcon,
   Group as GroupIcon,
@@ -14,8 +14,6 @@ import "./Feed.css";
 import ManasthaliLogo from "../../images/Manasthali.png";
 
 const Feed = () => {
-  const [isLeftHover, setIsLeftHover] = useState(false);
-
   return (
     <div className="main-container">
       {/* Header */}
@@ -31,15 +29,11 @@ const Feed = () => {
           </button>
         </div>
       </div>
-      <br/> <br/> <br/>
+      <br /> <br /> <br />
       {/* Content Section */}
       <div className="content-container">
         {/* Left Navbar */}
-        <div
-          className={`left-navbar ${isLeftHover ? "hovered" : ""}`}
-          onMouseEnter={() => setIsLeftHover(true)}
-          onMouseLeave={() => setIsLeftHover(false)}
-        >
+        <div className="left-navbar">
           <div className="nav-item">
             <HomeIcon style={{ fontSize: 30, color: "black" }} />
             <span className="icon-text">Home</span>
@@ -60,74 +54,42 @@ const Feed = () => {
             <WorkspacePremiumIcon style={{ fontSize: 30, color: "black" }} />
             <span className="icon-text">Premium</span>
           </div>
-
-          {/* Dropdown Menu */}
-          {isLeftHover && (
-            <div className="dropdown-menu">
-              <div className="dropdown-item">Home</div>
-              <div className="dropdown-item">Group</div>
-              <div className="dropdown-item">Stories</div>
-              <div className="dropdown-item">Events</div>
-              <div className="dropdown-item">Premium</div>
-            </div>
-          )}
         </div>
 
         {/* Main Content */}
-
         <div className="mid-part">
-          <div>Main Content Area <br /> a transcriptional activator, a model for happiness, and an organization that promotes higher education.
-            PerA
-            A transcriptional activator that positively controls the expression of BFP. PerA is also known as BfpT.
-            PERMA+ model
-            A scientific theory of happiness that aims to improve well-being and reduce stress, depression, and anxiety. The model is based on the idea that increasing positive emotions, engagement, relationships, meaning, and achievement can lead to a happier life.
-            Preeminent Education Research Association (PERA)
-            An organization that promotes higher education, research, and other activities in Maharashtra, India. PERA's activities include:
-            Conducting Common Entrance Tests (CETs) for professional undergraduate and post graduate programs
-            Working with industry to create collaborative education projects
-            Helping universities get accreditation, rankings, and ratings
-            Encouraging research and other activities related to art, design, technology, sports, and commerce
-            Why Pera
-            Why Pera * The constitution of PERA, as an Esteemed Federation of the State Private universities in Maharashtra, is a step in the...
+          <div className="innerDb">
+          Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.
 
-            PERA CET
-            Identification of the DNA Binding Sites of PerA, the ...
-            The expression of BFP is under the positive control of PerA (also known as BfpT), an AraC/XylS-like transcriptional activator enco...
-            National Institutes of Health (NIH) (.gov)
-            PERA – Preeminent Education Research Association (PERA)
-            Preeminent Education and Research Association PERA is an esteem federation of the state private universities of Maharashtra. The f...
-            PERA CET
-            Identification of the DNA Binding Sites of PerA, the ...
-            The expression of BFP is under the positive control of PerA (also known as BfpT), an AraC/XylS-like transcriptional activator enco...
-            National Institutes of Health (NIH) (.gov)
-            PERA – Preeminent Education Research Association (PERA)
-            Preeminent Education and Research Association PERA is an esteem federation of the state private universities of Maharashtra. The f...
-            PERA CET
-            Identification of the DNA Binding Sites of PerA, the ...
-            The expression of BFP is under the positive control of PerA (also known as BfpT), an AraC/XylS-like transcriptional activator enco...
-            National Institutes of Health (NIH) (.gov)
-            PERA – Preeminent Education Research Association (PERA)
-            Preeminent Education and Research Association PERA is an esteem federation of the state private universities of Maharashtra. The f...
-            PERA CET
-            Identification of the DNA Binding Sites of PerA, the ...
-            The expression of BFP is under the positive control of PerA (also known as BfpT), an AraC/XylS-like transcriptional activator enco...
-            National Institutes of Health (NIH) (.gov)
-            PERA – Preeminent Education Research Association (PERA)
-            Preeminent Education and Research Association PERA is an esteem federation of the state private universities of Maharashtra. The f...
+Key Aspects of Manasthali:
+Holistic Development: Manasthali encourages personal growth through self-awareness, mindfulness, and emotional resilience. It focuses on strengthening the inner self to face life's challenges with confidence.
 
-            PERA CET
-            Show all
-            Generative AI is experimental.
+Mental Wellness: It promotes the importance of mental health as a cornerstone for overall well-being. Manasthali advocates practices like meditation, journaling, and seeking professional support when needed.
 
+Community and Connection: A core principle of Manasthali is fostering a supportive community where individuals can share, learn, and grow together.
 
+Cultural and Philosophical Roots: Inspired by ancient Indian philosophies, Manasthali aligns with the idea of living a balanced life by integrating mind, body, and soul.
 
-            Export
+Practical Tools for Well-being: Manasthali emphasizes actionable steps such as goal setting, stress management, and finding purpose in daily life.
 
-            Pera: Uses, Side effects, Reviews, Composition ...
+Whether approached as a philosophy, a program, or a lifestyle, Manasthali serves as a reminder to prioritize mental well-being, build inner peace, and create a life of fulfillment.
 
-            1mg
-            https://www.1mg.com › medicines › pera-118737
-            28 Oct 2022 — Pera 1000mg Injection is an antibiotic that kills harmful bacteria. However, it also affects the helpful bacteria in your stomach or intestine and causes ...</div>
+Manasthali is a concept that encapsulates the idea of nurturing the mind and soul. Rooted in the Sanskrit words "Manas" (mind) and "Sthali" (place or abode), Manasthali signifies a sanctuary for mental and emotional well-being. It emphasizes creating a balanced, harmonious space where individuals can thrive mentally, emotionally, and spiritually.
+
+Key Aspects of Manasthali:
+Holistic Development: Manasthali encourages personal growth through self-awareness, mindfulness, and emotional resilience. It focuses on strengthening the inner self to face life's challenges with confidence.
+
+Mental Wellness: It promotes the importance of mental health as a cornerstone for overall well-being. Manasthali advocates practices like meditation, journaling, and seeking professional support when needed.
+
+Community and Connection: A core principle of Manasthali is fostering a supportive community where individuals can share, learn, and grow together.
+
+Cultural and Philosophical Roots: Inspired by ancient Indian philosophies, Manasthali aligns with the idea of living a balanced life by integrating mind, body, and soul.
+
+Practical Tools for Well-being: Manasthali emphasizes actionable steps such as goal setting, stress management, and finding purpose in daily life.
+
+Whether approached as a philosophy, a program, or a lifestyle, Manasthali serves as a reminder to prioritize mental well-being, build inner peace, and create a life of fulfillment.
+
+        </div>
         </div>
 
         {/* Right Navbar */}
@@ -148,4 +110,3 @@ const Feed = () => {
 };
 
 export default Feed;
-
