@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Verifyotp.css";
+// import styles from "./Verifyotp.module.css";
 
 const Verifyotp = () => {
   const [otp, setOtp] = useState("");

@@ -10,8 +10,6 @@ import QuizGetStarted from "./components/Quiz/QuizGetStarted";
 import Quiz from "./components/Quiz/Quiz";
 import Feed from "./components/Feed/Feed";
 import Auth from "./components/Authorization/Auth";
-// import ChatApp from './components/Chats/Chat';
-
 
 const App = () => {
   return (
@@ -53,4 +51,4 @@ const App = () => {
     </>
   );
 };
-export default App;
+export default App;   

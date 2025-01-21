@@ -5,13 +5,14 @@ import { setUser } from "../../redux-config/UserSlice";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Api from "../../apis/Api";
-import "./Signin.css";
+import styles from "./Signin.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Visibility, VisibilityOff } from "@mui/icons-material"; // Import icons
 
-export default function SignIn() {
+const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [forgotPassword, setForgotPassword] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false); // Password visibility toggle
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -42,101 +43,73 @@ export default function SignIn() {
     }
   };
 
-  // Handle Forgot Password
-  const handleForgotPassword = async () => {
-    try {
-      await axios.post(Api.FORGOT_PASSWORD, { email });
-      toast.success("Password reset link sent to your email.");
-      setForgotPassword(false);
-    } catch (err) {
-      console.error("Error:", err);
-      toast.error("Failed to send password reset link.");
-    }
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
     <>
       <ToastContainer />
-      <div className="container d-flex justify-content-center align-items-center min-vh-100">
-        <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "400px" }}>
-        <div className="signin-box shadow-lg p-4">
-        <div className="signin-logo"></div>  {/* Add the logo here */}
-          <h3 className="text-center mb-4">
-            {forgotPassword ? "Reset Password" : "Sign In"}
-          </h3>
-          {!forgotPassword ? (
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  Email
-                </label>
+      <div className={styles.signinContainer}>
+        <div className={`${styles.signinBox} shadow-lg p-4`}>
+          <div className={styles.signinLogo}></div> {/* Add your logo here */}
+          <h3 className="text-center mb-4">Sign In</h3>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.inputContainer}>
+              <label htmlFor="email" className={email ? "active" : ""}>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter email"
+                className={`form-control ${styles.inputField}`}
+                required
+              />
+            </div>
+
+            <div className={styles.inputContainer}>
+              <label htmlFor="password" className={password ? "active" : ""}>
+                Password
+              </label>
+              <div className="password-field-container">
                 <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter email"
-                  className="form-control"
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="password" className="form-label">
-                  Password
-                </label>
-                <input
-                  type="password"
+                  type={passwordVisible ? "text" : "password"}
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter password"
-                  className="form-control"
+                  className={`form-control ${styles.inputField}`}
                   required
                 />
+                <span
+                  className={styles.togglePassword}
+                  onClick={togglePasswordVisibility}
+                  style={{ cursor: "pointer" }}
+                >
+                  {passwordVisible ? (
+                    <VisibilityOff />
+                  ) : (
+                    <Visibility />
+                  )}
+                </span>
               </div>
-              <button type="submit" className="btn btn-primary w-100">
-                Sign In
-              </button>
-              <button
-                type="button"
-                className="btn btn-link w-100 mt-3"
-                onClick={() => setForgotPassword(true)}
-              >
-                Forgot Password?
-              </button>
-            </form>
-          ) : (
-            <form onSubmit={handleForgotPassword}>
-              <div className="mb-3">
-                <label htmlFor="reset-email" className="form-label">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="reset-email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="form-control"
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-secondary w-100">
-                Send Reset Link
-              </button>
-              <button
-                type="button"
-                className="btn btn-link w-100 mt-3"
-                onClick={() => setForgotPassword(false)}
-              >
-                Back to Sign In
-              </button>
-            </form>
-          )}
-        </div>
+            </div>
+
+            <button type="submit" className={`btn ${styles.inBtn}`}>
+              Sign In
+            </button>
+
+            <a className={`${styles.inAnchor} mt-5 w-100`} href={"/forgot-password/"}>
+              Forgot Password?
+            </a>
+          </form>
         </div>
       </div>
     </>
   );
-}
+};
 
+export default SignIn;
