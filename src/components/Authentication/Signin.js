@@ -53,10 +53,10 @@ const SignIn = () => {
       <div className={styles.signinContainer}>
         <div className={`${styles.signinBox} shadow-lg p-4`}>
           <div className={styles.signinLogo}></div> {/* Add your logo here */}
-          <h3 className="text-center mb-4">Sign In</h3>
+          <h2 className="text-center mb-4">Sign In</h2>
           <form onSubmit={handleSubmit}>
             <div className={styles.inputContainer}>
-              <label htmlFor="email" className={email ? "active" : ""}>
+              <label htmlFor="email" className={styles.labelField}>
                 Email
               </label>
               <input
@@ -66,12 +66,13 @@ const SignIn = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email"
                 className={`form-control ${styles.inputField}`}
+                autoComplete="off"
                 required
               />
             </div>
 
             <div className={styles.inputContainer}>
-              <label htmlFor="password" className={password ? "active" : ""}>
+              <label htmlFor="password" className={styles.labelField}>
                 Password
               </label>
               <div className="password-field-container">
