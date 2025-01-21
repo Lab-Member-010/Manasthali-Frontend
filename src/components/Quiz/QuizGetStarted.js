@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./QuizGetStarted.css"; 
 import { HiArrowSmRight } from "react-icons/hi";
-// import bg from "../../images/back2.gif";
 
 const QuizGetStarted = () => {
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ const QuizGetStarted = () => {
   return (
     <div className="quiz-get-started-container">
       <img
-        src="https://i.pinimg.com/originals/d1/0c/06/d10c06dec166ef52753efc51e166426a.gif"
+        src="https://i.pinimg.com/originals/cf/85/d9/cf85d966c302f3728a0e8f81805c132a.gif"
         alt="Background"
         className="background-image"
       />
