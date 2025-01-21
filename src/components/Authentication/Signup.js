@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Signup.module.css";
 import Api from "../../apis/Api";
+import { Visibility, VisibilityOff } from "@mui/icons-material"; // Import icons
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -105,8 +106,9 @@ const SignUp = () => {
                 <span
                   className={styles.togglePassword}
                   onClick={togglePasswordVisibility}
+                  style={{ cursor: "pointer" }}
                 >
-                  {passwordVisible ? "Hide" : "Show"}
+                  {passwordVisible ? <VisibilityOff /> : <Visibility />}
                 </span>
               </div>
               {errors.password && <p className={styles.errorText}>{errors.password}</p>}

@@ -86,7 +86,7 @@ label {
 .togglePassword {
   position: absolute;
   right: 20px;
-  top: 50%;
+  top: 70%;
   transform: translateY(-50%);
   font-size: 14px;
   color: Black;
