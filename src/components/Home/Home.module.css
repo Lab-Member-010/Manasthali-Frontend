@@ -1,0 +1,50 @@
+/* Background container */
+.backgroundContainer {
+  background-image: url('../../images/spore.gif');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 50px;
+}
+
+.homeContainer {
+  background-color: transparent !important; 
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  max-width: 1000px;
+   position: relative;  
+  right: 0; 
+}
+
+.homeContainer h3 {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #000; 
+  margin-bottom: 30px;
+}
+
+.customBtn,
+.customBtnOutline {
+  color: black; 
+  background-color: transparent !important;
+  font-weight: bold;
+  padding: 14px 24px;
+  transition: all 0.4s ease;
+  font-size: 1.1rem;
+  box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.2);
+}
+
+.customBtn:hover,
+.customOtnOutline:hover {
+  background-color: transparent !important; 
+  color: black;
+  transform: scale(1.025);
+  box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.3);
+}
