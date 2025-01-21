@@ -10,9 +10,7 @@ const SignUp = () => {
     email: "",
     password: "",
     username: "",
-    contact: "",
-    dob: "",
-    gender: "",
+  
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -29,9 +27,7 @@ const SignUp = () => {
     if (!formData.email) newErrors.email = "Email is required.";
     if (!formData.password) newErrors.password = "Password is required.";
     if (!formData.username) newErrors.username = "Username is required.";
-    if (!formData.contact) newErrors.contact = "Contact is required.";
-    if (!formData.dob) newErrors.dob = "Date of Birth is required.";
-    if (!formData.gender) newErrors.gender = "Gender is required.";
+  
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
