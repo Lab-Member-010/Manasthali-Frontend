@@ -1,0 +1,41 @@
+.message-component {
+  width: 400px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.messages {
+  border: 1px solid #ddd;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  border-bottom: 1px solid #ddd;
+  padding: 5px 0;
+}
+
+.message.unread {
+  background-color: #f9f9f9;
+}
+
+.new-message textarea {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.new-message button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.new-message button:hover {
+  background-color: #0056b3;
+}
