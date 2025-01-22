@@ -65,15 +65,11 @@
   box-shadow: none; 
 }
 
-.inputField:focus ~ label {
-  color: #007bff; 
-}
-
-label {
-  width: 445px;
-  height: 20px;
+.labelField{
+  height:25px;
+  margin-left: 5px;
   font-size: 1.2rem;
-  color: grey;
+  color: black;
   text-align: left;
   transition: font-size 0.3s, transform 0.3s, color 0.3s;
 }
@@ -86,7 +82,7 @@ label {
 .togglePassword {
   position: absolute;
   right: 20px;
-  top: 50%;
+  top: 70%;
   transform: translateY(-50%);
   font-size: 14px;
   color: Black;
@@ -110,7 +106,7 @@ label {
   margin-bottom: 10px;
   transition: all 0.4s ease;
   font-size: 1.1rem;
-  box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid black;
 }
 
 .inBtn:hover,
@@ -118,7 +114,7 @@ label {
   background-color: transparent !important;
   color: black;
   transform: scale(1.025);
-  box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
 }
 
 .inAnchor{

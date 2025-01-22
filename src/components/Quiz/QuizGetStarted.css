@@ -5,8 +5,7 @@
     align-items: center;
     text-align: center;
     min-height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
+    color: solid black;
     position: relative;
     overflow: hidden;
   }
@@ -19,7 +18,7 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
-    filter: brightness(50%);
+    filter: brightness(100%);
   }
   
   .quiz-get-started-container h2 {
@@ -62,4 +61,3 @@
       padding: 0.5rem 1rem;
     }
   }
-  

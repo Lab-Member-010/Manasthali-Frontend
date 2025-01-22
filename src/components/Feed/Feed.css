@@ -1,11 +1,10 @@
-/* Main Container */
 .main-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden;
 }
 
-/* Content Section */
 .content-container {
   display: flex;
   flex: 1;
@@ -13,19 +12,38 @@
   margin-top: 18px;
 }
 
-/* Left Navbar */
-.left-navbar,
+.left-navbar{
+  width:180px;
+  border-right:1px solid lightgrey;
+}
+
+.navItem{
+  border:0px solid black;
+  border-radius: 10px;
+  width: 170px;
+  height: 45px;
+  margin: 5px;
+  padding: 0px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.navItem:hover{
+  background-color: #F0F0F0;
+}
+
 .right-navbar {
   width: 100px;
   height: 100%;
-  background-color: rgb(221, 221, 240);
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
   border-right: 1px solid #ccc;
   overflow-y: auto;
-
 }
 
 .right-navbar {
@@ -33,72 +51,49 @@
   border-left: 1px solid #ccc;
 }
 
-/* Nav Item */
 .nav-item {
   padding: 15px;
   cursor: pointer;
   text-align: center;
 }
 
-.nav-item:hover {
-  background-color: #e0e0e0;
+.nav-item:hover{
+  background-color: #F0F0F0;
 }
 
-/* Hover Menu */
-.hover-menu {
-  position: absolute;
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 5px;
-  z-index: 10;
-}
-
-.left-hover-menu {
-  left: 110px;
-  /* Appears to the right of the left navbar */
-}
-
-.right-hover-menu {
-  right: 110px;
-  /* Appears to the left of the right navbar */
-}
-
-.hover-item {
-  padding: 10px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.hover-item:hover {
-  background-color: #e0e0e0;
-}
-
-/* Main Content Area */
 .mid-part {
   flex: 1;
-  background-color: #8c8f9b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: whitesmoke;
   color: white;
   font-size: 24px;
   overflow-y: auto;
+  overflow-x: hidden; 
+  padding: 20px; 
 }
 
-/* Header */
+.innerDb{
+  max-height: calc(100vh - 160px); 
+  overflow-y: scroll; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.innerDb::-webkit-scrollbar {
+  display: none;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #ead6e8;
-  border-bottom: 1px solid #ddd;
+  background-color: white;
+  border-bottom: 0px solid #ddd;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-
 }
 
 .header-left,
@@ -117,10 +112,11 @@
   color: #333;
 }
 
-.search-bar {
+.searchBar {
+  width: 300px;
   padding: 5px 10px;
   font-size: 16px;
-  border: 2px solid #9b99c8;
+  border: 1px solid #9b99c8;
   border-radius: 15px;
   margin-right: 15px;
 }
@@ -136,7 +132,6 @@
 }
 
 .rotating-logo {
-
   animation: animate 5s infinite ease-in-out;
 }
 
@@ -154,183 +149,30 @@
   }
 }
 
-
-
-/* Basic Layout */
-.left-navbar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  /* Make it a parent container */
-}
-
-.nav-item {
-  position: relative;
-  padding: 15px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Hover Text on Icons */
-.nav-item .hover-text {
-  position: absolute;
-  left: 50px;
-  /* Position the hover text to the right of the icon */
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #fff;
-  padding: 5px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  display: none;
-  /* Initially hidden */
-  font-size: 14px;
-  color: #333;
-}
-
-/* Show hover text when navbar is hovered */
-.left-navbar:hover .nav-item .hover-text {
-  display: block;
-  /* Show the text when hovering over left navbar */
-}
-
-/* Optional: Add hover effect to navbar */
-.left-navbar:hover {
-  background-color: #cfc4de;
-  /* Optional: Change background on hover */
-}
-
-/* Add styles for dropdown menu */
-.left-navbar {
-  position: relative;
-  width: 70px;
-  /* Default collapsed width */
-  transition: width 0.3s ease;
-}
-
-.left-navbar.hovered {
-  width: 200px;
-  /* Expanded width on hover */
-}
-
-.left-navbar .nav-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  transition: all 0.3s ease;
-}
-
-.left-navbar .icon-text {
-  margin-left: 10px;
-  display: none;
-  /* Initially hidden */
-}
-
-.left-navbar.hovered .icon-text {
-  display: inline;
-  /* Show text on hover */
-}
-
-
-.dropdown-menu {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  background-color: rgb(206, 171, 171);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.dropdown-item {
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.dropdown-item:hover {
-  background-color: #a1729c;
-}
-
-/* Styling for the mid-part container */
-.mid-part {
-  width: 100%;
-  height: 700px;
-  overflow: hidden; /* Prevent overflow outside the container */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #a6a0ca;
-  position: relative;
-  background: linear-gradient(to right,
-      #2d9bbd,
-      #aac9d1,
-      #8d7fd2,
-      #7c5fb5,
-      #a06bba,
-      #e584b5,
-      #e9bdc9);
-}
-
-.mid-part > div {
-  width: 70%;
-  max-height: 100%;
-  overflow-y: auto; /* Enable vertical scrolling */
-  overflow-x: hidden;
-  padding: 15px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-  scrollbar-width: none; /* Hide scrollbar in modern browsers */
-  background-color: rgb(189, 189, 215);
-}
-
-/* For modern browsers: Custom scrollbar hidden */
-.mid-part > div::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for Chrome, Safari, Edge */
-}
-
-.mid-part > div {
-  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer */
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
-}
-/* Falling Animation */
 @keyframes fallIn {
   0% {
-    transform: translateY(-200px); /* Start above the viewport */
-    opacity: 0; /* Invisible at the start */
+    transform: translateY(-200px);
+    opacity: 0;
   }
   50% {
-    opacity: 1; /* Gradually become visible */
+    opacity: 1;
   }
   100% {
-    transform: translateY(0); /* End at the original position */
-    opacity: 1; /* Fully visible */
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
-/* Apply the animation to the site logo */
 .site-logo {
   font-size: 40px;
   font-weight: bold;
-  background: linear-gradient(45deg,
-      #1a5a6d,
-      #39a4bf,
-      #25768a,
-      #8d7fd2,
-      #7c5fb5,
-      #a06bba,
-      #e584b5,
-      #e0718e);
-  -webkit-background-clip: text;
+  background: linear-gradient(45deg, #1a5a6d, #39a4bf, #25768a, #8d7fd2, #7c5fb5, #a06bba, #e584b5, #e0718e);
+  -webkit-background-clip: text; 
+  background-clip: text; 
   -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: transparent; 
   display: inline;
   filter: brightness(1.2);
-
-  /* Animation properties */
-  animation: fallIn 1.5s ease-in-out; /* Adjust duration and timing */
-  position: relative; /* Ensure proper placement */
+  animation: fallIn 1.5s ease-in-out;
+  position: relative;
 }
-

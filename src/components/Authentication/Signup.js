@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Signup.module.css";
 import Api from "../../apis/Api";
+import { Visibility, VisibilityOff } from "@mui/icons-material"; // Import icons
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -55,14 +56,14 @@ const SignUp = () => {
       <div className={`${styles.signupBox} container text-center mt-5`}>
         <div className="row justify-content-center">
           <div className={styles.signupLogo}></div>
-          <h1>Sign Up</h1>
+          <h2 className="text-center mb-4">Sign Up</h2>
           {successMessage && (
             <p className="alert alert-success">{successMessage}</p>
           )}
           {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
           <form onSubmit={handleSubmit}>
             <div className={`form-group ${styles.inputContainer}`}>
-              <label className={formData.email ? "active" : ""}>Email:</label>
+              <label className={styles.labelField}>Email:</label>
               <input
                 type="email"
                 name="email"
@@ -76,7 +77,7 @@ const SignUp = () => {
               {errors.email && <p className={styles.errorText}>{errors.email}</p>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
-              <label className={formData.username ? "active" : ""}>Username:</label>
+              <label className={styles.labelField}>Username:</label>
               <input
                 type="text"
                 name="username"
@@ -90,7 +91,7 @@ const SignUp = () => {
               {errors.username && <p className={styles.errorText}>{errors.username}</p>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
-              <label className={formData.password ? "active" : ""}>Password:</label>
+              <label className={styles.labelField}>Password:</label>
               <div className={styles.passwordFieldContainer}>
                 <input
                   type={passwordVisible ? "text" : "password"}
@@ -105,8 +106,9 @@ const SignUp = () => {
                 <span
                   className={styles.togglePassword}
                   onClick={togglePasswordVisibility}
+                  style={{ cursor: "pointer" }}
                 >
-                  {passwordVisible ? "Hide" : "Show"}
+                  {passwordVisible ? <VisibilityOff /> : <Visibility />}
                 </span>
               </div>
               {errors.password && <p className={styles.errorText}>{errors.password}</p>}
@@ -122,3 +124,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+

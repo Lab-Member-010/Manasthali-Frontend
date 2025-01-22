@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import styles from "./Verifyotp.module.css";
+import styles from "./Verifyotp.module.css";
 
 const Verifyotp = () => {
   const [otp, setOtp] = useState("");
@@ -21,31 +21,34 @@ const Verifyotp = () => {
       });
 
       if (response.status === 200) {
-        // Show success toast and navigate to sign-in
         toast.success(response.data.message);
         navigate("/signin");
       }
     } catch (err) {
-      // Show error toast
       const errorMessage = err.response?.data?.error || "Invalid OTP.";
       toast.error(errorMessage);
     }
   };
 
   return (
-    <div className="otp-popup">
+    <div className={styles.otpContainer}>
       <ToastContainer />
-      <div className="otp-box">
-        <h2>Verify OTP</h2>
+      <div className={`${styles.otpBox} container text-center mt-5`}>
+      <div className={styles.otpLogo}></div>
+        <h2 className="text-center mb-4">Verify OTP</h2>
         <form onSubmit={handleSubmit}>
-          <input
+          <div className={`form-group ${styles.inputContainer}`}>
+          <label className={styles.labelField}>Username:</label>
+            <input
             type="text"
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
+            className={`form-control ${styles.inputField}`}
             placeholder="Enter OTP"
             required
           />
-          <button type="submit" className="btn btn-primary w-100">
+          </div>
+          <button type="submit" className={`btn custom-btn ${styles.verifyOtpBtn}`}>
             Verify OTP
           </button>
         </form>

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Api from "../../apis/Api";
 import styles from "./Signin.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Visibility, VisibilityOff } from "@mui/icons-material"; // Import icons
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -52,60 +53,60 @@ const SignIn = () => {
       <div className={styles.signinContainer}>
         <div className={`${styles.signinBox} shadow-lg p-4`}>
           <div className={styles.signinLogo}></div> {/* Add your logo here */}
-          <h3 className="text-center mb-4">
-            Sign In
-          </h3>
-            <form onSubmit={handleSubmit}>
-              <div className={styles.inputContainer}>
-                <label htmlFor="email" className={email ? "active" : ""}>
-                  Email
-                </label>
+          <h2 className="text-center mb-4">Sign In</h2>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.inputContainer}>
+              <label htmlFor="email" className={styles.labelField}>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter email"
+                className={`form-control ${styles.inputField}`}
+                autoComplete="off"
+                required
+              />
+            </div>
+
+            <div className={styles.inputContainer}>
+              <label htmlFor="password" className={styles.labelField}>
+                Password
+              </label>
+              <div className="password-field-container">
                 <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter email"
+                  type={passwordVisible ? "text" : "password"}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter password"
                   className={`form-control ${styles.inputField}`}
                   required
                 />
+                <span
+                  className={styles.togglePassword}
+                  onClick={togglePasswordVisibility}
+                  style={{ cursor: "pointer" }}
+                >
+                  {passwordVisible ? (
+                    <VisibilityOff />
+                  ) : (
+                    <Visibility />
+                  )}
+                </span>
               </div>
+            </div>
 
-              <div className={styles.inputContainer}>
-                <label htmlFor="password" className={password ? "active" : ""}>
-                  Password
-                </label>
-                <div className="password-field-container">
-                  <input
-                    type={passwordVisible ? "text" : "password"}
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter password"
-                    className={`form-control ${styles.inputField}`}
-                    required
-                  />
-                  <span
-                    className={styles.togglePassword}
-                    onClick={togglePasswordVisibility}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {passwordVisible ? "Hide" : "Show"}
-                  </span>
-                </div>
-              </div>
+            <button type="submit" className={`btn ${styles.inBtn}`}>
+              Sign In
+            </button>
 
-              <button type="submit" className={`btn ${styles.inBtn}`}>
-                Sign In
-              </button>
-
-              <a
-                className={`${styles.inAnchor} mt-5 w-100`}
-                href={"/forgot-password/"}
-              >
-                Forgot Password?
-              </a>
-            </form>
+            <a className={`${styles.inAnchor} mt-5 w-100`} href={"/forgot-password/"}>
+              Forgot Password?
+            </a>
+          </form>
         </div>
       </div>
     </>
