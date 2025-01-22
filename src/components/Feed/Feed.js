@@ -24,6 +24,7 @@ import Badge from "./badge/Badge";
 import Profile from "./profile/Profile";
 import Challenge from "./challenge/Challenege";
 import FindFriend from "./Find-friend/FindFriend";
+import Story from "./story/Story";
 
 const Feed = () => {
   const {isLoggedIn} = useSelector((store)=>store.User || {});
@@ -57,6 +58,10 @@ const Feed = () => {
       default:
         return <FeedHome/>;
     }
+  };
+
+  const renderStories= ()=>{
+    return <Story/>
   };
 
   return (
@@ -104,11 +109,11 @@ const Feed = () => {
 
         {/* Main Content */}
         <div className="mid-part">
-          <div className="storiesDiv">
-            This is story section
-          </div>
           <div className="innerDb">
-            {renderActiveComponent()}
+          <div className="storiesDiv">
+          {renderStories()}
+          </div>
+          {renderActiveComponent()}
           </div>
         </div>
 

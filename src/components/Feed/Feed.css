@@ -80,8 +80,7 @@
 
 .innerDb{
   background-color: white;
-  height: 530px;
-  max-height: calc(100vh - 125px); 
+  height: calc(100vh - 125px); 
   overflow-y: scroll; 
   -ms-overflow-style: none;
   scrollbar-width: none;
