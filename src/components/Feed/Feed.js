@@ -12,7 +12,8 @@ import {
   PowerSettingsNew as PowerSettingsNewIcon,
 } from "@mui/icons-material";
 import "./Feed.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { signOut } from "../../redux-config/UserSlice";
 import ManasthaliLogo from "../../images/Manasthali.png";
 
@@ -20,6 +21,7 @@ const Feed = () => {
   const {isLoggedIn} = useSelector((store)=>store.User || {});
   console.log(isLoggedIn)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div className="main-container">
       {/* Header */}
@@ -49,7 +51,7 @@ const Feed = () => {
             <AutoStoriesIcon/>
             <span className="icon-text ml-2">Stories</span>
           </div>
-          <div className="nav-item navItem">
+          <div className="nav-item navItem" onClick={()=>navigate("/chats")}>
             <ChatIcon/>
             <span className="icon-text ml-2">Chat</span>
           </div>

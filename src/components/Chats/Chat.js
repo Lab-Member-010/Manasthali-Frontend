@@ -8,9 +8,8 @@ const socket = io("http://localhost:3001");
 const ChatApp = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [receiverId, setReceiverId] = useState(""); // Set this based on your logic
+  const [receiverId, setReceiverId] = useState(""); 
 
-  // Listen for incoming messages (e.g., broadcasted from the backend)
   useEffect(() => {
     socket.on("receive-message", (data) => {
       setMessages((prevMessages) => [...prevMessages, data.message]);
