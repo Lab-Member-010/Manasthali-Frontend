@@ -10,7 +10,8 @@ import QuizGetStarted from "./components/Quiz/QuizGetStarted";
 import Quiz from "./components/Quiz/Quiz";
 import Feed from "./components/Feed/Feed";
 import Auth from "./components/Authorization/Auth";
-import UpdateContact from "./components/ContactDetails/UpdateContat";
+import Personality from "./components/Quiz/personality";
+
 const App = () => {
   return (
     <>
@@ -41,14 +42,12 @@ const App = () => {
 
         {/* Feed Page */}
         <Route path="/feed" element={<Auth><Feed /></Auth>} />
-        <Route path="/contact" element={<UpdateContact />} />
+
+        {/* Personality Page */}
+        <Route path="/personality" element={<Auth><Personality/></Auth>} />
       </Routes>
-       
-       {/* Messages Page */}
-       {/* <Route path="/message" element={<Auth><Message /></Auth>} */}
-      {/* <div className="App">
-      <ChatApp/>
-    </div> */}
+
+
     </>
   );
 };
