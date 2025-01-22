@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";  // Import Toastify
-import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
-import Api from "../../apis/Api";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Quiz.css";
+import Personality from "./personality";
 
 const questions = [
   "I enjoy socializing with new people.",
@@ -81,46 +80,17 @@ const Quiz = () => {
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (answers.includes(null)) {
       toast.error("Please answer all the questions before submitting.");
       return;
     }
-  
+
     const scores = calculateScores(answers);
     const personality = getPersonalityType(scores);
-    setIsLoading(true);
-  
-    try {
-      if (!isLoggedIn || !token) {
-        toast.error("You are not logged in. Please log in first.");
-        setIsLoading(false);
-        return;
-      }
-  
-      console.log('Submitting quiz...');
-      const quizResponse = await axios.post(
-        Api.SUBMIT_QUIZ,
-        { answers },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-  
-      if (quizResponse.status !== 200) throw new Error("Error submitting quiz.");
-  
-      toast.success("Quiz submitted successfully!");
-      setIsLoading(false);
-      navigate("/feed");
-    } catch (error) {
-      console.error("Error submitting quiz:", error);
-      toast.error("There was an error submitting the quiz. Please try again.");
-      setIsLoading(false);
-    }
+
+    navigate("/personality", { state: { personality } });
   };
-  
 
   const goToPrevious = () => {
     if (currentQuestionIndex > 0) setCurrentQuestionIndex(currentQuestionIndex - 1);
@@ -158,8 +128,8 @@ const Quiz = () => {
             Previous
           </button>
           {currentQuestionIndex === questions.length - 1 ? (
-            <button onClick={handleSubmit} disabled={isLoading}>
-              {isLoading ? "Submitting..." : "Submit Quiz"}
+            <button onClick={handleSubmit}>
+              Submit Quiz
             </button>
           ) : (
             <button onClick={goToNext}>Next</button>
