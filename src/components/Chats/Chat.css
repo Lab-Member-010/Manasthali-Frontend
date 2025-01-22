@@ -1,49 +1,41 @@
-.chat__section {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .brand {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .brand img {
-    margin-right: 10px;
-  }
-  
-  .message__area {
-    height: 300px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-  }
-  
-  .message {
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    max-width: 75%;
-  }
-  
-  .message.outgoing {
-    background-color: #d1e7dd;
-    align-self: flex-end;
-  }
-  
-  .message.incoming {
-    background-color: #f8d7da;
-    align-self: flex-start;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
+.message-component {
+  width: 400px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.messages {
+  border: 1px solid #ddd;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  border-bottom: 1px solid #ddd;
+  padding: 5px 0;
+}
+
+.message.unread {
+  background-color: #f9f9f9;
+}
+
+.new-message textarea {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.new-message button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.new-message button:hover {
+  background-color: #0056b3;
+}
