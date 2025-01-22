@@ -1,7 +1,8 @@
 import React from "react";
+import "./FeedHome.css";
 
 const FeedHome=()=>{
-    return <div style={{color:"black"}}>Welcome to Manasthali!</div>;
+    return <div className="FeedHomeContainer">Welcome to Manasthali!</div>;
 }
 
 export default FeedHome;

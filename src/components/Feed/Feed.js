@@ -17,6 +17,12 @@ import { signOut } from "../../redux-config/UserSlice";
 import ManasthaliLogo from "../../images/Manasthali.png";
 import Chat from "./chat/Chat";
 import FeedHome from "./home/FeedHome";
+import GroupChat from "./group-chat/GroupChat";
+import Group from "./group/Group";
+import Notification from "./notification/Notification";
+import Badge from "./badge/Badge";
+import Profile from "./profile/Profile";
+import Challenge from "./challenge/Challenege";
 
 const Feed = () => {
   const {isLoggedIn} = useSelector((store)=>store.User || {});
@@ -28,19 +34,25 @@ const Feed = () => {
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case "home":
-        return <FeedHome />;
+        return <FeedHome/>;
       case "groups":
-        return <Chat />;
+        return <Group/>;
       case "Dekhte baad me":
-        return <Chat />;
+        return <FeedHome/>;
       case "chat":
-        return <Chat />;
+        return <Chat/>;
       case "group-chat":
-        return <Chat />;
+        return <GroupChat/>;
       case "notifications":
-        return <Chat />;
+        return <Notification/>;
+      case "profile":
+        return <Profile/>;
+      case "badge":
+        return <Badge/>;
+      case "challenge":
+        return <Challenge/>;
       default:
-        return <div>Welcome to Manasthali!</div>;
+        return <FeedHome/>;
     }
   };
 
@@ -69,10 +81,6 @@ const Feed = () => {
             <GroupIcon/>
             <span className="icon-text ml-2">Group</span>
           </div>
-          <div className="nav-item navItem" onClick={() => setActiveComponent("Dekhte baad me")}>
-            <AutoStoriesIcon/>
-            <span className="icon-text ml-2">Dekhte baad me</span>
-          </div>
           <div className="nav-item navItem" onClick={() => setActiveComponent("chat")}>
             <ChatIcon/>
             <span className="icon-text ml-2">Chat</span>
@@ -85,12 +93,16 @@ const Feed = () => {
             <NotificationsIcon/>
             <span className="icon-text ml-2">Notifications</span>
           </div>
+          <div className="nav-item navItem" onClick={() => setActiveComponent("Dekhte baad me")}>
+            <AutoStoriesIcon/>
+            <span className="icon-text ml-2">Dekhte baad me</span>
+          </div>
         </div>
 
         {/* Main Content */}
         <div className="mid-part">
           <div className="storiesDiv">
-            hello
+            This is story section
           </div>
           <div className="innerDb">
             {renderActiveComponent()}
@@ -99,13 +111,13 @@ const Feed = () => {
 
         {/* Right Navbar */}
         <div className="right-navbar">
-          <div className="nav-item">
+          <div className="nav-item" onClick={() => setActiveComponent("profile")}>
             <AccountCircleIcon/>
           </div>
-          <div className="nav-item">
+          <div className="nav-item" onClick={() => setActiveComponent("challenge")}>
             <EventIcon/>
           </div>
-          <div className="nav-item">
+          <div className="nav-item" onClick={() => setActiveComponent("badge")}>
             <WorkspacePremiumIcon/>
           </div>
           <div className="nav-item" onClick={()=>dispatch(signOut())}>
