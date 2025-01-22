@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from './redux-config/store';
 import App from './App';
-import './components/Chats/Chat.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

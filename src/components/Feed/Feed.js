@@ -15,8 +15,8 @@ import "./Feed.css";
 import { useDispatch, useSelector} from "react-redux";
 import { signOut } from "../../redux-config/UserSlice";
 import ManasthaliLogo from "../../images/Manasthali.png";
-import Chat from "../Chats/Chat";
-import FeedHome from "./FeedHome";
+import Chat from "./chat/Chat";
+import FeedHome from "./home/FeedHome";
 
 const Feed = () => {
   const {isLoggedIn} = useSelector((store)=>store.User || {});

@@ -9,7 +9,6 @@ import ResetPassword from "./components/Authentication/ResetPassword";
 import QuizGetStarted from "./components/Quiz/QuizGetStarted";
 import Quiz from "./components/Quiz/Quiz";
 import Feed from "./components/Feed/Feed";
-import Chat from "./components/Chats/Chat";
 import Auth from "./components/Authorization/Auth";
 
 const App = () => {
@@ -42,9 +41,6 @@ const App = () => {
 
         {/* Feed Page */}
         <Route path="/feed" element={<Auth><Feed /></Auth>} />
-
-        {/* Messages Page */}
-        <Route path="/chats" element={<Auth><Chat/></Auth>}/>
       </Routes>
 
 
