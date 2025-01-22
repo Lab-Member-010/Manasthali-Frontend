@@ -23,6 +23,7 @@ import Notification from "./notification/Notification";
 import Badge from "./badge/Badge";
 import Profile from "./profile/Profile";
 import Challenge from "./challenge/Challenege";
+import FindFriend from "./Find-friend/FindFriend";
 
 const Feed = () => {
   const {isLoggedIn} = useSelector((store)=>store.User || {});
@@ -45,6 +46,8 @@ const Feed = () => {
         return <GroupChat/>;
       case "notifications":
         return <Notification/>;
+      case "find-friends":
+        return <FindFriend/>;
       case "profile":
         return <Profile/>;
       case "badge":
@@ -93,9 +96,9 @@ const Feed = () => {
             <NotificationsIcon/>
             <span className="icon-text ml-2">Notifications</span>
           </div>
-          <div className="nav-item navItem" onClick={() => setActiveComponent("Dekhte baad me")}>
+          <div className="nav-item navItem" onClick={() => setActiveComponent("find-friends")}>
             <AutoStoriesIcon/>
-            <span className="icon-text ml-2">Dekhte baad me</span>
+            <span className="icon-text ml-2">Find-Friends</span>
           </div>
         </div>
 
@@ -111,16 +114,16 @@ const Feed = () => {
 
         {/* Right Navbar */}
         <div className="right-navbar">
-          <div className="nav-item" onClick={() => setActiveComponent("profile")}>
+          <div className="nav-item navItems" onClick={() => setActiveComponent("profile")}>
             <AccountCircleIcon/>
           </div>
-          <div className="nav-item" onClick={() => setActiveComponent("challenge")}>
+          <div className="nav-item navItems" onClick={() => setActiveComponent("challenge")}>
             <EventIcon/>
           </div>
-          <div className="nav-item" onClick={() => setActiveComponent("badge")}>
+          <div className="nav-item navItems" onClick={() => setActiveComponent("badge")}>
             <WorkspacePremiumIcon/>
           </div>
-          <div className="nav-item" onClick={()=>dispatch(signOut())}>
+          <div className="nav-item navItems" onClick={()=>dispatch(signOut())}>
             <PowerSettingsNewIcon/>
           </div>
         </div>

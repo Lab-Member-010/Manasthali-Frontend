@@ -19,7 +19,7 @@
 
 .navItem{
   border:0px solid black;
-  border-radius: 10px;
+  border-radius: 2px;
   width: 170px;
   height: 45px;
   margin: 5px;
@@ -31,7 +31,9 @@
 }
 
 .navItem:hover{
-  background-color: #F0F0F0;
+  color: #391694;
+  background-color: #e7e4f1;
+  border-left:4px solid #391694;
 }
 
 .right-navbar {
@@ -51,14 +53,17 @@
   border-left: 1px solid #ccc;
 }
 
-.nav-item {
+.navItems {
   padding: 15px;
   cursor: pointer;
+  border:0px;
+  border-radius: 50%;
   text-align: center;
 }
 
-.nav-item:hover{
-  background-color: #F0F0F0;
+.navItems:hover{
+  color: #391694;
+  background-color: #e7e4f1;
 }
 
 .mid-part {
