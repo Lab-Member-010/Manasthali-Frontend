@@ -10,7 +10,7 @@ import QuizGetStarted from "./components/Quiz/QuizGetStarted";
 import Quiz from "./components/Quiz/Quiz";
 import Feed from "./components/Feed/Feed";
 import Auth from "./components/Authorization/Auth";
-
+import UpdateContact from "./components/ContactDetails/UpdateContat";
 const App = () => {
   return (
     <>
@@ -41,6 +41,7 @@ const App = () => {
 
         {/* Feed Page */}
         <Route path="/feed" element={<Auth><Feed /></Auth>} />
+        <Route path="/contact" element={<UpdateContact />} />
       </Routes>
        
        {/* Messages Page */}
@@ -51,4 +52,7 @@ const App = () => {
     </>
   );
 };
-export default App;
+export default App;   
+
+
+ 

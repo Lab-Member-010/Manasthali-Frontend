@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Home as HomeIcon,
   Group as GroupIcon,
@@ -72,7 +73,9 @@ const Feed = () => {
         {/* Right Navbar */}
         <div className="right-navbar">
           <div className="nav-item">
-            <AccountCircleIcon/>
+          <Link to="/contact" style={{ textDecoration: "none", color: "inherit" }}>
+            <AccountCircleIcon />
+          </Link>
           </div>
           <div className="nav-item">
             <EventIcon/>
