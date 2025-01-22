@@ -29,10 +29,7 @@ const Feed = () => {
           <div className="site-logo">Manasthali</div>
         </div>
         <div className="header-right">
-          <input type="text" placeholder="Search..." className="search-bar" />
-          <button className="menu-button">
-            <NotificationsIcon/>
-          </button>
+          <input type="text" placeholder="Search..." className="searchBar"/>
         </div>
       </div>
       <br /> <br /> <br />
@@ -53,12 +50,16 @@ const Feed = () => {
             <span className="icon-text ml-2">Stories</span>
           </div>
           <div className="nav-item navItem">
-            <EventIcon/>
-            <span className="icon-text ml-2">Events</span>
+            <ChatIcon/>
+            <span className="icon-text ml-2">Chat</span>
           </div>
           <div className="nav-item navItem">
-            <WorkspacePremiumIcon/>
-            <span className="icon-text ml-2">Challenge</span>
+            <GroupsIcon/>
+            <span className="icon-text ml-2">GroupChat</span>
+          </div>
+          <div className="nav-item navItem">
+            <NotificationsIcon/>
+            <span className="icon-text ml-2">Notifications</span>
           </div>
         </div>
 
@@ -74,13 +75,13 @@ const Feed = () => {
             <AccountCircleIcon/>
           </div>
           <div className="nav-item">
-            <GroupsIcon/>
+            <EventIcon/>
           </div>
           <div className="nav-item">
-            <ChatIcon/>
+            <WorkspacePremiumIcon/>
           </div>
-          <div className="nav-item">
-            <PowerSettingsNewIcon onClick={()=>dispatch(signOut())}/>
+          <div className="nav-item" onClick={()=>dispatch(signOut())}>
+            <PowerSettingsNewIcon/>
           </div>
         </div>
       </div>
