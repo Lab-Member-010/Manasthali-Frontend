@@ -10,6 +10,7 @@ import {
   Notifications as NotificationsIcon,
   AccountCircle as AccountCircleIcon,
   PowerSettingsNew as PowerSettingsNewIcon,
+  AddCircleOutline
 } from "@mui/icons-material";
 import "./Feed.css";
 import { useDispatch, useSelector} from "react-redux";
@@ -25,6 +26,7 @@ import Profile from "./profile/Profile";
 import Challenge from "./challenge/Challenege";
 import FindFriend from "./Find-friend/FindFriend";
 import Story from "./story/Story";
+import Post from "./post/Post";
 
 const Feed = () => {
   const {isLoggedIn} = useSelector((store)=>store.User || {});
@@ -55,6 +57,8 @@ const Feed = () => {
         return <Badge/>;
       case "challenge":
         return <Challenge/>;
+      case "post":
+        return <Post/>;
       default:
         return <FeedHome/>;
     }
@@ -104,6 +108,10 @@ const Feed = () => {
           <div className="nav-item navItem" onClick={() => setActiveComponent("find-friends")}>
             <AutoStoriesIcon/>
             <span className="icon-text ml-2">Find-Friends</span>
+          </div>
+          <div className="nav-item navItem" onClick={() => setActiveComponent("post")}>
+            <AddCircleOutline/>
+            <span className="icon-text ml-2">Post</span>
           </div>
         </div>
 
