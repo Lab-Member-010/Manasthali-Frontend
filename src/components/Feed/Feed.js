@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
   Home as HomeIcon,
   Group as GroupIcon,
@@ -13,15 +13,37 @@ import {
 } from "@mui/icons-material";
 import "./Feed.css";
 import { useDispatch, useSelector} from "react-redux";
-import { useNavigate } from 'react-router-dom';
 import { signOut } from "../../redux-config/UserSlice";
 import ManasthaliLogo from "../../images/Manasthali.png";
+import Chat from "../Chats/Chat";
+import FeedHome from "./FeedHome"
 
 const Feed = () => {
   const {isLoggedIn} = useSelector((store)=>store.User || {});
   console.log(isLoggedIn)
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const [activeComponent, setActiveComponent] = useState("home");
+
+  const renderActiveComponent = () => {
+    switch (activeComponent) {
+      case "home":
+        return <FeedHome />;
+      case "groups":
+        return <Chat />;
+      case "Dekhte baad me":
+        return <Chat />;
+      case "chat":
+        return <Chat />;
+      case "group-chat":
+        return <Chat />;
+      case "notifications":
+        return <Chat />;
+      default:
+        return <div>Welcome to Manasthali!</div>;
+    }
+  };
+
   return (
     <div className="main-container">
       {/* Header */}
@@ -39,27 +61,27 @@ const Feed = () => {
       <div className="content-container">
         {/* Left Navbar */}
         <div className="left-navbar">
-          <div className="nav-item navItem">
+          <div className="nav-item navItem" onClick={() => setActiveComponent("home")}>
             <HomeIcon/>
             <span className="icon-text ml-2">Home</span>
           </div>
-          <div className="nav-item navItem">
+          <div className="nav-item navItem" onClick={() => setActiveComponent("groups")}>
             <GroupIcon/>
             <span className="icon-text ml-2">Group</span>
           </div>
-          <div className="nav-item navItem">
+          <div className="nav-item navItem" onClick={() => setActiveComponent("Dekhte baad me")}>
             <AutoStoriesIcon/>
-            <span className="icon-text ml-2">Stories</span>
+            <span className="icon-text ml-2">Dekhte baad me</span>
           </div>
-          <div className="nav-item navItem" onClick={()=>navigate("/chats")}>
+          <div className="nav-item navItem" onClick={() => setActiveComponent("chat")}>
             <ChatIcon/>
             <span className="icon-text ml-2">Chat</span>
           </div>
-          <div className="nav-item navItem">
+          <div className="nav-item navItem" onClick={() => setActiveComponent("group-chat")}>
             <GroupsIcon/>
             <span className="icon-text ml-2">GroupChat</span>
           </div>
-          <div className="nav-item navItem">
+          <div className="nav-item navItem" onClick={() => setActiveComponent("notifications")}>
             <NotificationsIcon/>
             <span className="icon-text ml-2">Notifications</span>
           </div>
@@ -67,7 +89,11 @@ const Feed = () => {
 
         {/* Main Content */}
         <div className="mid-part">
+          <div className="storiesDiv">
+            hello
+          </div>
           <div className="innerDb">
+            {renderActiveComponent()}
           </div>
         </div>
 
