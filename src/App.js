@@ -10,6 +10,7 @@ import QuizGetStarted from "./components/Quiz/QuizGetStarted";
 import Quiz from "./components/Quiz/Quiz";
 import Feed from "./components/Feed/Feed";
 import Auth from "./components/Authorization/Auth";
+import Personality from "./components/Quiz/personality";
 
 const App = () => {
   return (
@@ -41,6 +42,9 @@ const App = () => {
 
         {/* Feed Page */}
         <Route path="/feed" element={<Auth><Feed /></Auth>} />
+
+        {/* Personality Page */}
+        <Route path="/personality" element={<Auth><Personality/></Auth>} />
       </Routes>
 
 
