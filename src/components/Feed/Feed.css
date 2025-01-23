@@ -69,20 +69,19 @@
 }
 
 .mid-part {
-  background-color: whitesmoke;
+  background-color: lightgray;
   flex: 1;
   color: white;
   font-size: 24px;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-left: 20px;
-  padding-right: 20px;  
-  padding-top: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .innerDb{
   background-color: white;
-  height: calc(100vh - 125px); 
+  height: calc(100vh - 5px); 
   overflow-y: scroll; 
   -ms-overflow-style: none;
   scrollbar-width: none;

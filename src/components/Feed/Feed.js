@@ -32,7 +32,6 @@ import Post from "./post/Post";
 const Feed = () => {
   const { token } = useSelector((store) => store.user);
   const userId = useSelector((state) => state.user.user._id);
-  //console.log(userId+" "+token);
   const dispatch = useDispatch();
 
   const [activeComponent, setActiveComponent] = useState("home");
