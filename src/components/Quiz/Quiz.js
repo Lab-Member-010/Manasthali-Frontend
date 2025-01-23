@@ -128,7 +128,7 @@ const Quiz = () => {
 
   const goToNext = () => {
     if (currentQuestionIndex < questions.length - 1) setCurrentQuestionIndex(currentQuestionIndex + 1);
-  };
+  };   
 
   return (
     <div className="quiz-wrapper">
@@ -170,4 +170,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default Quiz;   
