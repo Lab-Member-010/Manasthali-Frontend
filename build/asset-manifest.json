@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0226d794.css",
+    "main.js": "/static/js/main.bddcdfd0.js",
+    "static/media/spore.gif": "/static/media/spore.1098eb4968dc40e7bd7a.gif",
+    "static/media/Manasthali.png": "/static/media/Manasthali.bea908d22cf56e215106.png",
+    "index.html": "/index.html",
+    "main.0226d794.css.map": "/static/css/main.0226d794.css.map",
+    "main.bddcdfd0.js.map": "/static/js/main.bddcdfd0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0226d794.css",
+    "static/js/main.bddcdfd0.js"
+  ]
+}
