@@ -1,0 +1,261 @@
+
+import React, { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./Profile.css";  // Assuming you have custom styles for the profile page
+
+const ProfileSetting
+ = () => {
+  const user = useSelector((state) => state.UserSlice?.user);
+  const userId = user ? user._id : localStorage.getItem("userId");
+   // Fetch user ID from Redux or localStorage
+   const [profilePicture, setProfilePicture] = useState(null);
+  const [contact, setContact] = useState(user?.contact || "");
+  const [dob, setDob] = useState(user?.dob || "");
+  const [gender, setGender] = useState(user?.gender || "");
+  const [message, setMessage] = useState("");
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const navigate = useNavigate();
+
+  const handleProfilePictureUpdate = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+
+    if (!profilePicture) {
+      toast.error("Please select a profile picture.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("profile_picture", profilePicture);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/users/${userId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Profile picture updated successfully!");
+        setMessage("Profile picture updated successfully!");
+      } else {
+        toast.error("Failed to update profile picture.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to update profile picture.");
+    }
+  };
+
+
+
+  // Handle contact update
+  const handleContactUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token"); // Fetch the token
+      const response = await axios.put(
+        `http://localhost:3001/users/${userId}/contact`,
+        { contact },
+        {
+          headers: {
+            Authorization: `Bearer ${token}` // Add token to the request headers
+          }
+        }
+      );
+      if (response.data.success) {
+        setMessage("Contact updated successfully!");
+      } else {
+        setMessage("Failed to update contact. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage("Failed to update contact. Please try again.");
+    }
+  };
+  
+  // Handle DOB update
+  const handleDobUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token"); // Fetch the token
+      const response = await axios.put(
+        `http://localhost:3001/users/${userId}/dob`,
+        { dob },
+        {
+          headers: {
+            Authorization: `Bearer ${token}` // Add the token to the request headers
+          }
+        }
+      );
+      if (response.data.success) {
+        setMessage("Date of Birth updated successfully!");
+      } else {
+        setMessage("Failed to update DOB. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage("Failed to update DOB. Please try again.");
+    }
+  };
+  
+
+  // Handle gender update
+  const handleGenderUpdate = async (e) => {
+    e.preventDefault();
+    
+    const token = localStorage.getItem("token"); // Token ko fetch karte hain
+    
+    if (!token) {
+      setMessage("You need to log in to update gender.");
+      return;
+    }
+  
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/users/${userId}/gender`,
+        { gender },
+        {
+          headers: {
+            Authorization: `Bearer ${token}` // Token ko header mein bhejein
+          }
+        }
+      );
+  
+      if (response.data.success) {
+        setMessage("Gender updated successfully!");
+      } else {
+        setMessage("Failed to update gender. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      setMessage("Failed to update gender. Please try again.");
+    }
+  };
+  
+  
+  return (
+    <div className="container py-4">
+      <ToastContainer />
+      <h2 className="text-center mb-4">Your Profile</h2>
+
+      <div className="card shadow-sm">
+        <div className="card-body">
+          <h4 className="card-title">Profile Information</h4>
+        </div>
+      </div>
+
+      {!showUpdateForm && (
+        <div className="text-center mt-4">
+          <button
+            className="btn btn-primary"
+            onClick={() => setShowUpdateForm(true)}
+          >
+            Update Your Details
+          </button>
+        </div>
+      )}
+
+      {showUpdateForm && (
+        <div className="row mt-4">
+          <div className="col-md-3">
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">Update Profile Picture</h5>
+                <form onSubmit={handleProfilePictureUpdate}>
+                  <input
+                    type="file"
+                    className="form-control mb-2"
+                    accept="image/*"
+                    onChange={(e) => setProfilePicture(e.target.files[0])}
+                    required
+                  />
+                  <button className="btn btn-primary w-100" type="submit">
+                    Update Picture
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-3">
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">Update Contact</h5>
+                <form onSubmit={handleContactUpdate}>
+                  <input
+                    type="text"
+                    className="form-control mb-2"
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                    placeholder="Enter new contact"
+                    required
+                  />
+                  <button className="btn btn-primary w-100" type="submit">
+                    Update Contact
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-3">
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">Update Date of Birth</h5>
+                <form onSubmit={handleDobUpdate}>
+                  <input
+                    type="date"
+                    className="form-control mb-2"
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
+                    required
+                  />
+                  <button className="btn btn-primary w-100" type="submit">
+                    Update DOB
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-3">
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">Update Gender</h5>
+                <form onSubmit={handleGenderUpdate}>
+                  <select
+                    className="form-select mb-2"
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                    required
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <button className="btn btn-primary w-100" type="submit">
+                    Update Gender
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ProfileSetting;
+

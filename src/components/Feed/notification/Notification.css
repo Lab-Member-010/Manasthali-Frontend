@@ -1,3 +1,6 @@
-.NotificationContainer{
-    color:#e7e4f1;
+ .notification-dropdown {
+  position: relative;
+  color: rgb(19, 23, 23);
 }
+
+ 
