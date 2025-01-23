@@ -135,7 +135,7 @@ const Quiz = () => {
       <div className="quiz-container">
         <div className="question-container">
           <div id="question" className="question">
-            {questions[currentQuestionIndex]}
+            {`${(currentQuestionIndex)*1+1}. ${questions[currentQuestionIndex]}`}
           </div>
           <div className="slider-options">
             <span className="label">Agree</span>
