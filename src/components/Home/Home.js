@@ -1,80 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Card, Button, Image, Row, Col, Container } from 'react-bootstrap';
-import { useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./Home.module.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
-  const userId = useSelector((state) => state.user.user._id);
-  const token=useSelector((state) => state.user.token);
-
-  useEffect(() => {
-    axios.get(`http://localhost:3001/posts/all-posts/${userId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
-      }
-    )
-      .then(response => {
-        setPosts(response.data);
-      })
-      .catch(error => {
-        toast.error('Error fetching posts:', error);
-      });
-  }, []);
+  const navigate = useNavigate();
 
   return (
-    <div>
-      <ToastContainer/>
-    <Container className="mt-4">
-      <Row>
-        {posts.map(post => (
-          <Col key={post._id} sm={12} md={6} lg={4} className="mb-4">
-            <Card className="shadow-sm">
-              <Card.Header className="d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-center">
-                  <Image src={post.userId.profilePicture} roundedCircle width={40} height={40} />
-                  <span className="ms-2">{post.userId.username}</span>
-                </div>
-                <span>{post.communityId ? post.communityId.name : 'General'}</span>
-              </Card.Header>
-              <Card.Body>
-                <Image src={post.media[0]} alt="Post Image" fluid className="w-100 mb-3" />
-                <p>{post.description}</p>
-                <div className="d-flex justify-content-between">
-                  <Button variant="outline-primary" className="me-2">
-                    Like
-                  </Button>
-                  <Button variant="outline-secondary">
-                    Comment
-                  </Button>
-                </div>
-              </Card.Body>
-              <Card.Footer className="text-muted">
-                {post.likes.length} Likes | {post.comment_count} Comments
-              </Card.Footer>
-            </Card>
-
-            {/* Comments Section */}
-            {post.comments && post.comments.length > 0 && (
-              <div className="mt-2">
-                {post.comments.map(comment => (
-                  <div key={comment._id} className="d-flex mb-2">
-                    <Image src={comment.user_id.profilePicture} roundedCircle width={30} height={30} />
-                    <div className="ms-2">
-                      <strong>{comment.user_id.username}</strong>
-                      <p>{comment.comment}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <div className={styles.backgroundContainer}>
+      <div className={`${styles.homeContainer} container-fluid text-center`}>
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <h3 className="display-4 mb-4">Welcome to Manasthali</h3>
+            <p className="lead">
+              A platform to connect with people based on your personality.
+            </p>
+            <div className="d-grid gap-3 col-6 mx-auto mt-4">
+              <button
+                className={`${styles.customBtn} ${styles.customBtnOutline} btn`}
+                onClick={() => navigate("/signup")}
+              >
+                Sign Up
+              </button>
+              <button
+                className={`${styles.customBtn} ${styles.customBtnOutline} btn`}
+                onClick={() => navigate("/signin")}
+              >
+                Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

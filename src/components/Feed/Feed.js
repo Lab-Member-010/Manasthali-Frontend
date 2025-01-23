@@ -31,6 +31,8 @@ import FindFriend from "./Find-friend/FindFriend";
 import Story from "./story/Story";
 import Post from "./post/Post";
 import ProfileSetting from "./profile/ProfileSetting";
+import Community from "./community/community";
+
 const Feed = () => {
   const { token } = useSelector((store) => store.user);
   const userId = useSelector((state) => state.user.user._id);
