@@ -21,7 +21,7 @@ import GroupChat from "./group-chat/GroupChat";
 import Group from "./group/Group";
 import Notification from "./notification/Notification";
 import Badge from "./badge/Badge";
-import Profile from "./profile/Profile";
+import Profile from "./profile/ProfileSetting";
 import Challenge from "./challenge/Challenege";
 import FindFriend from "./Find-friend/FindFriend";
 import Story from "./story/Story";
