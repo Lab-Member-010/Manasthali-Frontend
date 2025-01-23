@@ -11,7 +11,8 @@ import {
   AccountCircle as AccountCircleIcon,
   PowerSettingsNew as PowerSettingsNewIcon,
   AddCircleOutline,
-  Settings
+  Settings,
+  SupportAgent
 } from "@mui/icons-material";
 import "./Feed.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,8 +31,6 @@ import FindFriend from "./Find-friend/FindFriend";
 import Story from "./story/Story";
 import Post from "./post/Post";
 import ProfileSetting from "./profile/ProfileSetting";
-import Community from "./community/community";
-
 const Feed = () => {
   const { token } = useSelector((store) => store.user);
   const userId = useSelector((state) => state.user.user._id);
@@ -136,6 +135,10 @@ const Feed = () => {
           <div className="nav-item navItem" onClick={() => setActiveComponent("post")}>
             <AddCircleOutline />
             <span className="icon-text ml-2">Post</span>
+          </div>
+          <div className="nav-item navItem" onClick={() => setActiveComponent("post")}>
+            <SupportAgent />
+            <span className="icon-text ml-2">Mental Coach</span>
           </div>
         </div>
 
