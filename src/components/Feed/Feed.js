@@ -38,21 +38,17 @@ const Feed = () => {
 
   const [activeComponent, setActiveComponent] = useState("home");
   const [profileData, setProfileData] = useState(null);
-  const [loadingProfile, setLoadingProfile] = useState(false);
 
   const handleProfileClick = async () => {
-    setLoadingProfile(true);
     console.log("Fetching profile data for user:", userId);
     try {
       const response = await axios.get(`http://localhost:3001/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("Profile data:", response);
       setProfileData(response.data.user);
     } catch (error) {
       console.error("Failed to fetch profile data:", error.response?.data || error.message);
     } finally {
-      setLoadingProfile(false);
       setActiveComponent("profile");
     }
   };
@@ -75,7 +71,7 @@ const Feed = () => {
       case "find-friends":
         return <FindFriend />;
       case "profile":
-        return <Profile user={profileData} loading={loadingProfile} />;
+        return <Profile user={profileData} />;
       case "badge":
         return <Badge />;
       case "challenge":
