@@ -1,3 +1,62 @@
-.ProfileContainer{
-    color: #e7e4f1;
+.ProfileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profileImage img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+}
+
+.userName{
+    color: #262626;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.followersFollowing {
+    color: #8e8e8e;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.followersFollowing span {
+    font-size: 16px;
+}
+
+.personalityType {
+    color: #262626;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .ProfileContainer {
+        padding: 10px;
+    }
+    .profileImage img {
+        width: 120px;
+        height: 120px;
+    }
+    .userName {
+        font-size: 20px;
+    }
+    .followersFollowing span {
+        font-size: 14px;
+    }
+    .personalityType {
+        font-size: 14px;
+    }
 }

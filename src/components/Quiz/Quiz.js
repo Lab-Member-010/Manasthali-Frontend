@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Api from "../../apis/Api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Quiz.css";
-import Personality from "./personality"; 
 
 const questions = [
   "I enjoy socializing with new people.",
@@ -80,7 +81,7 @@ const Quiz = () => {
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (answers.includes(null)) {
       toast.error("Please answer all the questions before submitting.");
       return;
@@ -89,8 +90,37 @@ const Quiz = () => {
     const scores = calculateScores(answers);
     const personality = getPersonalityType(scores);
 
-    navigate("/personality", { state: { personality } });
-  };   
+    setIsLoading(true);
+
+    try {
+      if (!isLoggedIn || !token) {
+        toast.error("You are not logged in. Please log in first.");
+        setIsLoading(false);
+        return;
+      }
+
+      console.log('Submitting quiz...');
+      const quizResponse = await axios.post(
+        Api.SUBMIT_QUIZ,
+        { answers },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (quizResponse.status !== 200) throw new Error("Error submitting quiz.");
+
+      toast.success("Quiz submitted successfully!");
+      setIsLoading(false);
+      navigate("/personality", { state: { personality } });
+    } catch (error) {
+      console.error("Error submitting quiz:", error);
+      toast.error("There was an error submitting the quiz. Please try again.");
+      setIsLoading(false);
+    }
+  };
 
   const goToPrevious = () => {
     if (currentQuestionIndex > 0) setCurrentQuestionIndex(currentQuestionIndex - 1);
@@ -105,7 +135,7 @@ const Quiz = () => {
       <div className="quiz-container">
         <div className="question-container">
           <div id="question" className="question">
-            {questions[currentQuestionIndex]}
+            {`${(currentQuestionIndex)*1+1}. ${questions[currentQuestionIndex]}`}
           </div>
           <div className="slider-options">
             <span className="label">Agree</span>
