@@ -34,6 +34,8 @@
   color: #391694;
   background-color: #e7e4f1;
   border-left:4px solid #391694;
+  width: 166px;
+  padding-left: 11px;
 }
 
 .right-navbar {

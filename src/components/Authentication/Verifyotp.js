@@ -38,7 +38,7 @@ const Verifyotp = () => {
         <h2 className="text-center mb-4">Verify OTP</h2>
         <form onSubmit={handleSubmit}>
           <div className={`form-group ${styles.inputContainer}`}>
-          <label className={styles.labelField}>Username:</label>
+          <label className={styles.labelField}>OTP:</label>
             <input
             type="text"
             value={otp}

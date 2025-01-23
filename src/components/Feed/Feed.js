@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
   Home as HomeIcon,
   Group as GroupIcon,
@@ -10,9 +10,11 @@ import {
   Notifications as NotificationsIcon,
   AccountCircle as AccountCircleIcon,
   PowerSettingsNew as PowerSettingsNewIcon,
+  AddCircleOutline
 } from "@mui/icons-material";
 import "./Feed.css";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { signOut } from "../../redux-config/UserSlice";
 import ManasthaliLogo from "../../images/Manasthali.png";
 import Chat from "./chat/Chat";
@@ -25,43 +27,67 @@ import Profile from "./profile/ProfileSetting";
 import Challenge from "./challenge/Challenege";
 import FindFriend from "./Find-friend/FindFriend";
 import Story from "./story/Story";
+import Post from "./post/Post";
 
 const Feed = () => {
-  const {isLoggedIn} = useSelector((store)=>store.User || {});
-  console.log(isLoggedIn)
+  const { token } = useSelector((store) => store.user);
+  const userId = useSelector((state) => state.user.user._id);
+  //console.log(userId+" "+token);
   const dispatch = useDispatch();
 
   const [activeComponent, setActiveComponent] = useState("home");
+  const [profileData, setProfileData] = useState(null);
+  const [loadingProfile, setLoadingProfile] = useState(false);
+
+  const handleProfileClick = async () => {
+    setLoadingProfile(true);
+    console.log("Fetching profile data for user:", userId);
+    try {
+      const response = await axios.get(`http://localhost:3001/users/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("Profile data:", response);
+      setProfileData(response.data.user);
+    } catch (error) {
+      console.error("Failed to fetch profile data:", error.response?.data || error.message);
+    } finally {
+      setLoadingProfile(false);
+      setActiveComponent("profile");
+    }
+  };
+  
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
       case "home":
-        return <FeedHome/>;
+        return <FeedHome />;
       case "groups":
-        return <Group/>;
+        return <Group />;
       case "Dekhte baad me":
-        return <FeedHome/>;
+        return <FeedHome />;
       case "chat":
-        return <Chat/>;
+        return <Chat />;
       case "group-chat":
-        return <GroupChat/>;
+        return <GroupChat />;
       case "notifications":
-        return <Notification/>;
+        return <Notification />;
       case "find-friends":
-        return <FindFriend/>;
+        return <FindFriend />;
       case "profile":
-        return <Profile/>;
+        return <Profile user={profileData} loading={loadingProfile} />;
       case "badge":
-        return <Badge/>;
+        return <Badge />;
       case "challenge":
-        return <Challenge/>;
+        return <Challenge />;
+      case "post":
+        return <Post />;
       default:
-        return <FeedHome/>;
+        return <FeedHome />;
     }
   };
 
-  const renderStories= ()=>{
-    return <Story/>
+  const renderStories = () => {
+    return <Story />;
   };
 
   return (
@@ -73,7 +99,7 @@ const Feed = () => {
           <div className="site-logo">Manasthali</div>
         </div>
         <div className="header-right">
-          <input type="text" placeholder="Search..." className="searchBar"/>
+          <input type="text" placeholder="Search..." className="searchBar" />
         </div>
       </div>
       <br /> <br /> <br />
@@ -82,54 +108,58 @@ const Feed = () => {
         {/* Left Navbar */}
         <div className="left-navbar">
           <div className="nav-item navItem" onClick={() => setActiveComponent("home")}>
-            <HomeIcon/>
+            <HomeIcon />
             <span className="icon-text ml-2">Home</span>
           </div>
           <div className="nav-item navItem" onClick={() => setActiveComponent("groups")}>
-            <GroupIcon/>
+            <GroupIcon />
             <span className="icon-text ml-2">Group</span>
           </div>
           <div className="nav-item navItem" onClick={() => setActiveComponent("chat")}>
-            <ChatIcon/>
+            <ChatIcon />
             <span className="icon-text ml-2">Chat</span>
           </div>
           <div className="nav-item navItem" onClick={() => setActiveComponent("group-chat")}>
-            <GroupsIcon/>
+            <GroupsIcon />
             <span className="icon-text ml-2">GroupChat</span>
           </div>
           <div className="nav-item navItem" onClick={() => setActiveComponent("notifications")}>
-            <NotificationsIcon/>
+            <NotificationsIcon />
             <span className="icon-text ml-2">Notifications</span>
           </div>
           <div className="nav-item navItem" onClick={() => setActiveComponent("find-friends")}>
-            <AutoStoriesIcon/>
+            <AutoStoriesIcon />
             <span className="icon-text ml-2">Find-Friends</span>
+          </div>
+          <div className="nav-item navItem" onClick={() => setActiveComponent("post")}>
+            <AddCircleOutline />
+            <span className="icon-text ml-2">Post</span>
           </div>
         </div>
 
         {/* Main Content */}
         <div className="mid-part">
           <div className="innerDb">
-          <div className="storiesDiv">
-          {renderStories()}
-          </div>
-          {renderActiveComponent()}
+            <div className="storiesDiv">
+              {renderStories()}
+            </div>
+            {renderActiveComponent()}
           </div>
         </div>
 
         {/* Right Navbar */}
         <div className="right-navbar">
-          <div className="nav-item navItems" onClick={() => setActiveComponent("profile")}>
-            <AccountCircleIcon/>
+          <div className="nav-item navItems" onClick={()=>handleProfileClick()}>
+            <AccountCircleIcon />
           </div>
           <div className="nav-item navItems" onClick={() => setActiveComponent("challenge")}>
-            <EventIcon/>
+            <EventIcon />
           </div>
           <div className="nav-item navItems" onClick={() => setActiveComponent("badge")}>
-            <WorkspacePremiumIcon/>
+            <WorkspacePremiumIcon />
           </div>
-          <div className="nav-item navItems" onClick={()=>dispatch(signOut())}>
-            <PowerSettingsNewIcon/>
+          <div className="nav-item navItems" onClick={() => dispatch(signOut())}>
+            <PowerSettingsNewIcon />
           </div>
         </div>
       </div>
