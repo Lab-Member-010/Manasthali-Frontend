@@ -30,6 +30,7 @@ import FindFriend from "./Find-friend/FindFriend";
 import Story from "./story/Story";
 import Post from "./post/Post";
 import ProfileSetting from "./profile/ProfileSetting";
+import Community from "./community/community";
 
 const Feed = () => {
   const { token } = useSelector((store) => store.user);
@@ -80,6 +81,8 @@ const Feed = () => {
         return <Post />;
       case "setting":
         return <ProfileSetting/>;
+      case "community":
+        return <Community/>;
       default:
         return <FeedHome />;
     }
@@ -158,6 +161,9 @@ const Feed = () => {
             <WorkspacePremiumIcon />
           </div>
           <div className="nav-item navItems" onClick={() => setActiveComponent("setting")}>
+            <Settings/>
+          </div>
+          <div className="nav-item navItems" onClick={() => setActiveComponent("community")}>
             <Settings/>
           </div>
           <div className="nav-item navItems" onClick={() => dispatch(signOut())}>

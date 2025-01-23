@@ -5,6 +5,7 @@ const Api = {
     FORGOT_PASSWORD: "http://localhost:3001/users/forgot-password",
     VERIFY_OTP:"http://localhost:3001/users/verify-otp",
     SERVER_URL:"http://localhost:3001",
+    COMMUNITY_URL:"http://localhost:3001/communities/view",
 };
 
 export default Api;
