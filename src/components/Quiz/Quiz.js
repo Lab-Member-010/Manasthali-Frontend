@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Quiz.css";
-import Personality from "./personality";
+import Personality from "./personality"; 
 
 const questions = [
   "I enjoy socializing with new people.",
@@ -90,7 +90,7 @@ const Quiz = () => {
     const personality = getPersonalityType(scores);
 
     navigate("/personality", { state: { personality } });
-  };
+  };   
 
   const goToPrevious = () => {
     if (currentQuestionIndex > 0) setCurrentQuestionIndex(currentQuestionIndex - 1);
@@ -98,7 +98,7 @@ const Quiz = () => {
 
   const goToNext = () => {
     if (currentQuestionIndex < questions.length - 1) setCurrentQuestionIndex(currentQuestionIndex + 1);
-  };
+  };   
 
   return (
     <div className="quiz-wrapper">
@@ -140,4 +140,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default Quiz;   
