@@ -2,6 +2,7 @@ import React from "react";
 import "./Profile.css";
 
 const Profile = ({ user, loading }) => {
+    
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -14,7 +15,7 @@ const Profile = ({ user, loading }) => {
         <div className="ProfileContainer">
             {/* Profile Image */}
             <div className="profileImage">
-                <img src={user.profilePicture || "default-avatar.png"} alt={user.username} />
+                <img src={user.profile_picture} alt={user.username} />
             </div>
 
             {/* Username */}

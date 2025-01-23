@@ -10,7 +10,8 @@ import {
   Notifications as NotificationsIcon,
   AccountCircle as AccountCircleIcon,
   PowerSettingsNew as PowerSettingsNewIcon,
-  AddCircleOutline
+  AddCircleOutline,
+  Settings
 } from "@mui/icons-material";
 import "./Feed.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,11 +24,12 @@ import GroupChat from "./group-chat/GroupChat";
 import Group from "./group/Group";
 import Notification from "./notification/Notification";
 import Badge from "./badge/Badge";
-import Profile from "./profile/ProfileSetting";
+import Profile from "./profile/Profile";
 import Challenge from "./challenge/Challenege";
 import FindFriend from "./Find-friend/FindFriend";
 import Story from "./story/Story";
 import Post from "./post/Post";
+import ProfileSetting from "./profile/ProfileSetting";
 
 const Feed = () => {
   const { token } = useSelector((store) => store.user);
@@ -80,6 +82,8 @@ const Feed = () => {
         return <Challenge />;
       case "post":
         return <Post />;
+      case "setting":
+        return <ProfileSetting/>;
       default:
         return <FeedHome />;
     }
@@ -156,6 +160,9 @@ const Feed = () => {
           </div>
           <div className="nav-item navItems" onClick={() => setActiveComponent("badge")}>
             <WorkspacePremiumIcon />
+          </div>
+          <div className="nav-item navItems" onClick={() => setActiveComponent("setting")}>
+            <Settings/>
           </div>
           <div className="nav-item navItems" onClick={() => dispatch(signOut())}>
             <PowerSettingsNewIcon />

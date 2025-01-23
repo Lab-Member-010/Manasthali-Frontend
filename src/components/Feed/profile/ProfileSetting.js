@@ -2,27 +2,23 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Profile.css";  // Assuming you have custom styles for the profile page
+import "./Profile.css"; 
 
-const ProfileSetting
- = () => {
+const ProfileSetting= () => {
   const user = useSelector((state) => state.UserSlice?.user);
-  const userId = user ? user._id : localStorage.getItem("userId");
-   // Fetch user ID from Redux or localStorage
-   const [profilePicture, setProfilePicture] = useState(null);
+  const userId = useSelector((state) => state.user.user._id);
+  const token=useSelector((state) => state.user.token);
+  const [profilePicture, setProfilePicture] = useState(null);
   const [contact, setContact] = useState(user?.contact || "");
   const [dob, setDob] = useState(user?.dob || "");
   const [gender, setGender] = useState(user?.gender || "");
   const [message, setMessage] = useState("");
   const [showUpdateForm, setShowUpdateForm] = useState(false);
-  const navigate = useNavigate();
 
   const handleProfilePictureUpdate = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
 
     if (!profilePicture) {
       toast.error("Please select a profile picture.");
@@ -56,19 +52,15 @@ const ProfileSetting
     }
   };
 
-
-
-  // Handle contact update
   const handleContactUpdate = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token"); // Fetch the token
       const response = await axios.put(
         `http://localhost:3001/users/${userId}/contact`,
         { contact },
         {
           headers: {
-            Authorization: `Bearer ${token}` // Add token to the request headers
+            Authorization: `Bearer ${token}` 
           }
         }
       );
