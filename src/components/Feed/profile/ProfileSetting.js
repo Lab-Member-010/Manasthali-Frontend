@@ -65,12 +65,14 @@ const ProfileSetting= () => {
         }
       );
       if (response.data.success) {
+        toast.success("Contact updated successfully!");
         setMessage("Contact updated successfully!");
       } else {
+        toast.error("Failed to update Contact.");
         setMessage("Failed to update contact. Please try again.");
       }
     } catch (error) {
-      console.error(error);
+      toast.error("Failed to update Contact.");
       setMessage("Failed to update contact. Please try again.");
     }
   };
@@ -79,7 +81,6 @@ const ProfileSetting= () => {
   const handleDobUpdate = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token"); // Fetch the token
       const response = await axios.put(
         `http://localhost:3001/users/${userId}/dob`,
         { dob },
@@ -90,12 +91,14 @@ const ProfileSetting= () => {
         }
       );
       if (response.data.success) {
+        toast.success("DOB updated successfully!");
         setMessage("Date of Birth updated successfully!");
       } else {
+        toast.error("Failed to update DOB.");
         setMessage("Failed to update DOB. Please try again.");
       }
     } catch (error) {
-      console.error(error);
+      toast.error("Failed to update DOB.");
       setMessage("Failed to update DOB. Please try again.");
     }
   };
@@ -104,32 +107,26 @@ const ProfileSetting= () => {
   // Handle gender update
   const handleGenderUpdate = async (e) => {
     e.preventDefault();
-    
-    const token = localStorage.getItem("token"); // Token ko fetch karte hain
-    
-    if (!token) {
-      setMessage("You need to log in to update gender.");
-      return;
-    }
-  
     try {
       const response = await axios.put(
         `http://localhost:3001/users/${userId}/gender`,
         { gender },
         {
           headers: {
-            Authorization: `Bearer ${token}` // Token ko header mein bhejein
+            Authorization: `Bearer ${token}` 
           }
         }
       );
   
       if (response.data.success) {
+        toast.success("Gender updated successfully!");
         setMessage("Gender updated successfully!");
       } else {
+        toast.error("Failed to update Gender.");
         setMessage("Failed to update gender. Please try again.");
       }
     } catch (error) {
-      console.error(error);
+      toast.error("Failed to update Gender.");
       setMessage("Failed to update gender. Please try again.");
     }
   };
