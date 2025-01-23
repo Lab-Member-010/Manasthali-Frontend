@@ -1,3 +1,150 @@
-.FindFriendContainer{
-    color: #e7e4f1;
+/* Refined FindFriend.css */
+.FindFriendContainer {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.FindFriendContainer h2 {
+    font-size: 2.2rem;
+    color: #5a3fcd;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color:#c093fc;
+    color: white;
+}
+
+thead th {
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #f0f0ff;
+}
+
+tbody td {
+    padding: 15px;
+    text-align: center;
+    font-size: 1rem;
+    color: #444;
+}
+
+.ProfilePicture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #dcdcdc;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.ProfilePicture:hover {
+    transform: scale(1.1);
+    border-color: #c093fc;
+}
+
+button {
+    background-color:#c093fc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color:#c093fc;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color:#c093fc;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 15px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+        width: 100%;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #444;
+    }
+
+    .ProfilePicture {
+        width: 50px;
+        height: 50px;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
 }
