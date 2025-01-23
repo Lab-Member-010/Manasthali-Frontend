@@ -80,6 +80,8 @@ const Feed = () => {
         return <Post />;
       case "setting":
         return <ProfileSetting/>;
+      case "community":
+        return <Community/>;
       default:
         return <FeedHome />;
     }
@@ -162,6 +164,9 @@ const Feed = () => {
             <WorkspacePremiumIcon />
           </div>
           <div className="nav-item navItems" onClick={() => setActiveComponent("setting")}>
+            <Settings/>
+          </div>
+          <div className="nav-item navItems" onClick={() => setActiveComponent("community")}>
             <Settings/>
           </div>
           <div className="nav-item navItems" onClick={() => dispatch(signOut())}>
