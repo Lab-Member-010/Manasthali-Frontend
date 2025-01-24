@@ -15,9 +15,9 @@ const Community = () => {
     const fetchPersonalityData = async () => {
       try {
         const response = await axios.get(Api.COMMUNITY_URL, {
-          headers: { Authorization: `Bearer ${token} `},
+          headers: { Authorization: `Bearer ${token}` },
         });
-        console.log(response.data); 
+        console.log(response.data); // Log the response to inspect it
         setPersonalityData(Array.isArray(response.data.data) ? response.data.data: []);  // if the array is inside 'results'
       } catch (err) {
         setError('Error fetching data');
@@ -44,6 +44,7 @@ const Community = () => {
           <div key={personality._id} className="card">
             <h2>{personality.name}</h2>
             <p>{personality.description}</p>
+            <p><strong>Personality Type:</strong> {personality.personality_type}</p>
           </div>
         ))}
       </div>

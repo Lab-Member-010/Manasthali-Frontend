@@ -1,4 +1,5 @@
 /* Community Page Styles */
+/* Community Page Styles */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
