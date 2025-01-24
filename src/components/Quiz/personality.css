@@ -4,6 +4,11 @@
    box-sizing: border-box;
 }
 .type-container {
+    background-image: url('../../images/quiz_gif.gif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

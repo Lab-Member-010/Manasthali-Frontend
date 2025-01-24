@@ -13,11 +13,11 @@ const Personality = () => {
 
   return (
     <div className="type-container">
-      <img
+      {/* <img
         src="https://i.pinimg.com/originals/cf/85/d9/cf85d966c302f3728a0e8f81805c132a.gif"
         alt="Background"
         className="background-image"
-      />
+      /> */}
      
         <h2>Hey, your personality type is:</h2>
         <h1>{personality}</h1>
