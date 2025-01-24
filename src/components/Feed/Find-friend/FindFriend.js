@@ -18,10 +18,8 @@ const FindFriend = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log('API Response:', response.data);
         setUsers(Array.isArray(response.data.users) ? response.data.users : []);
       } catch (err) {
-        console.error('Fetch Error:', err.response?.data || err.message);
         setError(err.response?.data?.message || 'Failed to fetch users');
       } finally {
         setLoading(false);
@@ -32,6 +30,7 @@ const FindFriend = () => {
   }, [userId, token]);
 
   const handleFollow = async (userIdToFollow) => {
+
     console.log("User ID to follow:", userIdToFollow);
     console.log("Authorization token:", token); 
   
@@ -39,26 +38,29 @@ const FindFriend = () => {
       alert('Authentication token is missing. Please log in.');
       return;
     }
-  
     try {
+      console.log(userIdToFollow);
+      console.log(userId);
       const response = await axios.post(
-        `http://localhost:3001/users/follow/${userIdToFollow}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
+        `http://localhost:3001/users/follow`,
+        {userId,userIdToFollow},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-  
-      console.log("API Response:", response.data); // Log API response
-      if (response.status === 200) {
-        alert(response.data.message || 'Followed successfully!');
-        setUsers(users.filter((user) => user._id !== userIdToFollow)); // Remove user from list
-      }
+   
+
+      // Show success message
+      alert(response.data.message || 'Followed successfully!');
+
+      // Update the list to remove the followed user
+      setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userIdToFollow));
     } catch (err) {
-      console.error("Error:", err.response || err.message); // Log error response
       alert(err.response?.data?.message || 'Failed to follow. Please try again.');
     }
   };
-  
-  
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
