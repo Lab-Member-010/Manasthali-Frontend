@@ -1,29 +1,47 @@
+/* Community Page Styles */
 .cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .card {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    width: 250px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card h2 {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .card p {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .card strong {
-    font-weight: bold;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+  font-size: 1.2rem;
+  color: #391694;
+}
+
+.card p {
+  font-size: 0.8rem;
+  color: grey;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1rem;
+  color: #999;
+}
+
+.error {
+  text-align: center;
+  font-size: 1rem;
+  color: #e74c3c;
+}
