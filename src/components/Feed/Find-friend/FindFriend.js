@@ -30,6 +30,14 @@ const FindFriend = () => {
   }, [userId, token]);
 
   const handleFollow = async (userIdToFollow) => {
+
+    console.log("User ID to follow:", userIdToFollow);
+    console.log("Authorization token:", token); 
+  
+    if (!token) {
+      alert('Authentication token is missing. Please log in.');
+      return;
+    }
     try {
       console.log(userIdToFollow);
       console.log(userId);
@@ -76,11 +84,11 @@ const FindFriend = () => {
               <tr key={user._id}>
                 <td>
                   <img
-                    src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/image.png'}
+                    src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
                     alt={user.username}
                     className="ProfilePicture"
                     onError={(e) => {
-                      e.target.src = '/image.png';
+                      e.target.src = '/user.png';
                     }}
                   />
                 </td>
