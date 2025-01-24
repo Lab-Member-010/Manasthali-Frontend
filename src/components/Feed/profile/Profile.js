@@ -15,7 +15,7 @@ const Profile = ({ user, loading }) => {
         <div className="ProfileContainer">
             {/* Profile Image */}
             <div className="profileImage">
-                <img src={`http://localhost:3001/${user.profile_picture}`} alt={user.username} />
+                <img src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : './default_profile.jpg'} alt={user.username} />
             </div>
 
             {/* Username */}

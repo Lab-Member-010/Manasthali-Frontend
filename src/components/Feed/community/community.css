@@ -1,7 +1,8 @@
 /* Community Page Styles */
+/* Community Page Styles */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
@@ -23,30 +24,25 @@
 }
 
 .card h2 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 1.2rem;
+  color: #391694;
 }
 
 .card p {
-  font-size: 1rem;
-  color: #666;
+  font-size: 0.8rem;
+  color: grey;
   line-height: 1.6;
   margin-bottom: 10px;
 }
 
-.card strong {
-  color: #333;
-}
-
 .loading {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #999;
 }
 
 .error {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #e74c3c;
 }

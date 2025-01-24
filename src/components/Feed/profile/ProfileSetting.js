@@ -86,7 +86,7 @@ const ProfileSetting= () => {
         { dob },
         {
           headers: {
-            Authorization: `Bearer ${token}` // Add the token to the request headers
+            Authorization: `Bearer ${token}`
           }
         }
       );
@@ -146,7 +146,7 @@ const ProfileSetting= () => {
       {!showUpdateForm && (
         <div className="text-center mt-4">
           <button
-            className="btn btn-primary"
+            className="form-control w-100"
             onClick={() => setShowUpdateForm(true)}
           >
             Update Your Details
@@ -168,7 +168,7 @@ const ProfileSetting= () => {
                     onChange={(e) => setProfilePicture(e.target.files[0])}
                     required
                   />
-                  <button className="btn btn-primary w-100" type="submit">
+                  <button className="form-control" type="submit">
                     Update Picture
                   </button>
                 </form>
@@ -189,7 +189,7 @@ const ProfileSetting= () => {
                     placeholder="Enter new contact"
                     required
                   />
-                  <button className="btn btn-primary w-100" type="submit">
+                  <button className="form-control" type="submit">
                     Update Contact
                   </button>
                 </form>
@@ -209,7 +209,7 @@ const ProfileSetting= () => {
                     onChange={(e) => setDob(e.target.value)}
                     required
                   />
-                  <button className="btn btn-primary w-100" type="submit">
+                  <button className="form-control" type="submit">
                     Update DOB
                   </button>
                 </form>
@@ -233,7 +233,7 @@ const ProfileSetting= () => {
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                   </select>
-                  <button className="btn btn-primary w-100" type="submit">
+                  <button className="form-control" type="submit">
                     Update Gender
                   </button>
                 </form>
