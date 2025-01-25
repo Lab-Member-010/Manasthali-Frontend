@@ -12,9 +12,9 @@ const ProfileSetting= () => {
   const token=useSelector((state) => state.user.token);
   const [profilePicture, setProfilePicture] = useState(null);
   const [contact, setContact] = useState(user?.contact || "");
+  const [bio, setBio] = useState(user?.bio || "");
   const [dob, setDob] = useState(user?.dob || "");
   const [gender, setGender] = useState(user?.gender || "");
-const[bio,setbio]=useState(user?.bio||"");
   const [message, setMessage] = useState("");
   const [showUpdateForm, setShowUpdateForm] = useState(false);
 
@@ -104,32 +104,6 @@ const[bio,setbio]=useState(user?.bio||"");
     }
   };
   
-
-  const handleBioUpdate = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.put(
-        `http://localhost:3001/users/${userId}/bio`,
-        { bio },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
-      if (response.data.success) {
-        toast.success("bio updated successfully!");
-        setMessage("Date of Birth updated successfully!");
-      } else {
-        toast.error("Failed to update bio.");
-        setMessage("Failed to update bio. Please try again.");
-      }
-    } catch (error) {
-      toast.error("Failed to update bio.");
-      setMessage("Failed to update bio. Please try again.");
-    }
-  };
-
   // Handle gender update
   const handleGenderUpdate = async (e) => {
     e.preventDefault();
@@ -157,6 +131,30 @@ const[bio,setbio]=useState(user?.bio||"");
     }
   };
   
+  const handleBioUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/users/${userId}/bio`,
+        { bio },
+        {
+          headers: {
+            Authorization: `Bearer ${token}` 
+          }
+        }
+      );
+      if (response.data.success) {
+        toast.success("Contact updated successfully!");
+        setMessage("Contact updated successfully!");
+      } else {
+        toast.error("Failed to update Contact.");
+        setMessage("Failed to update contact. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Failed to update Contact.");
+      setMessage("Failed to update contact. Please try again.");
+    }
+  };
   
   return (
     <div className="container py-4">
@@ -282,6 +280,28 @@ const[bio,setbio]=useState(user?.bio||"");
                   </select>
                   <button className="form-control" type="submit">
                     Update Gender
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+          <div className="col-md-3">
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">Update Bio</h5>
+                <form onSubmit={handleBioUpdate}>
+                  <input
+                    type="text"
+                    className="form-control mb-2"
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                    placeholder="Enter new Bio"
+                    required
+                  />
+                  <button className="form-control" type="submit">
+                    Update Bio
                   </button>
                 </form>
               </div>
