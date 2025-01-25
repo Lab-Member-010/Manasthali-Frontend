@@ -3,64 +3,139 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    font-family: 'Arial', sans-serif;
-    max-width: 600px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
     margin: 0 auto;
 }
 
-.settingIcon{
-    color:black;
+.profileImage {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 15px;
 }
 
 .profileImage img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    margin-bottom: 20px;
-    border: 2px solid #ddd;
 }
 
-.userName{
-    color: #262626;
+.userName {
     font-size: 24px;
-    font-weight: bold;
+    color: #000;
+    font-weight: 600;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .followersFollowing {
-    color: #8e8e8e;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #555;
 }
 
 .followersFollowing span {
-    font-size: 16px;
+    cursor: pointer;
+    color: #000;
+    font-weight: 500;
+}
+
+.followersFollowing span:hover {
+    text-decoration: underline;
 }
 
 .personalityType {
-    color: #262626;
-    font-size: 16px;
-    margin-top: 10px;
+    font-size: 14px;
+    color: #2d0467;
 }
 
-@media screen and (max-width: 600px) {
-    .ProfileContainer {
-        padding: 10px;
-    }
-    .profileImage img {
-        width: 120px;
-        height: 120px;
-    }
-    .userName {
-        font-size: 20px;
-    }
-    .followersFollowing span {
-        font-size: 14px;
-    }
-    .personalityType {
-        font-size: 14px;
-    }
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popupContent {
+    background-color: #fff;
+    padding: 20px;
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.popupContent h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.popupContent ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.popupContent li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.popupContent li:last-child {
+    border-bottom: none;
+}
+
+.userDetails {
+    display: flex;
+    align-items: center;
+}
+
+.userDetails img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.userDetails span {
+    font-size: 16px;
+    color: black;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:focus {
+    outline: none;
 }
