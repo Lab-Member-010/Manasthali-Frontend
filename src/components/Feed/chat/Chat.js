@@ -35,6 +35,7 @@ const MessageComponent = () => {
         setLoading(false);
       }
     };
+    
 
     fetchUserData();
   }, [userId, token]);

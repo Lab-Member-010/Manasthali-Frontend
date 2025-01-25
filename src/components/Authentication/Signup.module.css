@@ -8,6 +8,7 @@
   justify-content: flex-end;
   align-items: center;
   padding-right: 50px;
+  margin-top: 10px;
 }
 
 .signupBox {
@@ -24,8 +25,8 @@
 }
 
 .signupLogo {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   background-image: url("../../images/Manasthali.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -36,7 +37,7 @@
 
 .inputContainer {
   width: 80%;
-  margin-top: 20px;
+  margin-top: 15px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -111,4 +112,20 @@
   transform: scale(1.025);
   border: 1px solid black;
 }
+.errorText {
+  color: #dc3545; /* Red color for errors */
+  font-size: 0.875rem; /* Adjust the font size */
+  margin-top: 5px; /* Space between input and error message */
+  text-align: left; /* Align error message to the left */
+}
+
+.errorBorder {
+  border-color: #dc3545 !important; /* Red border for input fields with errors */
+}
+
+.inputContainer {
+  position: relative; /* Ensure input containers align correctly */
+  margin-bottom: 1rem; /* Space between form groups */
+}
+
 

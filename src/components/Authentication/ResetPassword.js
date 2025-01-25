@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import backgroundGif from "../../images/spore.gif";
 
 const ResetPassword = () => {
   const location = useLocation();
@@ -28,6 +29,16 @@ const ResetPassword = () => {
   };
 
   return (
+    <div
+    style={{
+       backgroundImage: `url(${backgroundGif})`, 
+              backgroundSize: "cover",
+              height: "100vh", 
+              display: "flex", 
+              alignItems: "center",
+              justifyContent: "center",
+    }}
+    >
     <div style={{ maxWidth: "400px", margin: "50px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "10px" }}>
       <ToastContainer />
       <h2>Reset Password</h2>
@@ -63,6 +74,7 @@ const ResetPassword = () => {
           Reset Password
         </button>
       </form>
+    </div>
     </div>
   );
 };
