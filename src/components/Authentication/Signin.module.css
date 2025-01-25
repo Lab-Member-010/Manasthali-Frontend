@@ -128,3 +128,12 @@
   color: #333;
   cursor: pointer;
 }
+.errorBorder {
+  border: 1px solid red;
+}
+
+.errorText {
+  font-size: 0.9rem;
+  color: red;
+  margin-top: 5px;
+}

@@ -1,0 +1,227 @@
+/* Global Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Card Container */
+  .card {
+    border: none;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  .card-body {
+    padding: 30px;
+  }
+  
+  .card-title {
+    font-size: 1.75rem;
+    color: #6559a1;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  /* Profile Picture Section */
+  .profile-img-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-img-container img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #ddd;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .profile-img-container input[type="file"] {
+    display: none;
+  }
+  
+  .profile-img-container label {
+    display: block;
+    background-color: #6559a1;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .profile-img-container label:hover {
+    background-color: white;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  .select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  .select:focus {
+    border-color: #6559a1;
+    outline: none;
+  }
+  
+  /* Buttons */
+  button {
+    background-color:#6559a1;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  button:hover {
+    background-color: white;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Toast Styling */
+  .Toastify__toast {
+    background-color: #28a745 !important;
+    color: white !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+  }
+  
+  .Toastify__toast--error {
+    background-color: #dc3545 !important;
+  }
+  
+  /* Flex Layout for Forms */
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .col-md-3 {
+    flex: 1;
+    min-width: 280px;
+  }
+  
+  /* Profile Update Form Styling */
+  .card-body form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Heading for Update Button */
+  .update-heading {
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .update-heading button {
+    background-color: #28a745;
+    color: white;
+    font-size: 1.25rem;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .update-heading button:hover {
+    background-color: #218838;
+  }
+  
+  /* Small Style Tweaks */
+  .text-center {
+    text-align: center;
+  }
+  
+  .mb-4 {
+    margin-bottom: 20px;
+  }
+  
+  .mb-2 {
+    margin-bottom: 10px;
+  }
+  
+  /* Card Titles */
+  .card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #007bff;
+  }
+  
+  /* Form Control */
+  input[type="file"] {
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  input[type="file"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .select {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  .select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  }
+  
+  

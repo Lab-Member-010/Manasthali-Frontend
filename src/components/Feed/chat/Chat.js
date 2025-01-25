@@ -1,95 +1,150 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import io from 'socket.io-client';
+import './Chat.css';
 
-const MessageComponent = ({ receiverId }) => {
+const MessageComponent = () => {
+  const [followers, setFollowers] = useState([]);
+  // const [following, setFollowing] = useState([]);
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const userId = useSelector((state) => state.user?.user?._id);
+  const token = useSelector((state) => state.user?.token);
+  const socket = useRef(null); // To hold the socket reference
 
-  // Fetch messages on component mount or when receiverId changes
+  // Fetch followers and following lists
   useEffect(() => {
-    const fetchMessages = async () => {
+    const fetchUserData = async () => {
       try {
-        const response = await axios.get(`/api/messages/${receiverId}`);
-        setMessages(response.data.messages);
+        const response = await axios.get(`http://localhost:3001/users/${userId}/followers`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const { followers } = response.data;
+        // const { following } = response.data;
+        setFollowers(followers);
+        // setFollowing(following);
       } catch (err) {
-        setError(err.response?.data?.error || 'Error fetching messages');
+        setError(err.response?.data?.message || 'Failed to fetch followers and following');
+      } finally {
+        setLoading(false);
       }
     };
+    
 
-    fetchMessages();
-  }, [receiverId]);
+    fetchUserData();
+  }, [userId, token]);
 
-  // Handle sending a new message
-  const handleSendMessage = async () => {
-    try {
-      if (!newMessage.trim()) {
-        setError('Message cannot be empty');
-        return;
-      }
+  // Setup Socket.IO connection
+  useEffect(() => {
+    // Initialize socket connection when component mounts
+    socket.current = io('http://localhost:3001'); // Make sure this URL matches your server's
+    socket.current.emit('join', userId); // Join the socket room (with userId)
+    
+    // Listen for new messages
+    socket.current.on('new_message', (newMessage) => {
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    });
 
-      const response = await axios.post('/api/messages/send', {
-        receiverId,
-        message: newMessage,
-      });
+    return () => {
+      // Cleanup on component unmount
+      socket.current.disconnect();
+    };
+  }, [userId]);
 
-      setMessages([...messages, response.data.newMessage]);
-      setNewMessage('');
-      setSuccess('Message sent successfully');
-      setError('');
-    } catch (err) {
-      setError(err.response?.data?.error || 'Error sending message');
+  // Handle sending a message
+  const handleSendMessage = () => {
+    if (!selectedUser || !message.trim()) {
+      alert('Please select a user and enter a message.');
+      return;
     }
+
+    // Send the message via socket
+    socket.current.emit('send_message', {
+      senderId: userId,
+      receiverId: selectedUser._id,
+      message,
+    });
+
+    // Add the message to the local state for immediate UI update
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { sender: userId, message, receiver: selectedUser._id, createdAt: new Date() },
+    ]);
+    setMessage(''); // Clear the message input
   };
 
-  // Handle marking a message as read
-  const handleMarkAsRead = async (messageId) => {
-    try {
-      await axios.put('/api/messages/mark-as-read', { messageId });
-
-      setMessages((prevMessages) =>
-        prevMessages.map((msg) =>
-          msg._id === messageId ? { ...msg, read: true } : msg
-        )
-      );
-      setSuccess('Message marked as read');
-      setError('');
-    } catch (err) {
-      setError(err.response?.data?.error || 'Error marking message as read');
-    }
-  };
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
-    <div className="message-component">
-      <h2>Messages</h2>
+    <div className="ChatContainer">
+      <h2>Direct Messages</h2>
 
-      {/* Display success or error message */}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
+      {/* Following List */}
+      {/* <div className="userList">
+        <h3>Your Following</h3>
+        <ul>
+          {following.map((user) => (
+            <li key={user._id} onClick={() => setSelectedUser(user)}>
+              <img
+                src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
+                alt={user.username}
+                className="ProfilePicture"
+              />
+              <span>{user.username}</span>
+            </li>
+          ))}
+        </ul>
+      </div> */}
 
-      {/* Message list */}
-      <div className="messages">
-        {messages.map((msg) => (
-          <div key={msg._id} className={`message ${msg.read ? 'read' : 'unread'}`}>
-            <p><strong>{msg.sender === receiverId ? 'Them' : 'You'}:</strong> {msg.message}</p>
-            <p><em>{new Date(msg.createdAt).toLocaleString()}</em></p> 
-            {!msg.read && msg.sender !== receiverId && (
-              <button onClick={() => handleMarkAsRead(msg._id)}>Mark as Read</button>
-            )}
+      Followers List
+       <div className="userList">
+        <ul>
+          {followers.map((user) => (
+            <li key={user._id} onClick={() => setSelectedUser(user)}>
+              <img
+                src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
+                alt={user.username}
+                className="ProfilePicture"
+              />
+              <span>{user.username}</span>
+            </li>
+          ))}
+        </ul>
+      </div>  
+
+      {/* Messages */}
+      {selectedUser && (
+        <div className="messages">
+          <h3>Chat with {selectedUser.username}</h3>
+          <div className="messageList">
+            {messages
+              .filter((msg) => (msg.sender === userId && msg.receiver === selectedUser._id) || (msg.receiver === userId && msg.sender === selectedUser._id))
+              .map((msg, idx) => (
+                <div key={idx} className={`message ${msg.sender === userId ? 'sent' : 'received'}`}>
+                  <p>{msg.message}</p>
+                  <span>{new Date(msg.createdAt).toLocaleString()}</span>
+                </div>
+              ))}
           </div>
-        ))}
-      </div>
 
-      {/* Send new message */}
-      <div className="new-message">
-        <textarea
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Type your message here"
-        />
-        <button onClick={handleSendMessage}>Send</button>
-      </div>
+          {/* Send Message */}
+          <div className="newMessage">
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Type your message..."
+            />
+            <button onClick={handleSendMessage}>Send</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
