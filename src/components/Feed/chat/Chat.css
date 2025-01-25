@@ -1,4 +1,4 @@
-.message-component {
+/* .message-component {
   width: 400px;
   margin: auto;
   font-family: Arial, sans-serif;
@@ -37,5 +37,96 @@
 }
 
 .new-message button:hover {
+  background-color: #0056b3;
+} */
+
+/* Chat Container */
+.ChatContainer {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* User List */
+.userList {
+  margin-bottom: 30px;
+}
+
+.userList h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.userList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.userList li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.userList li:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.ProfilePicture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Message Box */
+.messageBox {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.messageBox h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.messageBox textarea {
+  width: 100%;
+  padding: 10px;
+  height: 150px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.messageBox button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.messageBox button:hover {
   background-color: #0056b3;
 }
