@@ -42,8 +42,8 @@ const ProfileSetting= () => {
       );
 
       if (response.status === 200) {
-        toast.success("Profile picture updated successfully!");
         setMessage("Profile picture updated successfully!");
+        toast.success(message);
       } else {
         toast.error("Failed to update profile picture.");
       }
@@ -294,4 +294,3 @@ const ProfileSetting= () => {
 };
 
 export default ProfileSetting;
-
