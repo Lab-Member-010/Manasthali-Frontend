@@ -11,7 +11,8 @@ import {
   AccountCircle as AccountCircleIcon,
   PowerSettingsNew as PowerSettingsNewIcon,
   AddCircleOutline,
-  Settings
+  Settings,
+  SupportAgent
 } from "@mui/icons-material";
 import "./Feed.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +31,7 @@ import FindFriend from "./Find-friend/FindFriend";
 import Story from "./story/Story";
 import Post from "./post/Post";
 import ProfileSetting from "./profile/ProfileSetting";
+import Community from "./community/community";
 
 const Feed = () => {
   const { token } = useSelector((store) => store.user);
@@ -80,6 +82,8 @@ const Feed = () => {
         return <Post />;
       case "setting":
         return <ProfileSetting/>;
+      case "community":
+        return <Community/>;
       default:
         return <FeedHome />;
     }
@@ -134,6 +138,10 @@ const Feed = () => {
             <AddCircleOutline />
             <span className="icon-text ml-2">Post</span>
           </div>
+          <div className="nav-item navItem" onClick={() => setActiveComponent("post")}>
+            <SupportAgent />
+            <span className="icon-text ml-2">Mental Coach</span>
+          </div>
         </div>
 
         {/* Main Content */}
@@ -158,6 +166,9 @@ const Feed = () => {
             <WorkspacePremiumIcon />
           </div>
           <div className="nav-item navItems" onClick={() => setActiveComponent("setting")}>
+            <Settings/>
+          </div>
+          <div className="nav-item navItems" onClick={() => setActiveComponent("community")}>
             <Settings/>
           </div>
           <div className="nav-item navItems" onClick={() => dispatch(signOut())}>
