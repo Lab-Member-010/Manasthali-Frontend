@@ -14,6 +14,7 @@ const ProfileSetting= () => {
   const [contact, setContact] = useState(user?.contact || "");
   const [dob, setDob] = useState(user?.dob || "");
   const [gender, setGender] = useState(user?.gender || "");
+const[bio,setbio]=useState(user?.bio||"");
   const [message, setMessage] = useState("");
   const [showUpdateForm, setShowUpdateForm] = useState(false);
 
@@ -104,6 +105,31 @@ const ProfileSetting= () => {
   };
   
 
+  const handleBioUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/users/${userId}/bio`,
+        { bio },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      if (response.data.success) {
+        toast.success("bio updated successfully!");
+        setMessage("Date of Birth updated successfully!");
+      } else {
+        toast.error("Failed to update bio.");
+        setMessage("Failed to update bio. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Failed to update bio.");
+      setMessage("Failed to update bio. Please try again.");
+    }
+  };
+
   // Handle gender update
   const handleGenderUpdate = async (e) => {
     e.preventDefault();
@@ -170,6 +196,27 @@ const ProfileSetting= () => {
                   />
                   <button className="form-control" type="submit">
                     Update Picture
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-3">
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">Update bio</h5>
+                <form onSubmit={handleBioUpdate}>
+                  <input
+                    type="text"
+                    className="form-control mb-2"
+                    value={bio}
+                    onChange={(e) => setbio(e.target.value)}
+                    placeholder="Enter new bio"
+                    required
+                  />
+                  <button className="form-control" type="submit">
+                    bio 
                   </button>
                 </form>
               </div>
