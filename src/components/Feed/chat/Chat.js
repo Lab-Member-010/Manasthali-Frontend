@@ -17,6 +17,7 @@ const MessageComponent = ({ receiverId }) => {
         setError(err.response?.data?.error || 'Error fetching messages');
       }
     };
+    
 
     fetchMessages();
   }, [receiverId]);
