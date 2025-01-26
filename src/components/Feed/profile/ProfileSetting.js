@@ -104,7 +104,6 @@ const ProfileSetting= () => {
     }
   };
   
-
   // Handle gender update
   const handleGenderUpdate = async (e) => {
     e.preventDefault();
