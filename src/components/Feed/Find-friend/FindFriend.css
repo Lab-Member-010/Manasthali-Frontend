@@ -9,6 +9,18 @@
     text-align: center;
 }
 
+.SearchBarContainer {
+    margin-bottom: 20px;
+  }
+  
+  .SearchInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
 .FindFriendContainer h2 {
     font-size: 2.2rem;
     color: #c093fc;
