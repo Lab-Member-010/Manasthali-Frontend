@@ -41,7 +41,7 @@ const FeedHome = () => {
                   <div className="d-flex align-items-center">
                     {/* Safeguard for null/undefined userId or profile_picture */}
                     <Image
-                      src={`http://localhost:3001/${post?.userId?.profile_picture || "default-profile.jpg"}`}
+                      src={post?.userId?.profile_picture || "default-profile.jpg"}
                       roundedCircle
                       width={40}
                       height={40}
@@ -53,7 +53,7 @@ const FeedHome = () => {
                 <Card.Body>
                   {post?.media?.[0] && (
                     <Image
-                      src={`http://localhost:3001/${post.media[0]}`}
+                      src={post.media[0]}
                       alt="Post Image"
                       fluid
                       className="w-100 mb-3"

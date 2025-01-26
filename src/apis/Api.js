@@ -6,6 +6,8 @@ const Api = {
     VERIFY_OTP:"http://localhost:3001/users/verify-otp",
     SERVER_URL:"http://localhost:3001",
     COMMUNITY_URL:"http://localhost:3001/communities/view",
+    CHECK_EMAIL:"http://localhost:3001/users/email",
+    CHECK_USERNAME:"http://localhost:3001/users/username",
 };
 
 export default Api;

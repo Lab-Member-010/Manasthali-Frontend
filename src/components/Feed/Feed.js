@@ -167,7 +167,7 @@ const Feed = () => {
             {loadingProfile ? (
               <img src="loading-spinner.gif" alt="Loading..." className="profileIcon" />
             ) : profileData ? (
-              <img src={`http://localhost:3001/${profileData.profile_picture}`} alt="user" className="profileIcon" />
+              <img src={profileData.profile_picture} alt="user" className="profileIcon" />
             ) : (
               <img src="default-profile.jpg" alt="Default User" className="profileIcon" />
             )}
