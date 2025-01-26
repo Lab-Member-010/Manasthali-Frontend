@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { signOut } from "../../redux-config/UserSlice";
 import ManasthaliLogo from "../../images/Manasthali.png";
-import Chat from "./chat/Chat";
+import Chat from "./chat/ChatList";
 import FeedHome from "./home/FeedHome";
 import GroupChat from "./group-chat/GroupChat";
 import Group from "./group/Group";
