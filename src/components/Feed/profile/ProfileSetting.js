@@ -159,33 +159,25 @@ const ProfileSetting= () => {
     }
   };
 
-  const handleUserDelete = async (e) => {
+  const handleUserDelete = async (e)=>{
     e.preventDefault();
     try {
-      console.log(token)
-        const response = await axios.delete(
-            `http://localhost:3001/users/${userId}/delete`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`  // Make sure token is attached here
-                }
-            }
-        );
-        if (response.data.success) {
-            toast.success("User Deleted successfully!");
-            setMessage("User Deleted successfully!");
-            dispatch(signOut());  // Log the user out if successful
-        } else {
-            toast.error("Failed to Delete User.");
-            setMessage("Failed to Delete User. Please try again.");
+      const response = await axios.delete(
+        `http://localhost:3001/users/${userId}/delete`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}` 
+          }
         }
-    } catch (err) {
-        console.error(err);
-        toast.error("Failed to Delete User.");
-        setMessage("Failed to Delete User. Please try again.");
+      );
+        toast.success("User Deleted successfully!");
+        setMessage("User Deleted successfully!");
+        dispatch(signOut());
+    }catch(err){
+      toast.error("Failed to Delete User.2");
+      setMessage("Failed to Delete User. Please try again.");
     }
-};
-
+  };
   
   return (
     <div className="container py-4">
@@ -323,14 +315,14 @@ const ProfileSetting= () => {
               <div className="card-body">
                 <h5 className="card-title">Delete User</h5>
                 <form onSubmit={handleUserDelete}>
-                <input
-                  type="text"
-                  className="form-control mb-2"
-                  value={Delete}
-                  onChange={(e) => setDelete(e.target.value)}
-                  placeholder="Type 'yes' to confirm deletion"
-                  required
-                />
+                  <input
+                    type="text"
+                    className="form-control mb-2"
+                    value={Delete}
+                    onChange={(e) => setDelete(e.target.value)}
+                    placeholder="Enter yes to delete"
+                    required
+                  />
                   <button className="form-control" type="submit">
                     Delete User
                   </button>

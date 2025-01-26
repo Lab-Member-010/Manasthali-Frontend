@@ -23,10 +23,13 @@ const slice = createSlice({
       state.message = "";
       state.isLoggedIn = false; // Set isLoggedIn to false on sign out
     },
+    updateUserProfile(state, action) {
+      state.user = action.payload;  // Update user profile data in Redux
+    },
   },
 });
 
-export const { setUser, signOut } = slice.actions;
+export const { setUser, signOut, updateUserProfile } = slice.actions;
 export default slice.reducer;
 
  
