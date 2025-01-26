@@ -29,7 +29,7 @@ const Profile = ({ user, loading }) => {
 
         setShowPopup(true);
     };
-
+    
     const closePopup = () => {
         setShowPopup(false);
         setPopupType("");
@@ -48,6 +48,7 @@ const Profile = ({ user, loading }) => {
 
             {/* Username */}
             <h2 className="userName">{user.username}</h2>
+            <center><p>{user.bio}</p></center>
 
             {/* Followers/Following */}
             <div className="followersFollowing">
@@ -66,22 +67,28 @@ const Profile = ({ user, loading }) => {
                     <div className="popupContent">
                         <h3>{popupType === "followers" ? "Followers" : "Following"}</h3>
                         <ul>
-                            {popupUsers.length > 0 ? (
-                                popupUsers.map((user, index) => (
-                                    <li key={index}>
-                                        <div className="userDetails">
-                                            <img
-                                                src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : './default_profile.jpg'}
-                                                alt={user.username}
-                                            />
-                                            <span>{user.username}</span>
-                                        </div>
-                                    </li>
-                                ))
-                            ) : (
-                                <li>No users to display</li> // Display message if no users found
-                            )}
-                        </ul>
+  {popupUsers.length > 0 ? (
+    popupUsers.map((popupUser, index) => (
+      <li key={index}>
+        <div className="userDetails">
+          <img
+            src={
+              popupUser.profile_picture
+                ? `http://localhost:3001/${popupUser.profile_picture}`
+                : "./default_profile.jpg"
+            }
+            alt={popupUser.username || "Unnamed User"}
+          />
+          <span>{popupUser.username || "Unnamed User"}</span>
+        </div>
+      </li>
+    ))
+  ) : (
+    <li>No users to display</li>
+  )}
+</ul>
+
+                
                         <button onClick={closePopup}>Close</button>
                     </div>
                 </div>
@@ -91,3 +98,5 @@ const Profile = ({ user, loading }) => {
 };
 
 export default Profile;
+
+ 

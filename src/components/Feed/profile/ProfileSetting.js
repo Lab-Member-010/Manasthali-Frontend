@@ -203,27 +203,6 @@ const ProfileSetting= () => {
           <div className="col-md-3">
             <div className="card shadow-sm">
               <div className="card-body">
-                <h5 className="card-title">Update bio</h5>
-                <form onSubmit={handleBioUpdate}>
-                  <input
-                    type="text"
-                    className="form-control mb-2"
-                    value={bio}
-                    onChange={(e) => setbio(e.target.value)}
-                    placeholder="Enter new bio"
-                    required
-                  />
-                  <button className="form-control" type="submit">
-                    bio 
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-3">
-            <div className="card shadow-sm">
-              <div className="card-body">
                 <h5 className="card-title">Update Contact</h5>
                 <form onSubmit={handleContactUpdate}>
                   <input
