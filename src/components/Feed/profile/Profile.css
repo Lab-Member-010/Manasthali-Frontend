@@ -1,213 +1,146 @@
 .ProfileContainer {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  .profileHeader {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.profileImage {
+    gap: 30px; 
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .profileImage {
+    flex-shrink: 0;
+    position: relative;
+  }
+  
+  .profileImage img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
-
-.profileImage img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-}
-
-.userName {
-    font-size: 24px;
-    color: #000;
-    font-weight: 600;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.followersFollowing {
+  }
+  
+  .profileInfo {
+    flex-grow: 1;
+  }
+  
+  .usernameAndPosts {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    width: 100%;
-    margin-bottom: 15px;
-    font-size: 16px;
-    color: #555;
-}
-
-.followersFollowing span {
-    cursor: pointer;
-    color: #000;
-    font-weight: 500;
-}
-
-.followersFollowing span:hover {
-    text-decoration: underline;
-}
-
-.personalityType {
+    margin-bottom: 10px;
+  }
+  
+  .userName {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .userBio {
     font-size: 14px;
-    color: #2d0467;
-}
-
-.popup {
+    color: #8e8e8e;
+    margin: 10px 0;
+  }
+  
+  .followersFollowing {
+    display: flex;
+    gap: 30px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .followersFollowing span {
+    cursor: pointer;
+    color: #9b7bc4;
+    transition: color 0.2s ease;
+  }
+  
+  .followersFollowing span:hover {
+    color: #7226d5;
+  }
+  
+  .popup {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-}
-
-.popupContent {
-    background-color: #fff;
-    padding: 20px;
-    width: 300px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-}
-
-.popupContent h3 {
-    font-size: 18px;
-    font-weight: 600;
+  }
+  
+  .popupContent {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .popupContent h3 {
     margin-bottom: 15px;
-    text-align: center;
-}
-
-.popupContent ul {
+  }
+  
+  .popupContent ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
-}
-
-.popupContent li {
+  }
+  
+  .popupContent li {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    padding: 5px 0;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.popupContent li:last-child {
-    border-bottom: none;
-}
-
-.userDetails {
-    display: flex;
-    align-items: center;
-}
-
-.userDetails img {
+    margin-bottom: 12px;
+  }
+  
+  .popupContent li img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
-}
-
-.userDetails span {
-    font-size: 16px;
-    color: black;
-}
-
-button {
-    background-color: #007bff;
-    color: rgb(236, 87, 87);
-    border: none;
-    padding: 8px 16px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 15px;
-    width: 100%;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button:focus {
-    outline: none;
-}
-
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.popupContent {
-    background: rgb(235, 202, 202);
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    max-height: 500px;
-    overflow-y: auto;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.popupContent h3 {
-    margin-bottom: 15px;
-}
-
-.popupContent ul {
-    list-style: none;
-    padding: 0;
-}
-
-.popupContent ul li {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    border-bottom: 1px solid #f7f6f6;
-    padding-bottom: 10px;
-}
-
-.popupContent ul li .userDetails {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.popupContent button {
-    background-color: #007bff;
+  }
+  
+  .popupContent button {
+    background-color: #0095f6;
     color: white;
-    border: none;
     padding: 10px 20px;
-    cursor: pointer;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
   }
   
   .popupContent button:hover {
-    background-color: #0056b3;
+    background-color: #0078d4;
   }
- 
 
-.userDetails img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.userDetails span {
-    font-size: 16px;
-    font-weight: bold;
-}
+  @media (max-width: 768px) {
+    .profileHeader {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .profileImage img {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .usernameAndPosts {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .followersFollowing {
+      justify-content: center;
+    }
+  }
+  

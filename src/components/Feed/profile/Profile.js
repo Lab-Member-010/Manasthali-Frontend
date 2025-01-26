@@ -1,100 +1,125 @@
 import React, { useState } from "react";
 import "./Profile.css";
+import axios from "axios";
 
-const Profile = ({ user, loading }) => {
-    const [showPopup, setShowPopup] = useState(false);
-    const [popupType, setPopupType] = useState("");
-    const [popupUsers, setPopupUsers] = useState([]);
+const Profile = ({ user, loading, updateProfilePicture }) => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupType, setPopupType] = useState("");
+  const [popupUsers, setPopupUsers] = useState([]);
+  const [newProfilePic, setNewProfilePic] = useState(null);
+  const [updating, setUpdating] = useState(false);
 
-    if (loading) {
-        return <div>Loading...</div>;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>User not found</div>;
+  }
+
+  const handlePopup = (type) => {
+    setPopupType(type);
+    const users = type === "followers" ? user.followers : user.following;
+    setPopupUsers(users || []);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupType("");
+    setPopupUsers([]);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setNewProfilePic(file);
     }
+  };
 
-    if (!user) {
-        return <div>User not found</div>;
-    }
+  const handleProfilePicUpload = async () => {
+    if (!newProfilePic) return;
 
-    const handlePopup = (type) => {
-        setPopupType(type);
-        const users = type === "followers" ? user.followers : user.following;
+    const formData = new FormData();
+    formData.append("profile_picture", newProfilePic);
 
-        // Log the users to check the data structure
-        console.log("Popup Users:", users);
-        
-        if (Array.isArray(users) && users.length > 0) {
-            setPopupUsers(users);
-        } else {
-            setPopupUsers([]); // Set an empty array if no users are found
+    setUpdating(true);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/users/${user._id}/updateProfilePicture`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
+      );
+      // Once the profile is updated, update the profile in parent component
+      updateProfilePicture(response.data.user);
+      alert("Profile picture updated successfully!");
+    } catch (error) {
+      console.error("Error updating profile picture", error);
+      alert("Error updating profile picture. Please try again.");
+    } finally {
+      setUpdating(false);
+    }
+  };
 
-        setShowPopup(true);
-    };
-    
-    const closePopup = () => {
-        setShowPopup(false);
-        setPopupType("");
-        setPopupUsers([]);
-    };
+  return (
+<div className="ProfileContainer">
+  <div className="profileHeader">
+    {/* Profile Image */}
+    <div className="profileImage">
+      <img
+        src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : './default_profile.jpg'}
+        alt={user.username}
+      />
+    </div>
 
-    return (
-        <div className="ProfileContainer">
-            {/* Profile Image */}
-            <div className="profileImage">
-                <img
+    {/* Profile Information (Name, Bio, Followers, Following, etc.) */}
+    <div className="profileInfo">
+      <div className="usernameAndPosts">
+        <h2 className="userName">{user.username}</h2>
+      </div>
+      <p className="userBio">{user.bio}</p>
+      <div className="followersFollowing">
+        <span onClick={() => handlePopup("followers")}>{user.followers.length} Followers</span>
+        <span onClick={() => handlePopup("following")}>{user.following.length} Following</span>
+        <span>{user.posts ? user.posts.length : 0} Posts</span>
+      </div>
+    </div>
+  </div>
+
+  {/* Popup for Followers/Following */}
+  {showPopup && (
+    <div className="popup">
+      <div className="popupContent">
+        <h3>{popupType === "followers" ? "Followers" : "Following"}</h3>
+        <ul>
+          {popupUsers.length > 0 ? (
+            popupUsers.map((user, index) => (
+              <li key={index}>
+                <div className="userDetails">
+                  <img
                     src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : './default_profile.jpg'}
                     alt={user.username}
-                />
-            </div>
-
-            {/* Username */}
-            <h2 className="userName">{user.username}</h2>
-            <center><p>{user.bio}</p></center>
-
-            {/* Followers/Following */}
-            <div className="followersFollowing">
-                <span onClick={() => handlePopup("followers")}>Followers: {user.followers.length}</span>
-                <span onClick={() => handlePopup("following")}>Following: {user.following.length}</span>
-            </div>
-
-            {/* Personality Type */}
-            <div className="personalityType">
-                <span>Personality Type: {user.personality_type}</span>
-            </div>
-
-            {/* Popup for Followers/Following */}
-            {showPopup && (
-                <div className="popup">
-                    <div className="popupContent">
-                        <h3>{popupType === "followers" ? "Followers" : "Following"}</h3>
-                        <ul>
-  {popupUsers.length > 0 ? (
-    popupUsers.map((popupUser, index) => (
-      <li key={index}>
-        <div className="userDetails">
-          <img
-            src={
-              popupUser.profile_picture
-                ? `http://localhost:3001/${popupUser.profile_picture}`
-                : "./default_profile.jpg"
-            }
-            alt={popupUser.username || "Unnamed User"}
-          />
-          <span>{popupUser.username || "Unnamed User"}</span>
-        </div>
-      </li>
-    ))
-  ) : (
-    <li>No users to display</li>
-  )}
-</ul>
-
-                
-                        <button onClick={closePopup}>Close</button>
-                    </div>
+                  />
+                  <span>{user.username}</span>
                 </div>
-            )}
-        </div>
-    );
+              </li>
+            ))
+          ) : (
+            <li>No users to display</li>
+          )}
+        </ul>
+        <button onClick={closePopup}>Close</button>
+      </div>
+    </div>
+  )}
+</div>
+
+  );
 };
 
 export default Profile;

@@ -1,4 +1,3 @@
- // FeedHome.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Button, Image, Row, Col, Container } from "react-bootstrap";
@@ -9,23 +8,25 @@ import "react-toastify/dist/ReactToastify.css";
 
 const FeedHome = () => {
   const [posts, setPosts] = useState([]);
-  const userId = useSelector((state) => state?.user?.user?._id); // Redux state se user ID le raha hai
-  const token = useSelector((state) => state?.user?.token); // Redux state se token le raha hai
+  const userId = useSelector((state) => state?.user?.user?._id); 
+  const token = useSelector((state) => state?.user?.token);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/posts/all-posts/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        // Posts ko validate karke set kar rahe hain
-        setPosts(Array.isArray(response.data.posts) ? response.data.posts : []);
-      })
-      .catch((error) => {
-        toast.error("Error fetching posts: " + error.message);
-      });
+    if (userId && token) {
+      axios
+        .get(`http://localhost:3001/posts/all-posts/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setPosts(Array.isArray(response.data.posts) ? response.data.posts : []);
+        })
+        .catch((error) => {
+          const errorMsg = error.response?.data?.message || error.message || "Error fetching posts";
+          toast.error(errorMsg);
+        });
+    }
   }, [userId, token]);
 
   return (
@@ -38,8 +39,9 @@ const FeedHome = () => {
               <Card className="shadow-sm">
                 <Card.Header className="d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center">
+                    {/* Safeguard for null/undefined userId or profile_picture */}
                     <Image
-                      src={`http://localhost:3001/${post?.userId?.profile_picture || "default-profile.jpg"}`} // Null check added
+                      src={`http://localhost:3001/${post?.userId?.profile_picture || "default-profile.jpg"}`}
                       roundedCircle
                       width={40}
                       height={40}
@@ -71,12 +73,13 @@ const FeedHome = () => {
               </Card>
 
               {/* Comments Section */}
-              {post?.comments?.length > 0 && (
+              {Array.isArray(post?.comments) && post.comments.length > 0 && (
                 <div className="mt-2">
                   {post.comments.map((comment) => (
                     <div key={comment?._id} className="d-flex mb-2">
+                      {/* Safeguard for null/undefined user_id or profilePicture */}
                       <Image
-                        src={comment?.user_id?.profilePicture || "default-profile.jpg"} // Null check added
+                        src={comment?.user_id?.profilePicture || "default-profile.jpg"}
                         roundedCircle
                         width={30}
                         height={30}
