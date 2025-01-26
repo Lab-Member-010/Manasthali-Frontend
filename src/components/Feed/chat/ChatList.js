@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
+import "./ChatList.css";
 
 const MessageComponent = () => {
   const [dmList, setDmList] = useState([]); // DM list state

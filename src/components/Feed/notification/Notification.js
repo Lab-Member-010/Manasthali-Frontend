@@ -1,7 +1,9 @@
+import construction from "../../../images/Under-Construction.gif";
+
 const Notification = () => {
   return (
     <div className="notification">
-      <img src="../../images/Under-Construction.gif" alt="under construction"></img>
+      <img src={construction} alt="under construction"/>
     </div>
   );
 };
