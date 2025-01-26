@@ -22,95 +22,20 @@ const SignUp = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-
-    // Real-time validation for email
-    if (name === "email") {
-      const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
-      if (!emailRegex.test(value)) {
-        setErrors((prevErrors) => ({ ...prevErrors, email:"Email must include '@' and end with '.com'." }));
-      } else {
-        setErrors((prevErrors) => {
-          const { email, ...rest } = prevErrors;
-          return rest;
-        });
-      }
-    }
-
-    // Real-time validation for password
-    if (name === "password") {
-      const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
-      if (!passwordRegex.test(value)) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          password: "Password must be 8-16 characters (alphanumeric)long."
-        }));
-      } else {
-        setErrors((prevErrors) => {
-          const { password, ...rest } = prevErrors;
-          return rest;
-        });
-      }
-    }
   };
 
   const validateForm = () => {
     const newErrors = {};
-    const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
-
-    if (!formData.email) {
-      newErrors.email = "Email is required.";
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email ="Email must include '@'.";
-    }
-
-    if (!formData.password) {
-      newErrors.password = "Password is required.";
-    } else if (!passwordRegex.test(formData.password)) {
-      newErrors.password = "Password must be 8-16 characters long, alphanumeric, and can include '@'.";
-    }
-
+    if (!formData.email) newErrors.email = "Email is required.";
+    if (!formData.password) newErrors.password = "Password is required.";
     if (!formData.username) newErrors.username = "Username is required.";
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  const checkEmailAndUsernameExistence = async () => {
-    try {
-      // Check if email exists
-      const emailCheckResponse = await axios.post(Api.CHECK_EMAIL, { email: formData.email });
-      if (emailCheckResponse.data.exists) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          email: "This email is already registered.",
-        }));
-        return false;
-      }
-
-      // Check if username exists
-      const usernameCheckResponse = await axios.post(Api.CHECK_USERNAME, { username: formData.username });
-      if (usernameCheckResponse.data.exists) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          username: "This username is already taken.",
-        }));
-        return false;
-      }
-
-      return true; // No errors found
-    } catch (err) {
-      setErrorMessage("Something went wrong while checking for email/username.");
-      return false;
-    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
-    const isValid = await checkEmailAndUsernameExistence();
-    if (!isValid) return;
 
     try {
       const response = await axios.post(Api.SIGN_UP, formData);
@@ -145,12 +70,12 @@ const SignUp = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`form-control ${styles.inputField} ${errors.email ? styles.errorBorder : ""}`}
+                className={`form-control ${styles.inputField}`}
                 placeholder="Enter your email"
                 autoComplete="off"
                 required
               />
-              {errors.email && <p className={`${styles.errorText} text-danger`}>{errors.email}</p>}
+              {errors.email && <p className={styles.errorText}>{errors.email}</p>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
               <label className={styles.labelField}>Username:</label>
@@ -159,12 +84,12 @@ const SignUp = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className={`form-control ${styles.inputField} ${errors.username ? styles.errorBorder : ""}`}
+                className={`form-control ${styles.inputField}`}
                 placeholder="Enter your username"
                 autoComplete="off"
                 required
               />
-              {errors.username && <p className={`${styles.errorText} text-danger`}>{errors.username}</p>}
+              {errors.username && <p className={styles.errorText}>{errors.username}</p>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
               <label className={styles.labelField}>Password:</label>
@@ -174,7 +99,7 @@ const SignUp = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`form-control ${styles.inputField} ${errors.password ? styles.errorBorder : ""}`}
+                  className={`form-control ${styles.inputField}`}
                   placeholder="Enter your Password"
                   autoComplete="off"
                   required
@@ -187,7 +112,7 @@ const SignUp = () => {
                   {passwordVisible ? <VisibilityOff /> : <Visibility />}
                 </span>
               </div>
-              {errors.password && <p className={`${styles.errorText} text-danger`}>{errors.password}</p>}
+              {errors.password && <p className={styles.errorText}>{errors.password}</p>}
             </div>
             <button type="submit" className={`btn custom-btn ${styles.upBtnOutline}`}>
               Sign Up
@@ -195,9 +120,8 @@ const SignUp = () => {
           </form>
           <h5>Already have an account?  
             <span >
-              <Link to="/signin" style={{textDecoration:"none"}}> Sign In</Link>
-            </span>
-          </h5>
+        <Link to="/signin" style={{textDecoration:"none"}}> Sign In</Link>
+      </span></h5>
         </div>
       </div>
     </div>
