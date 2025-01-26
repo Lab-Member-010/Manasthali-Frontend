@@ -9,7 +9,7 @@ const FeedHome = () => {
   const [posts, setPosts] = useState([]);
   console.log(posts)
   const userId = useSelector((state) => state.user.user._id);
-  const token=useSelector((state) => state.user.token);
+  const token=useSelector((state) => state.user.token);  
 
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/all-posts/${userId}`,
