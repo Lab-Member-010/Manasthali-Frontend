@@ -110,15 +110,16 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
   };
 
   return (
-    <div className="ProfileContainer">
-      <div className="profileHeader">
-        {/* Profile Image */}
-        <div className="profileImage">
-          <img
-            src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : './default_profile.jpg'}
-            alt={user.username}
-          />
-        </div>
+
+<div className="ProfileContainer">
+  <div className="profileHeader">
+    {/* Profile Image */}
+    <div className="profileImage">
+      <img
+        src={user.profile_picture ? user.profile_picture : './default_profile.jpg'}
+        alt={user.username}
+      />
+    </div>
 
         {/* Profile Information (Name, Bio, Followers, Following, etc.) */}
         <div className="profileInfo">
@@ -139,7 +140,6 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
           </div>
         </div>
       </div>
-
       {/* Popup for Followers/Following */}
       {showPopup && (
         <div className="popup">
@@ -151,9 +151,8 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
                   <li key={index}>
                     <div className="userDetails">
                        {/* Link to user profile page */}
-                
-                  <img
-                    src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : './default_profile.jpg'}
+                 <img
+                    src={user.profile_picture ? user.profile_picture : './default_profile.jpg'}
                     alt={user.username}
                   />
                   <span>{user.username}</span>
