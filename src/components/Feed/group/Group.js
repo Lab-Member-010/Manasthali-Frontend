@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Group.css';
 
 const Group = () => {
   const [name, setName] = useState('');

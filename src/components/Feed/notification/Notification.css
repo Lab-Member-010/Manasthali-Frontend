@@ -1,6 +1,4 @@
- .notification-dropdown {
-  position: relative;
-  color: rgb(19, 23, 23);
+ .notification{
+  height: 200px;
+  width: 200px;
 }
-
- 

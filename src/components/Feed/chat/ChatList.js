@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import './Chat.css'; // Assuming you have a separate CSS file
 
 const MessageComponent = () => {
   const [dmList, setDmList] = useState([]); // DM list state
