@@ -11,7 +11,6 @@ import {
   Settings,
   PersonAddAlt1,
   Forum,
-  Search as SearchIcon,
   Group as GroupIcon,
 } from "@mui/icons-material";
 import "./Feed.css";
@@ -133,10 +132,6 @@ const Feed = () => {
           <div className="nav-item navItem" onClick={() => setActiveComponent("notifications")}>
             <NotificationsIcon />
             <span className="icon-text ml-2">Notifications</span>
-          </div>
-          <div className="nav-item navItem" onClick={() => setActiveComponent("post")}>
-            <SearchIcon/>
-            <span className="icon-text ml-2">Search</span>
           </div>
           <div className="nav-item navItem" onClick={() => setActiveComponent("find-friends")}>
             <PersonAddAlt1 />
