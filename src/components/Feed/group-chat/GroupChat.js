@@ -1,114 +1,187 @@
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import './GroupChat.css'; 
+import io from 'socket.io-client';
+import './GroupChat.css'; // Assuming you have a separate CSS file
 
-const GroupChat = ({ groupId }) => {
-  const [socket, setSocket] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const { user } = useSelector((state) => state.user); // Assuming user data is stored in Redux
+const GroupChat = () => {
+  const [groupList, setGroupList] = useState([]); // Group list state
+  const [messages, setMessages] = useState([]); // Messages for the selected group
+  const [message, setMessage] = useState(''); // Message input
+  const [selectedGroup, setSelectedGroup] = useState(null); // Selected group for chat
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const userId = useSelector((state) => state.user?.user?._id);
+  const token = useSelector((state) => state.user?.token);
+  const socket = useRef(null); // For socket.io reference
 
-  // Initialize socket connection
+  // Fetch Group list
   useEffect(() => {
-    const newSocket = io(`http://localhost:3001`); // Use environment variable for URL
-    
-    newSocket.on('connect', () => {
-      console.log('Connected to server');
-    });
-
-    newSocket.on('disconnect', () => {
-      console.log('Disconnected from server');
-    });
-
-    newSocket.on('receive-group-message', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]); // Add new message to state
-    });
-
-    setSocket(newSocket);
-    
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
-
-  // Join the group upon selecting a group
-  useEffect(() => {
-    if (groupId && socket) {
-      socket.emit('join-group', groupId);
-    }
-  }, [groupId, socket]);
-
-  // Fetch initial messages for the group
-  useEffect(() => {
-    const fetchMessages = async () => {
+    const fetchGroupList = async () => {
       try {
-        const response = await axios.get(`/api/groupmessages/${groupId}`);
-        setMessages(response.data.data); // Set fetched messages
+        const response = await axios.get(`http://localhost:3001/groups/view`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setGroupList(response.data); // Set group list from API response
       } catch (err) {
-        setError("Couldn't fetch messages");
+        setError(err.response?.data?.message || 'Failed to fetch groups');
+      } finally {
+        setLoading(false);
       }
     };
+    fetchGroupList();
+  }, [userId, token]);
 
-    if (groupId) {
+  // Setup Socket.IO connection for group chat
+  useEffect(() => {
+    if (userId) {
+      socket.current = io('http://localhost:3001'); // Ensure this matches your server's socket URL
+      socket.current.emit('join_group', userId); // Join the socket room for user
+
+      // Listen for new messages in the selected group
+      socket.current.on('new_group_message', (newMessage) => {
+        if (selectedGroup && newMessage.groupId === selectedGroup._id) {
+          setMessages((prevMessages) => [...prevMessages, newMessage]);
+        }
+      });
+
+      // Cleanup socket connection on unmount
+      return () => {
+        socket.current.disconnect();
+      };
+    }
+  }, [userId, selectedGroup]);
+
+  // Fetch messages for the selected group
+  useEffect(() => {
+    if (selectedGroup) {
+      const fetchMessages = async () => {
+        try {
+          const response = await axios.get(`http://localhost:3001/groupchat/${selectedGroup._id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setMessages(response.data.messages);
+        } catch (err) {
+          console.error("Error fetching group messages:", err);
+        }
+      };
       fetchMessages();
     }
-  }, [groupId]);
+  }, [selectedGroup, token]);
 
-  // Handle sending messages
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-    
-    if (!message.trim()) {
+  // Handle selecting a group for chat
+  const handleSelectGroup = (group) => {
+    setSelectedGroup(group); // Set selected group
+  };
+
+  // Handle sending a message
+  const handleSendMessage = async () => {
+    if (!selectedGroup || !message.trim()) {
+      alert('Please select a group and enter a message.');
       return;
     }
 
-    if (socket) {
-      const newMessage = {
-        sender: user._id,
-        group: groupId,
+    try {
+      // Send the message to the server
+      const response = await axios.post('http://localhost:3001/groupchat/send', {
+        groupId: selectedGroup._id, // Ensure you're using _id
         message,
-      };
-      socket.emit('send-group-message', newMessage); // Emit message to server
-      setMessage('');
-      setSuccess('Message sent');
+      }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      // Emit the message via socket after it's stored in DB
+      socket.current.emit('send_group_message', response.data.newMessage);
+
+      // Add the message to the local state for immediate UI update
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        response.data.newMessage,
+      ]);
+      setMessage(''); // Clear the message input
+    } catch (err) {
+      console.error('Error sending group message:', err);
     }
   };
 
+  // Handle message input change
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <div className="chat-container">
-      <h2>Group Chat</h2>
-
-      {error && <p className="error">{error}</p>}
-      {success && <p className="success">{success}</p>}
-
-      <div className="chat-messages">
-        <ul>
-          {messages.map((msg) => (
-            <li key={msg._id}>
-              <strong>{msg.sender.name}</strong>: {msg.message}
-              <span>{new Date(msg.createdAt).toLocaleTimeString()}</span>
-            </li>
+      <div className="sidebar">
+        <div className="sidebar-header">
+          <h2>Groups</h2>
+        </div>
+        <div className="group-list">
+          {groupList.map((group) => (
+            <div
+              className="group-item"
+              key={group._id}
+              onClick={() => handleSelectGroup(group)} // Set selected group on click
+            >
+              <img
+                src={group.groupImage ? `http://localhost:3001/${group.groupImage}` : '/user.png'}
+                alt={group.groupName}
+                className="group-img"
+              />
+              <div className="group-info">
+                <p className="group-name">{group.groupName}</p>
+                <p className="last-message">Last message preview...</p>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
 
-      <div className="chat-input">
-        <input
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type a message"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleSendMessage(e);
-            }
-          }}
-        />
-        <button onClick={handleSendMessage}>Send</button>
+      <div className="chat-panel">
+        {selectedGroup ? (
+          <div className="chat-box">
+            <div className="chat-header">
+              <img
+                src={selectedGroup.groupImage ? `http://localhost:3001/${selectedGroup.groupImage}` : '/user.png'}
+                alt={selectedGroup.groupName}
+                className="chat-group-img"
+              />
+              <h3>{selectedGroup.groupName}</h3>
+            </div>
+            <div className="chat-body">
+              {messages.length === 0 ? (
+                <p>No messages yet. Start the conversation!</p>
+              ) : (
+                <div className="message-list">
+                  {messages.map((msg) => (
+                    <div
+                      key={msg._id}
+                      className={`message ${msg.sender === userId ? 'sent' : 'received'} ${msg.read ? 'read' : 'unread'}`}
+                    >
+                      <p>{msg.message}</p>
+                      <span>{new Date(msg.createdAt).toLocaleString()}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="newMessage">
+              <textarea
+                value={message}
+                onChange={handleMessageChange} // Handle message input change
+                placeholder="Type your message..."
+              />
+              <button className="sentbutton" onClick={handleSendMessage}>Send</button>
+            </div>
+          </div>
+        ) : (
+          <div className="no-chat-selected">
+            <p>Please select a group to start chatting.</p>
+          </div>
+        )}
       </div>
     </div>
   );

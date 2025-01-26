@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import "./Group.css";
-
+import './Group.css';
 
 const Group = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [communityId, setCommunityId] = useState('');
   const [members, setMembers] = useState([]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -14,19 +12,18 @@ const Group = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/groups/create', {
+      const response = await axios.post(`http://localhost:3001/groups/create`, {
         name,
         description,
-        communityId,
         members,
       });
       setSuccess('Group created successfully!');
       setName('');
       setDescription('');
-      setCommunityId('');
       setMembers([]);
+      console.log(response);
     } catch (err) {
-      setError(err.response.data.message || 'Error creating group');
+      setError(err.response?.data?.message || 'Error creating group');
     }
   };
 
@@ -50,14 +47,6 @@ const Group = () => {
             onChange={(e) => setDescription(e.target.value)}
             required
           ></textarea>
-        </div>
-        <div>
-          <label>Community ID (optional):</label>
-          <input
-            type="text"
-            value={communityId}
-            onChange={(e) => setCommunityId(e.target.value)}
-          />
         </div>
         <div>
           <label>Members (comma-separated user IDs):</label>
