@@ -72,7 +72,7 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
     {/* Profile Image */}
     <div className="profileImage">
       <img
-        src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : './default_profile.jpg'}
+        src={user.profile_picture ? user.profile_picture : './default_profile.jpg'}
         alt={user.username}
       />
     </div>
@@ -82,7 +82,7 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
       <div className="usernameAndPosts">
         <h2 className="userName">{user.username}</h2>
       </div>
-      <p className="userBio">{user.bio}</p>
+      <span className="userBio">{user.bio}</span>
       <div className="followersFollowing">
         <span onClick={() => handlePopup("followers")}>{user.followers.length} Followers</span>
         <span onClick={() => handlePopup("following")}>{user.following.length} Following</span>
@@ -102,7 +102,7 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
               <li key={index}>
                 <div className="userDetails">
                   <img
-                    src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : './default_profile.jpg'}
+                    src={user.profile_picture ? user.profile_picture : './default_profile.jpg'}
                     alt={user.username}
                   />
                   <span>{user.username}</span>
