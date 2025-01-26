@@ -11,9 +11,7 @@ const FeedHome = () => {
   const userId = useSelector((state) => state?.user?.user?._id); 
   const token = useSelector((state) => state?.user?.token);
   console.log(posts)
-  const userId = useSelector((state) => state.user.user._id);
-  const token=useSelector((state) => state.user.token);  
-
+ 
   useEffect(() => {
     if (userId && token) {
       axios
