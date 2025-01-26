@@ -1,22 +1,20 @@
 
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
- 
-import "./Profile.css";
 import axios from "axios";
+import "./Profile.css";
 
 const Profile = ({ user, loading, updateProfilePicture }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupType, setPopupType] = useState("");
   const [popupUsers, setPopupUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null); // Selected user state
   const [newProfilePic, setNewProfilePic] = useState(null);
   const [updating, setUpdating] = useState(false);
-  const [showPosts, setShowPosts] = useState(false); // Added state for post visibility
+  const [showPosts, setShowPosts] = useState(false);
 
-  // Get token from Redux store
   const token = useSelector((state) => state.user.token);
 
-  // Fetch users data when popup is opened, token, or popupType changes
   useEffect(() => {
     if (showPopup && token) {
       fetchUsersData(popupType, token);
@@ -37,7 +35,7 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
 
       const response = await axios.get(endpoint, {
         headers: {
-          Authorization: `Bearer ${token}`, // Include token in the Authorization header
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -58,6 +56,12 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
     setShowPopup(false);
     setPopupType("");
     setPopupUsers([]);
+    setSelectedUser(null); // Close selected user details
+  };
+
+  const handleUserClick = (user) => {
+    setSelectedUser(user); // Set the clicked user
+    setShowPopup(false); // Close popup when user is selected
   };
 
   const handleFileChange = (event) => {
@@ -95,7 +99,6 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
     }
   };
 
-  // Handle loading and no user case AFTER hooks
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -104,91 +107,127 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
     return <div>User not found</div>;
   }
 
-  // Toggle posts visibility
   const togglePosts = () => {
     setShowPosts((prev) => !prev);
   };
 
   return (
-
-<div className="ProfileContainer">
-  <div className="profileHeader">
-    {/* Profile Image */}
-    <div className="profileImage">
-      <img
-        src={user.profile_picture ? user.profile_picture : './default_profile.jpg'}
-        alt={user.username}
-      />
-    </div>
-
-        {/* Profile Information (Name, Bio, Followers, Following, etc.) */}
-        <div className="profileInfo">
-          <div className="usernameAndPosts">
-            <h2 className="userName">{user.username}</h2>
+    <div className="ProfileContainer">
+      {selectedUser ? (
+        // Display selected user details
+        <>
+          <div className="profileHeader">
+            <div className="profileImage">
+              <img
+                src={
+                  selectedUser.profile_picture
+                    ? selectedUser.profile_picture
+                    : "./default_profile.jpg"
+                }
+                alt={selectedUser.username}
+              />
+            </div>
+            <div className="profileInfo">
+              <div className="usernameAndPosts">
+                <h2 className="userName">{selectedUser.username}</h2>
+              </div>
+              <p className="userBio">{selectedUser.bio || "No bio available"}</p>
+              <div className="followersFollowing">
+                <p>Followers: {selectedUser.followers?.length || 0}</p>
+                <p>Following: {selectedUser.following?.length || 0}</p>
+              </div>
+            </div>
           </div>
-          <p className="userBio">{user.bio}</p>
-          <div className="followersFollowing">
-            <span onClick={() => handlePopup("followers")}>
-              {user.followers?.length || 0} Followers
-            </span>
-            <span onClick={() => handlePopup("following")}>
-              {user.following?.length || 0} Following
-            </span>
-            <span onClick={togglePosts}>
-              {user.posts ? user.posts.length : 0} Posts
-            </span>
+          <button onClick={() => setSelectedUser(null)}>Back</button>
+        </>
+      ) : (
+        // Main profile display
+        <>
+          <div className="profileHeader">
+            <div className="profileImage">
+              <img
+                src={
+                  user.profile_picture
+                    ? user.profile_picture
+                    : "./default_profile.jpg"
+                }
+                alt={user.username}
+              />
+            </div>
+            <div className="profileInfo">
+              <div className="usernameAndPosts">
+                <h2 className="userName">{user.username}</h2>
+              </div>
+              <p className="userBio">{user.bio}</p>
+              <div className="followersFollowing">
+                <span onClick={() => handlePopup("followers")}>
+                  {user.followers?.length || 0} Followers
+                </span>
+                <span onClick={() => handlePopup("following")}>
+                  {user.following?.length || 0} Following
+                </span>
+                <span onClick={togglePosts}>
+                  {user.posts ? user.posts.length : 0} Posts
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      {/* Popup for Followers/Following */}
-      {showPopup && (
-        <div className="popup">
-          <div className="popupContent">
-            <h3>{popupType === "followers" ? "Followers" : "Following"}</h3>
-            <ul>
-              {popupUsers.length > 0 ? (
-                popupUsers.map((user, index) => (
-                  <li key={index}>
-                    <div className="userDetails">
-                       {/* Link to user profile page */}
-                 <img
-                    src={user.profile_picture ? user.profile_picture : './default_profile.jpg'}
-                    alt={user.username}
-                  />
-                  <span>{user.username}</span>
-                
-                    </div>
-                  </li>
-                ))
-              ) : (
-                <li>No users to display</li>
-              )}
-            </ul>
-            <button onClick={closePopup}>Close</button>
-          </div>
-        </div>
-      )}
 
-      {/* Show Posts */}
-      {showPosts && (
-        <div className="postsSection">
-          <h3>Posts</h3>
-          <ul>
-            {user.posts && user.posts.length > 0 ? (
-              user.posts.map((post, index) => (
-                <li key={index}>
-                  <p>{post.content}</p>
-                  <img
-                    src={post.image ? `http://localhost:3001/${post.image}` : './default_post.jpg'}
-                    alt="Post"
-                  />
-                </li>
-              ))
-            ) : (
-              <li>No posts to display</li>
-            )}
-          </ul>
-        </div>
+          {showPopup && (
+            <div className="popup">
+              <div className="popupContent">
+                <h3>{popupType === "followers" ? "Followers" : "Following"}</h3>
+                <ul>
+                  {popupUsers.length > 0 ? (
+                    popupUsers.map((user, index) => (
+                      <li key={index} onClick={() => handleUserClick(user)}>
+                        <div className="userDetails">
+                          <img
+                            src={
+                              user.profile_picture
+                                ? user.profile_picture
+                                : "./default_profile.jpg"
+                            }
+                            alt={user.username}
+                          />
+                          <span>{user.username}</span>
+                        </div>
+                      </li>
+                    ))
+                  ) : (
+                    <li>No users to display</li>
+                  )}
+                </ul>
+                <button onClick={closePopup}>Close</button>
+              </div>
+            </div>
+          )}
+
+          {showPosts && (
+            <div className="postsSection">
+              <h3>Posts</h3>
+              <ul>
+                {user.posts && user.posts.length > 0 ? (
+                  user.posts.map((post, index) => (
+                    <li key={index}>
+                      <p>{post.content}</p>
+                      <img
+                        src={
+                          post.image
+                            ? `http://localhost:3001/${post.image}`
+                            : "./default_post.jpg"
+                        }
+                        alt="Post"
+                      />
+                    </li>
+                  ))
+                ) : (
+                  <li>No posts to display</li>
+                )}
+              </ul>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
