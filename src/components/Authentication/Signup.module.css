@@ -88,13 +88,6 @@
   cursor: pointer;
 }
 
-/* Error Text */
-.errorText {
-  color: #fa8072;
-  font-size: 0.8rem;
-  margin-top: 5px;
-}
-
 .upBtn,
 .upBtnOutline {
   color: black;
@@ -116,14 +109,13 @@
   border: 1px solid black;
 }
 .errorText {
-  color: #dc3545; /* Red color for errors */
-  font-size: 0.875rem; /* Adjust the font size */
-  margin-top: 5px; /* Space between input and error message */
-  text-align: left; /* Align error message to the left */
+  color: rgb(254, 73, 73);
+  font-size: 0.7rem;
+  text-align: left; 
 }
 
 .errorBorder {
-  border-color: #dc3545 !important; /* Red border for input fields with errors */
+  border-color: rgb(254, 73, 73) !important; 
 }
 
 .inputContainer {

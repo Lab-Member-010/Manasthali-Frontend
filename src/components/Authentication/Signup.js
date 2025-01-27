@@ -146,7 +146,7 @@ const SignUp = () => {
                 autoComplete="off"
                 required
               />
-              {errors.email && <p className={styles.errorText}>{errors.email}</p>}
+              {errors.email && <span className={styles.errorText}>{errors.email}</span>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
               <label className={styles.labelField}>Username:</label>
@@ -160,7 +160,7 @@ const SignUp = () => {
                 autoComplete="off"
                 required
               />
-              {errors.username && <p className={styles.errorText}>{errors.username}</p>}
+              {errors.username && <span className={styles.errorText}>{errors.username}</span>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
               <label className={styles.labelField}>Password:</label>
@@ -183,7 +183,7 @@ const SignUp = () => {
                   {passwordVisible ? <VisibilityOff /> : <Visibility />}
                 </span>
               </div>
-              {errors.password && <p className={styles.errorText}>{errors.password}</p>}
+              {errors.password && <span className={styles.errorText}>{errors.password}</span>}
             </div>
             <button type="submit" className={`btn custom-btn ${styles.upBtnOutline}`}>
               Sign Up

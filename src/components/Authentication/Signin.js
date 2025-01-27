@@ -128,7 +128,7 @@ const SignIn = () => {
                 autoComplete="off"
                 required
               />
-              {errors.email && <p className={styles.errorText}>{errors.email}</p>}
+              {errors.email && <span className={styles.errorText}>{errors.email}</span>}
             </div>
 
             <div className={styles.inputContainer}>
@@ -154,7 +154,7 @@ const SignIn = () => {
                   {passwordVisible ? <VisibilityOff /> : <Visibility />}
                 </span>
               </div>
-              {errors.password && <p className={styles.errorText}>{errors.password}</p>}
+              {errors.password && <span className={styles.errorText}>{errors.password}</span>}
             </div>
 
             <button type="submit" className={`btn ${styles.inBtn}`}>
