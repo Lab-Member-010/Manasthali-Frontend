@@ -1,8 +1,8 @@
 import React from "react";
-import "./Story.css"
+import styles from "./Story.module.css"
 
 const Story=()=>{
-    return <div className="StoryContainer">This is Story</div>;
+    return <div className={styles.storyContainer}>This is Story</div>;
 }
 
 export default Story;
