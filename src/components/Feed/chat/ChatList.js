@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import "./ChatList.css";
+import './ChatList.css'; // Assuming you have a separate CSS file
 
 const MessageComponent = () => {
   const [dmList, setDmList] = useState([]); // DM list state
@@ -56,7 +56,7 @@ const MessageComponent = () => {
       const fetchMessages = async () => {
         try {
           const response = await axios.get(`http://localhost:3001/message/${selectedUser._id}`, {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}`},
           });
           setMessages(response.data.messages);
         } catch (err) {
@@ -108,7 +108,7 @@ const MessageComponent = () => {
       const response = await axios.post('http://localhost:3001/message/read', {
         messageId,
       }, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization:` Bearer ${token}` },
       });
 
       // Update the message in the state as read
@@ -147,7 +147,7 @@ const MessageComponent = () => {
             >
               <img
                 src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
-                alt={user.username}
+                alt={"../../"}
                 className="user-img"
               />
               <div className="user-info">

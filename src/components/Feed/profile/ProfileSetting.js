@@ -1,10 +1,11 @@
-
 import React, { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./ProfileSetting.css"; 
+import { signOut } from "../../../redux-config/UserSlice";
+
 
 const ProfileSetting= () => {
   const user = useSelector((state) => state.UserSlice?.user);
@@ -15,8 +16,10 @@ const ProfileSetting= () => {
   const [bio, setBio] = useState(user?.bio || "");
   const [dob, setDob] = useState(user?.dob || "");
   const [gender, setGender] = useState(user?.gender || "");
+  const [Delete, setDelete] = useState(user?.delete || "");
   const [message, setMessage] = useState("");
   const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const dispatch = useDispatch();
 
   const handleProfilePictureUpdate = async (e) => {
     e.preventDefault();
@@ -144,15 +147,35 @@ const ProfileSetting= () => {
         }
       );
       if (response.data.success) {
-        toast.success("Contact updated successfully!");
-        setMessage("Contact updated successfully!");
+        toast.success("Bio updated successfully!");
+        setMessage("Bio updated successfully!");
       } else {
-        toast.error("Failed to update Contact.");
-        setMessage("Failed to update contact. Please try again.");
+        toast.error("Failed to update Bio.");
+        setMessage("Failed to update Bio. Please try again.");
       }
     } catch (error) {
-      toast.error("Failed to update Contact.");
-      setMessage("Failed to update contact. Please try again.");
+      toast.error("Failed to update Bio.");
+      setMessage("Failed to update Bio. Please try again.");
+    }
+  };
+
+  const handleUserDelete = async (e)=>{
+    e.preventDefault();
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/users/${userId}/delete`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}` 
+          }
+        }
+      );
+        toast.success("User Deleted successfully!");
+        setMessage("User Deleted successfully!");
+        dispatch(signOut());
+    }catch(err){
+      toast.error("Failed to Delete User.2");
+      setMessage("Failed to Delete User. Please try again.");
     }
   };
   
@@ -286,6 +309,28 @@ const ProfileSetting= () => {
               </div>
             </div>
           </div>
+
+          <div className="col-md-3">
+            <div className="card shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">Delete User</h5>
+                <form onSubmit={handleUserDelete}>
+                  <input
+                    type="text"
+                    className="form-control mb-2"
+                    value={Delete}
+                    onChange={(e) => setDelete(e.target.value)}
+                    placeholder="Enter yes to delete"
+                    required
+                  />
+                  <button className="form-control" type="submit">
+                    Delete User
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
         </div>
       )}
     </div>

@@ -106,41 +106,6 @@
     outline: none;
   }
   
-  /* Buttons */
-  button {
-    background-color:#6559a1;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    margin-top: 15px;
-  }
-  
-  button:hover {
-    background-color: white;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  /* Toast Styling */
-  .Toastify__toast {
-    background-color: #28a745 !important;
-    color: white !important;
-    font-weight: 600 !important;
-    border-radius: 8px !important;
-  }
-  
-  .Toastify__toast--error {
-    background-color: #dc3545 !important;
-  }
-  
   /* Flex Layout for Forms */
   .row {
     display: flex;
