@@ -7,14 +7,14 @@ import { useNavigate } from "react-router-dom";
 import Api from "../../apis/Api";
 import styles from "./Signin.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Visibility, VisibilityOff } from "@mui/icons-material"; 
+import { Visibility, VisibilityOff } from "@mui/icons-material"; // Import icons
 import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({}); 
-  const [passwordVisible, setPasswordVisible] = useState(false); 
+  const [errors, setErrors] = useState({}); // State for validation errors
+  const [passwordVisible, setPasswordVisible] = useState(false); // Password visibility toggle
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const SignIn = () => {
 
     if (name === "password") {
       setPassword(value);
-      const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
+      const passwordRegex = /^(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d@]{8,16}$/;
       if (!passwordRegex.test(value)) {
         setErrors((prevErrors) => ({
           ...prevErrors,
@@ -54,7 +54,7 @@ const SignIn = () => {
   const validateForm = () => {
     const newErrors = {};
     const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
+    const passwordRegex = /^(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d@]{8,16}$/;
 
     if (!email) {
       newErrors.email = "Email is required.";
