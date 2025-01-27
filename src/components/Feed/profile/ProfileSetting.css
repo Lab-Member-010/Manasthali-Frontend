@@ -65,6 +65,10 @@
     display: none;
   }
   
+  .abc{
+    width: 200px;
+  }
+
   .profile-img-container label {
     display: block;
     background-color: #6559a1;
@@ -102,6 +106,7 @@
   input[type="text"]:focus,
   input[type="date"]:focus,
   .select:focus {
+    width:250px;
     border-color: #6559a1;
     outline: none;
   }

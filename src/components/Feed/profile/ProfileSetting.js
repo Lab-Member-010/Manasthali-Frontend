@@ -251,7 +251,7 @@ const ProfileSetting= () => {
                 <form onSubmit={handleDobUpdate}>
                   <input
                     type="date"
-                    className="form-control mb-2"
+                    className="form-control mb-2 abc"
                     value={dob}
                     onChange={(e) => setDob(e.target.value)}
                     required
