@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import "./Group.css";
 
 const Group = () => {
   const [name, setName] = useState('');
@@ -46,68 +45,86 @@ const Group = () => {
   };
 
   return (
-    <div className="create-group">
+    <div className="container-fluid border">
+  <div className="row justify-content-center">
+    <div className="col-md-8">
       <h2>Create New Group</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Group Name:</label>
+      <form className="form-group" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="form-label text-dark">Group Name:</label>
           <input
             type="text"
+            className="form-control text-dark"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Description:</label>
+        
+        <div className="form-group">
+          <label className="form-label text-dark">Description:</label>
           <textarea
+            className="form-control text-dark"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
-          ></textarea>
+          />
         </div>
-        <div>
-          <label>Members (comma-separated user IDs):</label>
+        
+        <div className="form-group">
+          <label className="form-label text-dark">Members (comma-separated user IDs):</label>
           <input
             type="text"
+            className="form-control text-dark"
             value={members}
             onChange={(e) => setMembers(e.target.value)}
             placeholder="user1_id, user2_id"
           />
         </div>
-        <div>
-          <label>Group Icon (optional):</label>
+        
+        <div className="form-group">
+          <label className="form-label text-dark">Group Icon (optional):</label>
           <input
             type="text"
+            className="form-control text-dark"
             value={groupIcon}
             onChange={(e) => setGroupIcon(e.target.value)}
             placeholder="URL of group icon"
           />
         </div>
-        <div>
-          <label>Community ID (optional):</label>
+        
+        <div className="form-group">
+          <label className="form-label text-dark">Community ID (optional):</label>
           <input
             type="text"
+            className="form-control text-dark"
             value={communityId}
             onChange={(e) => setCommunityId(e.target.value)}
             placeholder="Optional Community ID"
           />
         </div>
-        <div>
-          <label>Initial Message (optional):</label>
+        
+        <div className="form-group">
+          <label className="form-label text-dark">Initial Message (optional):</label>
           <textarea
+            className="form-control text-dark"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Welcome to the new group!"
-          ></textarea>
+          />
         </div>
 
-        {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
+        {error && <p className="text-danger">{error}</p>}
+        {success && <p className="text-success">{success}</p>}
 
-        <button type="submit">Create Group</button>
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary btn-block">Create Group</button>
+        </div>
       </form>
     </div>
+  </div>
+</div>
+
   );
 };
 
