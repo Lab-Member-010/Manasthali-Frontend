@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import './GroupChat.css'; // Assuming you have a separate CSS file for styling
+import styles from './GroupChat.module.css'; // Assuming you have a separate CSS file for styling
 
 const GroupChat = () => {
   const [joinedGroups, setJoinedGroups] = useState([]); // List of groups user has joined
@@ -32,7 +32,7 @@ const GroupChat = () => {
       }
     };
     fetchJoinedGroups();
-  }, []);
+  }, [token]);
 
   // Setup Socket.IO for group chat
   useEffect(() => {
@@ -110,17 +110,17 @@ const GroupChat = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="group-chat-container">
-      <div className="sidebar">
-        <div className="sidebar-header">
+    <div className={styles.groupChatContainer}>
+      <div className={styles.sidebar}>
+        <div className={styles.sidebarHeader}>
           <h2>Your Groups</h2>
         </div>
-        <div className="group-list">
+        <div className={styles.groupList}>
           {joinedGroups.map((group) => (
             <div
-              className="group-item"
+              className={styles.groupItem}
               key={group._id}
-              onClick={() => handleSelectGroup(group)} // Set selected group on click
+              onClick={() => handleSelectGroup(group)} 
             >
               <h3>{group.name}</h3>
               <p>{group.description}</p>
@@ -129,21 +129,21 @@ const GroupChat = () => {
         </div>
       </div>
 
-      <div className="chat-panel">
+      <div className={styles.chatPanel}>
         {selectedGroup ? (
-          <div className="chat-box">
-            <div className="chat-header">
+          <div className={styles.chatBox}>
+            <div className={styles.chatHeader}>
               <h3>{selectedGroup.name}</h3>
             </div>
-            <div className="chat-body">
+            <div className={styles.chatBody}>
               {messages.length === 0 ? (
                 <p>No messages yet. Start the conversation!</p>
               ) : (
-                <div className="message-list">
+                <div className={styles.messageList}>
                   {messages.map((msg) => (
                     <div
                       key={msg._id}
-                      className={`message ${msg.sender === userId ? 'sent' : 'received'}`}
+                      className={`${styles.message} ${styles.msgSender === userId ? 'sent' : 'received'}`}
                     >
                       <p>{msg.message}</p>
                       <span>{new Date(msg.createdAt).toLocaleString()}</span>
@@ -153,19 +153,20 @@ const GroupChat = () => {
               )}
             </div>
 
-            <div className="newMessage">
+            <div className={styles.newMessage}>
               <textarea
                 value={message}
-                onChange={handleMessageChange} // Handle message input change
+                onChange={handleMessageChange} 
+                className={styles.textArea}
                 placeholder="Type your message..."
               />
-              <button className="send-button" onClick={handleSendMessage}>
+              <button className={styles.sendButton} onClick={handleSendMessage}>
                 Send
               </button>
             </div>
           </div>
         ) : (
-          <div className="no-group-selected">
+          <div className={styles.noGroupSelected}>
             <p>Please select a group to start chatting.</p>
           </div>
         )}
