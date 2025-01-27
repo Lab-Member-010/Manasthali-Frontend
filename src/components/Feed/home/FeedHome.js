@@ -5,10 +5,11 @@ import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
-
 const FeedHome = () => {
   const [posts, setPosts] = useState([]);
-  const userId = useSelector((state) => state?.user?.user?._id); 
+  const [newComment, setNewComment] = useState(""); // State for the new comment
+  const [commentForPost, setCommentForPost] = useState(null); // Store post id for comment
+  const userId = useSelector((state) => state?.user?.user?._id);
   const token = useSelector((state) => state?.user?.token);
 
   useEffect(() => {
@@ -29,6 +30,54 @@ const FeedHome = () => {
     }
   }, [userId, token]);
 
+  const handleLike = (postId) => {
+    const updatedPosts = posts.map((post) =>
+      post._id === postId
+        ? {
+            ...post,
+            likes: post.likes.includes(userId)
+              ? post.likes.filter((id) => id !== userId)
+              : [...post.likes, userId],
+          }
+        : post
+    );
+    setPosts(updatedPosts);
+  };
+
+  const handleCommentSubmit = async (postId) => {
+    if (newComment.trim()) {
+      try {
+        const response = await axios.post(
+          `http://localhost:3001/post/${postId}/addcomment`, // Ensure the endpoint is correct
+          { text: newComment },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        if (response.status === 201) {
+          toast.success("Comment added successfully");
+          setNewComment(""); // Clear the comment input field
+          // Fetch the latest posts after adding the comment
+          axios.get(`http://localhost:3001/posts/all-posts/${userId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((response) => {
+            setPosts(Array.isArray(response.data.posts) ? response.data.posts : []);
+          })
+          .catch((error) => {
+            toast.error("Error fetching posts");
+          });
+        }
+      } catch (error) {
+        toast.error("Error adding comment");
+      }
+    } else {
+      toast.error("Please write a comment");
+    }
+  };
+
+  const handleCommentChange = (e) => {
+    setNewComment(e.target.value);
+  };
+
   return (
     <div>
       <ToastContainer />
@@ -39,7 +88,6 @@ const FeedHome = () => {
               <Card className="shadow-sm">
                 <Card.Header className="d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center">
-                    {/* Safeguard for null/undefined userId or profile_picture */}
                     <Image
                       src={post?.userId?.profile_picture || "default-profile.jpg"}
                       roundedCircle
@@ -61,25 +109,39 @@ const FeedHome = () => {
                   )}
                   <p>{post?.description || "No description available"}</p>
                   <div className="d-flex justify-content-between">
-                    <Button variant="outline-primary" className="me-2">
-                      Like
+                    <Button variant="outline-primary" className="me-2" onClick={() => handleLike(post._id)}>
+                      {post.likes.includes(userId) ? "Unlike" : "Like"} ({post.likes.length})
                     </Button>
-                    <Button variant="outline-secondary">Comment</Button>
+                    <Button
+                      variant="outline-secondary"
+                      onClick={() => setCommentForPost(post._id)} // Set the postId for the comment
+                    >
+                      Comment
+                    </Button>
                   </div>
                 </Card.Body>
                 <Card.Footer className="text-muted">
-                  {post?.likes?.length || 0} Likes | {post?.comment_count || 0} Comments
+                  {post?.likes?.length || 0} Likes | {post?.comments?.length || 0} Comments
                 </Card.Footer>
               </Card>
 
-              {/* Comments Section */}
-              {Array.isArray(post?.comments) && post.comments.length > 0 && (
+              {commentForPost === post._id && (
+                <div className="mt-2">
+                  <textarea
+                    value={newComment}
+                    onChange={handleCommentChange}
+                    placeholder="Add a comment"
+                  />
+                  <button onClick={() => handleCommentSubmit(post._id)}>Submit Comment</button>
+                </div>
+              )}
+
+              {post?.comments?.length > 0 && (
                 <div className="mt-2">
                   {post.comments.map((comment) => (
                     <div key={comment?._id} className="d-flex mb-2">
-                      {/* Safeguard for null/undefined user_id or profilePicture */}
                       <Image
-                        src={comment?.user_id?.profilePicture || "default-profile.jpg"}
+                        src={comment?.user_id?.profile_picture || "default-profile.jpg"}
                         roundedCircle
                         width={30}
                         height={30}
@@ -99,5 +161,4 @@ const FeedHome = () => {
     </div>
   );
 };
-
 export default FeedHome;
