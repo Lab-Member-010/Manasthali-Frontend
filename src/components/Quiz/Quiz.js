@@ -170,4 +170,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;   
+export default Quiz;
