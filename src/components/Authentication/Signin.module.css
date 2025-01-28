@@ -1,3 +1,4 @@
+ 
 .signinContainer {
   background-image: url('../../images/spore.gif');
   background-size: cover;
@@ -90,11 +91,11 @@
   cursor: pointer;
 }
 
-.errorText {
+/* .errorText {
   color: #fa8072;
   font-size: 0.8rem;
   margin-top: 5px;
-}
+} */
 
 .inBtn,
 .inBtnOutline {

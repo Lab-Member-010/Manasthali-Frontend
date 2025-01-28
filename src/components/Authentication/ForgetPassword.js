@@ -1,3 +1,4 @@
+ 
 import React, { useState } from "react";
 import axios from "axios";
 import Api from "../../apis/Api";
@@ -48,6 +49,8 @@ const ForgetPassword = () => {
         display: "flex", 
         alignItems: "center",
         justifyContent: "center",
+        
+       
       }}
     >
       <div
@@ -56,7 +59,10 @@ const ForgetPassword = () => {
           padding: "20px",
           border: "1px solid #ccc",
           borderRadius: "10px",
-          backgroundColor: "rgba(255, 255, 255, 0.8)", 
+          backgroundColor: "transparent",
+          boxShadow: "0px 1px 2px 1px rgba(0, 0, 0, 0.3)",
+          backdropFilter: "blur(10px)"
+      
         }}
       >
         <h2>Forget Password</h2>
@@ -65,6 +71,7 @@ const ForgetPassword = () => {
             <label>Email:</label>
             <input
               type="email"
+              placeholder="enter the email"
               value={email}
               onChange={handleChange}
               required
@@ -73,6 +80,7 @@ const ForgetPassword = () => {
                 padding: "8px",
                 marginTop: "5px",
                 borderRadius: "5px",
+                backgroundColor: "transparent",
                 border: validationError ? "1px solid red" : "1px solid #ccc",
               }}
             />
@@ -85,11 +93,15 @@ const ForgetPassword = () => {
             style={{
               width: "100%",
               padding: "10px",
-              background: "#007bff",
-              color: "#fff",
-              border: "none",
+            
               borderRadius: "5px",
               cursor: "pointer",
+              
+              color: "black",
+              backgroundColor: "transparent",
+              fontWeight: "bold",
+              fontSize: "1.1rem",
+              border: "1px solid black",
             }}
           >
             Send Reset Token

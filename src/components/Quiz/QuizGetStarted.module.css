@@ -1,4 +1,4 @@
-.quiz-get-started-container {
+.quizGetStartedContainer {
     background-image: url('../../images/quiz_gif.gif');
     background-size: cover;
     background-position: center;
@@ -6,7 +6,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center;    
     align-items: center;
     text-align: center;
     min-height: 100vh;
@@ -15,7 +15,7 @@
     overflow: hidden;
   }
   
-  .background-image {
+  .backgroundImage {
     position: absolute;
     top: 0;
     left: 0;
@@ -26,19 +26,19 @@
     filter: brightness(100%);
   }
   
-  .quiz-get-started-container h2 {
+  .quizGetStartedContainer h2 {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
   }
   
-  .quiz-get-started-container p {
+  .quizGetStartedContainer p {
     font-size: 1.25rem;
     margin-bottom: 2rem;
     max-width: 600px;
   }
   
-  .next-button {
+  .nextButton {
     border: none;
     padding: 0.75rem 1.5rem;
     font-size: 1.25rem;
@@ -47,21 +47,21 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   }
   
-  .next-button:hover {
+  .nextButton:hover {
     background-color:transparent;
     transform: scale(1.1);
   }
   
   @media (max-width: 768px) {
-    .quiz-get-started-container h2 {
+    .quizGetStartedContainer h2 {
       font-size: 2rem;
     }
   
-    .quiz-get-started-container p {
+    .quizGetStartedContainer p {
       font-size: 1rem;
     }
   
-    .next-button {
+    .nextButton {
       font-size: 1rem;
       padding: 0.5rem 1rem;
     }
