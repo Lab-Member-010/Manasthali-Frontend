@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch,useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./ProfileSetting.css"; 
+import styles from "./ProfileSetting.module.css"; 
 import { signOut } from "../../../redux-config/UserSlice";
 
 
@@ -182,18 +182,15 @@ const ProfileSetting= () => {
   return (
     <div className="container py-4">
       <ToastContainer />
-      <h2 className="text-center mb-4">Your Profile</h2>
-
-      <div className="card shadow-sm">
-        <div className="card-body">
-          <h4 className="card-title">Profile Information</h4>
-        </div>
+      
+      <div>
+          <h2 className="text-center text-dark mb-4">Your Profile</h2>
       </div>
 
       {!showUpdateForm && (
         <div className="text-center mt-4">
           <button
-            className="form-control w-100"
+            className={`form-control w-100 ${styles.updateProfile}`}
             onClick={() => setShowUpdateForm(true)}
           >
             Update Your Details
@@ -203,8 +200,8 @@ const ProfileSetting= () => {
 
       {showUpdateForm && (
         <div className="row mt-4">
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Profile Picture</h5>
                 <form onSubmit={handleProfilePictureUpdate}>
@@ -215,7 +212,7 @@ const ProfileSetting= () => {
                     onChange={(e) => setProfilePicture(e.target.files[0])}
                     required
                   />
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update Picture
                   </button>
                 </form>
@@ -223,8 +220,8 @@ const ProfileSetting= () => {
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Contact</h5>
                 <form onSubmit={handleContactUpdate}>
@@ -236,7 +233,7 @@ const ProfileSetting= () => {
                     placeholder="Enter new contact"
                     required
                   />
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update Contact
                   </button>
                 </form>
@@ -244,8 +241,8 @@ const ProfileSetting= () => {
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Date of Birth</h5>
                 <form onSubmit={handleDobUpdate}>
@@ -256,7 +253,7 @@ const ProfileSetting= () => {
                     onChange={(e) => setDob(e.target.value)}
                     required
                   />
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update DOB
                   </button>
                 </form>
@@ -264,8 +261,8 @@ const ProfileSetting= () => {
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Gender</h5>
                 <form onSubmit={handleGenderUpdate}>
@@ -280,7 +277,7 @@ const ProfileSetting= () => {
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                   </select>
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update Gender
                   </button>
                 </form>
@@ -289,8 +286,8 @@ const ProfileSetting= () => {
           </div>
 
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Bio</h5>
                 <form onSubmit={handleBioUpdate}>
@@ -302,7 +299,7 @@ const ProfileSetting= () => {
                     placeholder="Enter new Bio"
                     required
                   />
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update Bio
                   </button>
                 </form>
@@ -310,8 +307,8 @@ const ProfileSetting= () => {
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Delete User</h5>
                 <form onSubmit={handleUserDelete}>
@@ -323,7 +320,7 @@ const ProfileSetting= () => {
                     placeholder="Enter yes to delete"
                     required
                   />
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Delete User
                   </button>
                 </form>

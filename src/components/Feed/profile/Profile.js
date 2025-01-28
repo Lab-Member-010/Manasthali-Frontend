@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import "./Profile.css";
+import styles from "./Profile.module.css";
 
 const Profile = ({ user, loading, updateProfilePicture }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -112,12 +112,12 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
   };
 
   return (
-    <div className="ProfileContainer">
+    <div className={styles.ProfileContainer}>
       {selectedUser ? (
         // Display selected user details
         <>
-          <div className="profileHeader">
-            <div className="profileImage">
+          <div className={styles.profileHeader}>
+            <div className={styles.profileImage}>
               <img
                 src={
                   selectedUser.profile_picture
@@ -127,12 +127,12 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
                 alt={selectedUser.username}
               />
             </div>
-            <div className="profileInfo">
-              <div className="usernameAndPosts">
-                <h2 className="userName">{selectedUser.username}</h2>
+            <div className={styles.profileInfo}>
+              <div className={styles.usernameAndPosts}>
+                <h2 className={styles.userName}>{selectedUser.username}</h2>
               </div>
-              <p className="userBio">{selectedUser.bio || "No bio available"}</p>
-              <div className="followersFollowing">
+              <p className={styles.userBio}>{selectedUser.bio || "No bio available"}</p>
+              <div className={styles.followersFollowing}>
                 <p>Followers: {selectedUser.followers?.length || 0}</p>
                 <p>Following: {selectedUser.following?.length || 0}</p>
               </div>
@@ -143,8 +143,8 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
       ) : (
         // Main profile display
         <>
-          <div className="profileHeader">
-            <div className="profileImage">
+          <div className={styles.profileHeader}>
+            <div className={styles.profileImage}>
               <img
                 src={
                   user.profile_picture
@@ -154,12 +154,12 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
                 alt={user.username}
               />
             </div>
-            <div className="profileInfo">
-              <div className="usernameAndPosts">
-                <h2 className="userName">{user.username}</h2>
+            <div className={styles.profileInfo}>
+              <div className={styles.AuthorizationusernameAndPosts}>
+                <h2 className={styles.userName}>{user.username}</h2>
               </div>
-              <p className="userBio">{user.bio}</p>
-              <div className="followersFollowing">
+              <p className={styles.userBio}>{user.bio}</p>
+              <div className={styles.followersFollowing}>
                 <span onClick={() => handlePopup("followers")}>
                   {user.followers?.length || 0} Followers
                 </span>
@@ -174,14 +174,14 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
           </div>
 
           {showPopup && (
-            <div className="popup">
-              <div className="popupContent">
+            <div className={styles.popup}>
+              <div className={styles.popupContent}>
                 <h3>{popupType === "followers" ? "Followers" : "Following"}</h3>
                 <ul>
                   {popupUsers.length > 0 ? (
                     popupUsers.map((user, index) => (
                       <li key={index} onClick={() => handleUserClick(user)}>
-                        <div className="userDetails">
+                        <div className={styles.userDetails}>
                           <img
                             src={
                               user.profile_picture
@@ -204,7 +204,7 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
           )}
 
           {showPosts && (
-            <div className="postsSection">
+            <div className={styles.postsSection}>
               <h3>Posts</h3>
               <ul>
                 {user.posts && user.posts.length > 0 ? (

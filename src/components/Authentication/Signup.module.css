@@ -17,11 +17,11 @@
   backdrop-filter: blur(10px);
   text-align: center;
   width: 470px;
-  height: 650px;
+  height: 570px;
   max-width: 1000px;
   position: relative;
   right: 0;
-  margin: 0px auto;
+  margin: 40px auto;
 }
 
 .signupLogo {
@@ -44,7 +44,7 @@
 }
 
 .inputField {
-  width: 410px !important;
+  width: 440px !important;
   height: 40px !important;
   background-color: transparent !important;
   border-bottom: 1px solid black !important;

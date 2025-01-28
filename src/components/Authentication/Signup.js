@@ -35,20 +35,20 @@ const SignUp = () => {
       }
     }
 
-    if (name === "password") {
-      const passwordRegex = /^(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d@]{8,16}$/;
-      if (!passwordRegex.test(value)) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          password: "Password must be 8-16 characters long, alphanumeric, and can include '@'.",
-        }));
-      } else {
-        setErrors((prevErrors) => {
-          const { password, ...rest } = prevErrors;
-          return rest;
-        });
-      }
+  if (name === "password") {
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
+    if (!passwordRegex.test(value)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "Password must be 8-16 characters long, alphanumeric, and can include '@'.",
+      }));
+    } else {
+      setErrors((prevErrors) => {
+        const { password, ...rest } = prevErrors;
+        return rest;
+      });
     }
+  }
 
     if (name === "username") {
       if (value.trim() === "") {
@@ -65,7 +65,7 @@ const SignUp = () => {
   const validateForm = async () => {
     const newErrors = {};
     const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
-    const passwordRegex = /^(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d@]{8,16}$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
 
     if (!formData.email) {
       newErrors.email = "Email is required.";
@@ -97,14 +97,15 @@ const SignUp = () => {
       }
     }
 
-    if (!formData.password) {
-      newErrors.password = "Password is required.";
-    } else if (!passwordRegex.test(formData.password)) {
-      newErrors.password = "Password must be 8-16 characters long, alphanumeric, and can include '@'.";
-    }
+    // Password Validation
+  if (!formData.password) {
+    newErrors.password = "Password is required.";
+  } else if (!passwordRegex.test(formData.password)) {
+    newErrors.password = "Password must be 8-16 characters long, alphanumeric, and can include '@'.";
+  }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
