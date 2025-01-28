@@ -14,7 +14,7 @@ const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({});
-
+  
   const validatePassword = (password) => {
     const newErrors = {};
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
@@ -23,11 +23,11 @@ const ResetPassword = () => {
     } else if (!passwordRegex.test(password)) {
       newErrors.password = "Password must be 8-16 characters long, alphanumeric, and can include '@'.";
     }
-
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
+  
   const handleChange = (e) => {
     const { name,value } = e.target;
     if (name === "password") {
@@ -46,12 +46,13 @@ const ResetPassword = () => {
       }
     }
   };
-
+  
   const handleResetPassword = async (e) => {
     e.preventDefault();
     if (!validatePassword(password)) return;
-
+    
     try {
+      console.log(password);
       const response = await axios.post("http://localhost:3001/users/reset-password", {
         token,
         password,
@@ -78,25 +79,27 @@ const ResetPassword = () => {
         <form onSubmit={handleResetPassword}>
           <div className={styles.inputContainer}>
             <label>New Password:</label>
-            <input
-              type={passwordVisible ? "text" : "password"}
-              id="password"
-              name="password"
-              value={password}
-              onChange={handleChange}
-              placeholder="Enter password"
-              className={`form-control ${styles.inputField} ${errors.password ? styles.errorBorder : ""}`}
-              required
-            />
-            <span
+              <div className={styles.passwordFieldContainer}>
+                <input
+                  type={passwordVisible ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  placeholder="Enter password"
+                  className={`form-control ${styles.inputField} ${errors.password ? styles.errorBorder : ""}`}
+                  required
+                />
+                <span
                   className={styles.togglePassword}
                   onClick={togglePasswordVisibility}
                   style={{ cursor: "pointer" }}
-            >
-            {passwordVisible ? <VisibilityOff /> : <Visibility />}
-            </span>
-            {errors.password && <span className={styles.errorText}>{errors.password}</span>}
-          </div>
+                >
+                  {passwordVisible ? <VisibilityOff /> : <Visibility />}
+                </span>
+              </div>
+              {errors.password && <span className={styles.errorText}>{errors.password}</span>}
+            </div>
           <button type="submit" className={`btn ${styles.resetButton}`}>
             Reset Password
           </button>
