@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Button, Image, Row, Col, Container } from "react-bootstrap";
@@ -30,50 +31,72 @@ const FeedHome = () => {
     }
   }, [userId, token]);
 
-  const handleLike = (postId) => {
-    const updatedPosts = posts.map((post) =>
-      post._id === postId
-        ? {
-            ...post,
-            likes: post.likes.includes(userId)
-              ? post.likes.filter((id) => id !== userId)
-              : [...post.likes, userId],
-          }
-        : post
-    );
-    setPosts(updatedPosts);
-  };
+  const handleLike = async (post) => {
+    try {
+      const likeAction = post.likes.includes(userId) ? 'unlike' : 'like';
 
+      // Optimistically update the UI
+      const updatedPosts = posts.map((currentPost) =>
+        currentPost._id === post._id
+          ? {
+              ...currentPost,
+              likes: likeAction === 'like'
+                ? [...currentPost.likes, userId]
+                : currentPost.likes.filter(id => id !== userId),
+            }
+          : currentPost
+      );
+      setPosts(updatedPosts); // Update the state to reflect the UI changes
+
+      // Send the like/unlike request to the backend
+      const response = await axios.post(
+        `http://localhost:3001/posts/posts/${post._id}/${likeAction}`,
+        { userId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.status === 200) {
+        // Optionally update the UI again to reflect any changes from the server
+        const updatedPostsResponse = await axios.get(
+          `http://localhost:3001/posts/all-posts/${userId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setPosts(updatedPostsResponse.data.posts); // Update posts from server to ensure consistency
+      }
+    } catch (error) {
+      // Handle error and show a message to the user
+      toast.error("Error updating like status");
+      console.error(error);
+    }
+  };
   const handleCommentSubmit = async (postId) => {
     if (newComment.trim()) {
       try {
         const response = await axios.post(
-          `http://localhost:3001/post/${postId}/addcomment`, // Ensure the endpoint is correct
+          `http://localhost:3001/posts/posts/${postId}/addcomment`, // Corrected endpoint
           { text: newComment },
           { headers: { Authorization: `Bearer ${token}` } }
         );
+
         if (response.status === 201) {
           toast.success("Comment added successfully");
-          setNewComment(""); // Clear the comment input field
-          // Fetch the latest posts after adding the comment
-          axios.get(`http://localhost:3001/posts/all-posts/${userId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          .then((response) => {
-            setPosts(Array.isArray(response.data.posts) ? response.data.posts : []);
-          })
-          .catch((error) => {
-            toast.error("Error fetching posts");
-          });
+          setNewComment(""); // Clear the input field
+          setCommentForPost(null); // Close the comment box
+
+          // Refresh posts to show the new comment
+          const updatedPostsResponse = await axios.get(
+            `http://localhost:3001/posts/all-posts/${userId}`,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          setPosts(updatedPostsResponse.data.posts);
         }
       } catch (error) {
-        toast.error("Error adding comment");
+        toast.error(error.response?.data?.message || "Error adding comment");
       }
     } else {
       toast.error("Please write a comment");
     }
   };
-
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
   };
@@ -109,7 +132,7 @@ const FeedHome = () => {
                   )}
                   <p>{post?.description || "No description available"}</p>
                   <div className="d-flex justify-content-between">
-                    <Button variant="outline-primary" className="me-2" onClick={() => handleLike(post._id)}>
+                    <Button variant="outline-primary" className="me-2" onClick={() => handleLike(post)}>
                       {post.likes.includes(userId) ? "Unlike" : "Like"} ({post.likes.length})
                     </Button>
                     <Button
@@ -147,7 +170,11 @@ const FeedHome = () => {
                         height={30}
                       />
                       <div className="ms-2">
-                        <strong>{comment?.user_id?.username || "Anonymous"}</strong>
+                        <strong
+                          className={comment?.user_id?._id === userId ? "comment-author" : ""}
+                        >
+                          {comment?.user_id?.username || "Anonymous"}
+                        </strong>
                         <p>{comment?.comment || ""}</p>
                       </div>
                     </div>
@@ -162,3 +189,5 @@ const FeedHome = () => {
   );
 };
 export default FeedHome;
+
+ 

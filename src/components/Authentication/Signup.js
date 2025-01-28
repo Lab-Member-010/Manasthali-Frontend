@@ -17,6 +17,7 @@ const SignUp = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false); // Manage password visibility
+  const[loading,setLoading]=useState(false)
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,7 +25,7 @@ const SignUp = () => {
     setFormData({ ...formData, [name]: value });
 
     if (name === "email") {
-      const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
+      const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
       if (!emailRegex.test(value)) {
         setErrors((prevErrors) => ({ ...prevErrors, email: "Invalid email format." }));
       } else {
@@ -34,19 +35,19 @@ const SignUp = () => {
         });
       }
     }
-
-  if (name === "password") {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
-    if (!passwordRegex.test(value)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password: "Password must be 8-16 characters long, alphanumeric, and can include '@'.",
-      }));
-    } else {
-      setErrors((prevErrors) => {
-        const { password, ...rest } = prevErrors;
-        return rest;
-      });
+    if (name === "password") {
+      const passwordRegex =/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@]{8,16}$/;
+      if (!passwordRegex.test(value)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          password: "Password must be 8-16 characters long, alphanumeric, and can include '@'.",
+        }));
+      } else {
+        setErrors((prevErrors) => {
+          const { password, ...rest } = prevErrors;
+          return rest;
+        });
+      }
     }
   }
 
@@ -64,9 +65,8 @@ const SignUp = () => {
 
   const validateForm = async () => {
     const newErrors = {};
-    const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
-
+    const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.\d)[A-Za-z\d@]{8,16}$/;
     if (!formData.email) {
       newErrors.email = "Email is required.";
     } else if (!emailRegex.test(formData.email)) {
@@ -110,8 +110,11 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!(await validateForm())) return;
-
+    setLoading(true);
+    if (!(await validateForm()))  {
+      setLoading(false);
+      return;
+    }
     try {
       const response = await axios.post(Api.SIGN_UP, formData);
       setSuccessMessage(response.data.message);
@@ -119,6 +122,9 @@ const SignUp = () => {
       navigate("/verify-otp", { state: { email: formData.email } });
     } catch (err) {
       setErrorMessage(err.response?.data?.error || "Something went wrong.");
+    }
+    finally{
+      setLoading(false)
     }
   };
 
@@ -203,3 +209,6 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+
+  
