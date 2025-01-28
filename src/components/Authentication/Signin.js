@@ -110,7 +110,7 @@ const SignIn = () => {
       <ToastContainer />
       <div className={styles.signinContainer}>
         <div className={`${styles.signinBox} shadow-lg p-4`}>
-          <div className={styles.signinLogo}></div> {/* Add your logo here */}
+          <div className={styles.signinLogo}></div>
           <h2 className="text-center mb-4">Sign In</h2>
           <form onSubmit={handleSubmit}>
             <div className={styles.inputContainer}>
@@ -135,7 +135,7 @@ const SignIn = () => {
               <label htmlFor="password" className={styles.labelField}>
                 Password
               </label>
-              <div className="password-field-container">
+              <div className={styles.passwordFieldContainer}>
                 <input
                   type={passwordVisible ? "text" : "password"}
                   id="password"

@@ -81,7 +81,7 @@ tbody td {
     border-color: #c093fc;
 }
 
-button {
+.FollowUnfollow {
     background-color:#c093fc;
     color: white;
     border: none;
@@ -94,12 +94,12 @@ button {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
+.FollowUnfollow:hover {
     background-color:#c093fc;
     transform: translateY(-2px);
 }
 
-button:active {
+.FollowUnfollow:active {
     background-color:#c093fc;
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);

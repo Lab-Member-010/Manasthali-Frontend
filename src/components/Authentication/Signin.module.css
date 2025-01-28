@@ -38,7 +38,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  margin: 10px auto 20px; /* Center the logo and add spacing */
+  margin: 10px auto 20px; 
 }
 
 .inputContainer {
@@ -83,19 +83,13 @@
 .togglePassword {
   position: absolute;
   right: 20px;
-  top: 55%;
+  top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
   color: Black;
   font-weight: bold;
   cursor: pointer;
 }
-
-/* .errorText {
-  color: #fa8072;
-  font-size: 0.8rem;
-  margin-top: 5px;
-} */
 
 .inBtn,
 .inBtnOutline {
@@ -129,12 +123,13 @@
   color: #333;
   cursor: pointer;
 }
-.errorBorder {
-  border: 1px solid rgb(254, 73, 73);
-}
 
 .errorText {
   font-size: 0.7rem;
   color: rgb(254, 73, 73);
   text-align: left;
+}
+
+.errorBorder {
+  border: 1px solid rgb(254, 73, 73) !important;
 }

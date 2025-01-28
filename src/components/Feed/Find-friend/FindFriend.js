@@ -134,7 +134,7 @@ const FindFriend = () => {
                 </td>
                 <td>{user.username}</td>
                 <td>
-                  <button onClick={() => handleFollow(user._id)}>Follow</button>
+                  <button className="FollowUnfollow" onClick={() => handleFollow(user._id)}>Follow</button>
                 </td>
               </tr>
             ))}
