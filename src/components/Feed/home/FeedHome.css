@@ -7,8 +7,8 @@
   
   .card-body {
     padding: 0;
-  }
-  
+  } 
+
   /* Profile Header Styling */
   .card-header {
     border-bottom: 1px solid #e1e1e1;
@@ -108,4 +108,6 @@
     outline: none;
   }
   
-  
+  .shadow-sm{
+    margin-bottom: 20px;
+  }
