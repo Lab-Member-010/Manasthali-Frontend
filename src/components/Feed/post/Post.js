@@ -55,7 +55,7 @@ const Post = () => {
             className="form-control mb-3"
           />
         </div>
-        <div>
+        <div>                   
           <input
             type="file"
             multiple

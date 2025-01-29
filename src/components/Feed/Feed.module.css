@@ -77,10 +77,11 @@
 
 .innerDb{
   background-color: white;
-  height: calc(100vh - 5px); 
+  height: calc(100vh - 100px); 
   overflow-y: scroll; 
   -ms-overflow-style: none;
   scrollbar-width: none;
+  margin-bottom: 20px;
 }
 
 .storiesDiv{

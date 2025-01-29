@@ -1,49 +1,64 @@
- 
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import backgroundGif from "../../images/spore.gif";
+import styles from "./ResetPassword.module.css";
+import { Visibility, VisibilityOff } from "@mui/icons-material"; 
 
 const ResetPassword = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const token = queryParams.get("token"); // Get token from URL
+  const token = queryParams.get("token"); 
 
-  const [newPassword, setNewPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({});
-
+  
   const validatePassword = (password) => {
-    const passwordRegex = /^(?=.[a-zA-Z])(?=.\d)[a-zA-Z\d@]{8,16}$/;
-    if (!passwordRegex.test(password)) {
-      setErrors({
-        newPassword: "Password must be 8-16 characters long, alphanumeric, and can include '@'.",
-      });
-      return false;
-    } else {
-      setErrors({});
-      return true;
+    const newErrors = {};
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
+    if (!password) {
+      newErrors.password = "Password is required.";
+    } else if (!passwordRegex.test(password)) {
+      newErrors.password = "Password must be 8-16 characters long, alphanumeric, and can include '@'.";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
+  const handleChange = (e) => {
+    const { name,value } = e.target;
+    if (name === "password") {
+      setPassword(value);
+      const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
+      if (!passwordRegex.test(value)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          password: "Password must be 8-16 characters long, alphanumeric, and can include '@'.",
+        }));
+      } else {
+        setErrors((prevErrors) => {
+          const { password, ...rest } = prevErrors;
+          return rest;
+        });
+      }
     }
   };
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setNewPassword(value);
-    validatePassword(value);
-  };
-
+  
   const handleResetPassword = async (e) => {
     e.preventDefault();
-    if (!validatePassword(newPassword)) return;
-
+    if (!validatePassword(password)) return;
+    
     try {
+      console.log(password);
       const response = await axios.post("http://localhost:3001/users/reset-password", {
         token,
-        newPassword,
+        password,
       });
       toast.success(response.data.message, { position: "top-center" });
-      setNewPassword("");
+      setPassword("");
     } catch (err) {
       toast.error(err.response?.data?.error || "Something went wrong.", {
         position: "top-center",
@@ -51,67 +66,41 @@ const ResetPassword = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
-    <div
-      style={{
-        backgroundImage: `url(${backgroundGif})`,
-        backgroundSize: "cover",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "400px",
-          margin: "50px auto",
-          padding: "20px",
-          border: "1px solid #ccc",
-          borderRadius: "10px",
-          backgroundColor: "transparent",
-          boxShadow: "0px 1px 2px 1px rgba(0, 0, 0, 0.3)",
-          backdropFilter: "blur(10px)",
-        }}
-      >
+    <div className={styles.resetContainer}>
+      <div className={styles.resetBox}>
         <ToastContainer />
-        <h2>Reset Password</h2>
+        <div className={styles.resetLogo}></div>
+        <h2 className="text-center mb-4">Reset Password</h2>
         <form onSubmit={handleResetPassword}>
-          <div style={{ marginBottom: "15px" }}>
+          <div className={styles.inputContainer}>
             <label>New Password:</label>
-            <input
-              type="password"
-              placeholder="Enter new password"
-              value={newPassword}
-              onChange={handleChange}
-              required
-              style={{
-                width: "100%",
-                padding: "8px",
-                marginTop: "5px",
-                borderRadius: "5px",
-                border: errors.newPassword ? "1px solid red" : "1px solid #ccc",
-                backgroundColor: "transparent",
-              }}
-            />
-            {errors.newPassword && (
-              <span style={{ color: "red", fontSize: "0.9em" }}>{errors.newPassword}</span>
-            )}
-          </div>
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              padding: "10px",
-              color: "black",
-              backgroundColor: "transparent",
-              fontWeight: "bold",
-              fontSize: "1.1rem",
-              border: "1px solid black",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
+              <div className={styles.passwordFieldContainer}>
+                <input
+                  type={passwordVisible ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  placeholder="Enter password"
+                  className={`form-control ${styles.inputField} ${errors.password ? styles.errorBorder : ""}`}
+                  required
+                />
+                <span
+                  className={styles.togglePassword}
+                  onClick={togglePasswordVisibility}
+                  style={{ cursor: "pointer" }}
+                >
+                  {passwordVisible ? <VisibilityOff /> : <Visibility />}
+                </span>
+              </div>
+              {errors.password && <span className={styles.errorText}>{errors.password}</span>}
+            </div>
+          <button type="submit" className={`btn ${styles.resetButton}`}>
             Reset Password
           </button>
         </form>
