@@ -164,7 +164,7 @@ const MessageComponent = () => {
           <div className="chat-box">
             <div className="chat-header">
               <img
-                src={selectedUser.profile_picture ? `http://localhost:3001/${selectedUser.profile_picture}` : '/user.png'}
+                src={selectedUser.profile_picture ? `${selectedUser.profile_picture}` : '/user.png'}
                 alt={selectedUser.username}
                 className="chat-user-img"
               />
@@ -192,8 +192,9 @@ const MessageComponent = () => {
             <div className="newMessage">
               <textarea
                 value={message}
-                onChange={handleMessageChange} // Handle message input change
+                onChange={handleMessageChange} 
                 placeholder="Type your message..."
+                className='textArea'
               />
               <button className="sentbutton" onClick={handleSendMessage}>Send</button>
             </div>

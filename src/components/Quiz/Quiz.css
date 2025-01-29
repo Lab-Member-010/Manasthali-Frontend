@@ -130,3 +130,25 @@
   display: flex;
   justify-content: space-between;
 }
+
+.preNextButton{
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  border-radius: 40px;
+  background-color: #c093fc;
+  color:white;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.preNextButton:hover {
+  background-color:#ae7af2;
+  transform: scale(1.05);
+  color: #000;
+}
+
+.preNextButton:disabled{
+  background-color: #cfcfcf;
+  color: gray;
+}

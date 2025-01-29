@@ -4,30 +4,28 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Signup.module.css";
 import Api from "../../apis/Api";
-import { Visibility, VisibilityOff } from "@mui/icons-material"; // Import icons
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    username: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false); // Manage password visibility
-  const[loading,setLoading]=useState(false)
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
 
     if (name === "email") {
-      const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      setEmail(value);
+      const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
       if (!emailRegex.test(value)) {
-        setErrors((prevErrors) => ({ ...prevErrors, email: "Invalid email format." }));
+        setErrors((prevErrors) => ({ ...prevErrors, email: "Invalid email format. Email must include '@' and end with '.com'." }));
       } else {
         setErrors((prevErrors) => {
           const { email, ...rest } = prevErrors;
@@ -37,7 +35,8 @@ const SignUp = () => {
     }
 
     if (name === "password") {
-      const passwordRegex =/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@]{8,16}$/;
+      setPassword(value);
+      const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
       if (!passwordRegex.test(value)) {
         setErrors((prevErrors) => ({
           ...prevErrors,
@@ -52,6 +51,7 @@ const SignUp = () => {
     }
 
     if (name === "username") {
+      setUsername(value);
       if (value.trim() === "") {
         setErrors((prevErrors) => ({ ...prevErrors, username: "Username is required." }));
       } else {
@@ -65,17 +65,15 @@ const SignUp = () => {
 
   const validateForm = async () => {
     const newErrors = {};
-    const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.\d)[A-Za-z\d@]{8,16}$/;
-
-    if (!formData.email) {
+    const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
+    if (!email) {
       newErrors.email = "Email is required.";
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Invalid email format.";
+    } else if (!emailRegex.test(email)) {
+      newErrors.email = "Invalid email format. Email must include '@' and end with '.com'.";
     } else {
-      // Check if email already exists
       try {
-        const response = await axios.post(Api.CHECK_EMAIL, { email: formData.email });
+        const response = await axios.post(Api.CHECK_EMAIL, { email: email });
         if (!response.data.available) {
           newErrors.email = "Email already exists.";
         }
@@ -84,12 +82,17 @@ const SignUp = () => {
       }
     }
 
-    if (!formData.username) {
+    if (!password) {
+      newErrors.password = "Password is required.";
+    } else if (!passwordRegex.test(password)) {
+      newErrors.password = "Password must be 8-16 characters long, alphanumeric, and can include '@'.";
+    }
+
+    if (!username) {
       newErrors.username = "Username is required.";
     } else {
-      // Check if username already exists
       try {
-        const response = await axios.post(Api.CHECK_USERNAME, { username: formData.username });
+        const response = await axios.post(Api.CHECK_USERNAME, { username: username });
         if (!response.data.available) {
           newErrors.username = "Username already exists.";
         }
@@ -98,33 +101,21 @@ const SignUp = () => {
       }
     }
 
-    if (!formData.password) {
-      newErrors.password = "Password is required.";
-    } else if (!passwordRegex.test(formData.password)) {
-      newErrors.password = "Password must be 8-16 characters long, alphanumeric, and can include '@'.";
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    if (!(await validateForm()))  {
-      setLoading(false);
-      return;
-    }
+    if (!(await validateForm())) return;
+
     try {
-      const response = await axios.post(Api.SIGN_UP, formData);
+      const response = await axios.post(Api.SIGN_UP, { email, username, password });
       setSuccessMessage(response.data.message);
       setErrorMessage("");
-      navigate("/verify-otp", { state: { email: formData.email } });
+      navigate("/verify-otp", { state: { email: email } });
     } catch (err) {
       setErrorMessage(err.response?.data?.error || "Something went wrong.");
-    }
-    finally{
-      setLoading(false)
     }
   };
 
@@ -146,28 +137,28 @@ const SignUp = () => {
               <input
                 type="email"
                 name="email"
-                value={formData.email}
+                value={email}
                 onChange={handleChange}
                 className={`form-control ${styles.inputField} ${errors.email ? styles.errorBorder : ""}`}
                 placeholder="Enter your email"
                 autoComplete="off"
                 required
               />
-              {errors.email && <p className={styles.errorText}>{errors.email}</p>}
+              {errors.email && <span className={styles.errorText}>{errors.email}</span>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
               <label className={styles.labelField}>Username:</label>
               <input
                 type="text"
                 name="username"
-                value={formData.username}
+                value={username}
                 onChange={handleChange}
                 className={`form-control ${styles.inputField} ${errors.username ? styles.errorBorder : ""}`}
                 placeholder="Enter your username"
                 autoComplete="off"
                 required
               />
-              {errors.username && <p className={styles.errorText}>{errors.username}</p>}
+              {errors.username && <span className={styles.errorText}>{errors.username}</span>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
               <label className={styles.labelField}>Password:</label>
@@ -175,7 +166,7 @@ const SignUp = () => {
                 <input
                   type={passwordVisible ? "text" : "password"}
                   name="password"
-                  value={formData.password}
+                  value={password}
                   onChange={handleChange}
                   className={`form-control ${styles.inputField} ${errors.password ? styles.errorBorder : ""}`}
                   placeholder="Enter your Password"
@@ -190,17 +181,17 @@ const SignUp = () => {
                   {passwordVisible ? <VisibilityOff /> : <Visibility />}
                 </span>
               </div>
-              {errors.password && <p className={styles.errorText}>{errors.password}</p>}
+              {errors.password && <span className={styles.errorText}>{errors.password}</span>}
             </div>
             <button type="submit" className={`btn custom-btn ${styles.upBtnOutline}`}>
               Sign Up
             </button>
           </form>
           <h5>
-            Already have an account?  
-            
-              <Link to="/signin" style={{ textDecoration: "none" }}> Sign In</Link>
-           
+            Already have an account?
+
+            <Link to="/signin" style={{ textDecoration: "none" }}> Sign In</Link>
+
           </h5>
         </div>
       </div>
@@ -209,6 +200,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-
-  

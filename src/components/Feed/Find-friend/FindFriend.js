@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './FindFriend.css';
+import styles from './FindFriend.module.css';
 import { useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 
@@ -18,12 +17,20 @@ const FindFriend = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/users/get-all-users-except/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
-        setUsers(Array.isArray(response.data.users) ? response.data.users : []);
-        setFilteredUsers(response.data.users); // Initially, show all users
+        const followingResponse = await axios.get(`http://localhost:3001/users/${userId}/following`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        
+        const followingIds = new Set(followingResponse.data.following.map(user => user._id));
+
+        const usersWithFollowStatus = response.data.users.map((user) => ({
+          ...user,
+          isFollowing: followingIds.has(user._id),
+        }));
+        setUsers(usersWithFollowStatus);
+        setFilteredUsers(usersWithFollowStatus);
       } catch (err) {
         setError(err.response?.data?.message || 'Failed to fetch users');
       } finally {
@@ -34,107 +41,94 @@ const FindFriend = () => {
     fetchUsers();
   }, [userId, token]);
 
-  // Debounced search handler
   const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    debouncedSearch(value);
+    setSearchTerm(e.target.value);
+    debouncedSearch(e.target.value);
   };
 
   const debouncedSearch = debounce((searchTerm) => {
     filterUsers(searchTerm);
-  }, 500); // Delay of 500ms before the search is triggered
+  }, 500);
 
-  // Filter users based on search term
   const filterUsers = (searchTerm) => {
     if (searchTerm.trim() === '') {
       setFilteredUsers(users);
     } else {
-      const filtered = users.filter((user) =>
-        user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user._id.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredUsers(filtered);
+      setFilteredUsers(users.filter(user =>
+        user.username.toLowerCase().includes(searchTerm.toLowerCase())
+      ));
     }
   };
 
-  useEffect(() => {
-    if (searchTerm) {
-      debouncedSearch(searchTerm);
-    } else {
-      setFilteredUsers(users);
-    }
-  }, [searchTerm, users]);
-
-  const handleFollow = async (userIdToFollow) => {
-    if (!token) {
-      alert('Authentication token is missing. Please log in.');
-      return;
-    }
+  const handleFollowToggle = async (targetUserId, isCurrentlyFollowing) => {
     try {
-      const response = await axios.post(
-        `http://localhost:3001/users/follow`,
-        { userId, userIdToFollow },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      alert(response.data.message || 'Followed successfully!');
-      // Remove the followed user from the list
-      setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userIdToFollow));
+        const url = `http://localhost:3001/users/${isCurrentlyFollowing ? 'unfollow' : 'follow'}`;
+        await axios.post(
+            url,
+            { userId, userIdToUnfollow: targetUserId, userIdToFollow: targetUserId }, // Corrected field names
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        setUsers(prevUsers =>
+            prevUsers.map(user =>
+                user._id === targetUserId ? { ...user, isFollowing: !isCurrentlyFollowing } : user
+            )
+        );
+        setFilteredUsers(prevFilteredUsers =>
+            prevFilteredUsers.map(user =>
+                user._id === targetUserId ? { ...user, isFollowing: !isCurrentlyFollowing } : user
+            )
+        );
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to follow. Please try again.');
+        alert(err.response?.data?.message || 'Action failed. Please try again.');
     }
-  };
+};
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="FindFriendContainer">
+    <div className={styles.FindFriendContainer}>
       <h2>Find Friends</h2>
-
-      {/* Search bar to filter users */}
-      <div className="SearchBarContainer">
+      <div className={styles.SearchBarContainer}>
         <input
           type="text"
-          placeholder="Search by username or user ID"
+          placeholder="Search by username"
           value={searchTerm}
           onChange={handleSearchChange}
-          className="SearchInput"
+          className={styles.SearchInput}
         />
       </div>
-
-      {/* Display filtered users */}
       {filteredUsers.length === 0 ? (
         <p>No users found</p>
       ) : (
-        <table>
-          <thead>
+        <table className={styles.Table}>
+          <thead className={styles.tHead}>
             <tr>
               <th>Profile Picture</th>
               <th>Username</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={styles.tBody}>
             {filteredUsers.map((user) => (
               <tr key={user._id}>
                 <td>
                   <img
                     src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
                     alt={user.username}
-                    className="ProfilePicture"
-                    onError={(e) => {
-                      e.target.src = '/user.png';
-                    }}
+                    className={styles.ProfilePicture}
+                    onError={(e) => { e.target.src = '/user.png'; }}
                   />
                 </td>
                 <td>{user.username}</td>
                 <td>
-                  <button onClick={() => handleFollow(user._id)}>Follow</button>
+                  <button
+                    onClick={() => handleFollowToggle(user._id, user.isFollowing)}
+                    className={styles.FollowUnfollow}
+                  >
+                    {user.isFollowing ? 'Unfollow' : 'Follow'}
+                  </button>
                 </td>
               </tr>
             ))}

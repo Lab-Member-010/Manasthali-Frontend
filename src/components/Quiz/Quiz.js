@@ -154,15 +154,15 @@ const Quiz = () => {
           </div>
         </div>
         <div className="navigation-buttons">
-          <button onClick={goToPrevious} disabled={currentQuestionIndex === 0}>
+          <button onClick={goToPrevious} className="preNextButton" disabled={currentQuestionIndex === 0}>
             Previous
           </button>
           {currentQuestionIndex === questions.length - 1 ? (
-            <button onClick={handleSubmit}>
+            <button onClick={handleSubmit} className="preNextButton">
               Submit Quiz
             </button>
           ) : (
-            <button onClick={goToNext}>Next</button>
+            <button onClick={goToNext} className="preNextButton">Next</button>
           )}
         </div>
       </div>
