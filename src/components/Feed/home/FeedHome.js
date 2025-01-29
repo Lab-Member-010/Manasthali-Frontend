@@ -8,6 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from "react-icons/ai";
 import { BiSolidCommentDetail } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
+
 
 const FeedHome = () => {
   const [posts, setPosts] = useState([]);
@@ -17,7 +19,7 @@ const FeedHome = () => {
 
   const userId = useSelector((state) => state?.user?.user?._id);
   const token = useSelector((state) => state?.user?.token);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (userId && token) {
       axios
@@ -81,8 +83,11 @@ const FeedHome = () => {
     }
   };
 
+  // const handleCommentClick = (postId) => {
+  //   setActiveCommentPost(activeCommentPost === postId ? null : postId);
+  // };
   const handleCommentClick = (postId) => {
-    setActiveCommentPost(activeCommentPost === postId ? null : postId);
+    navigate(`/posts/${postId}/comments`); // कमेंट पेज पर भेजेगा
   };
 
   const handleCommentSubmit = async (postId) => {
@@ -215,7 +220,7 @@ const FeedHome = () => {
     </div>
   );
 };
-
 export default FeedHome;
+
 
  
