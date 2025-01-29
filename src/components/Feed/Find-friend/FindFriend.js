@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './FindFriend.css';
+import styles from './FindFriend.module.css';
 import { useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 
@@ -88,36 +88,36 @@ const FindFriend = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="FindFriendContainer">
+    <div className={styles.FindFriendContainer}>
       <h2>Find Friends</h2>
-      <div className="SearchBarContainer">
+      <div className={styles.SearchBarContainer}>
         <input
           type="text"
           placeholder="Search by username"
           value={searchTerm}
           onChange={handleSearchChange}
-          className="SearchInput"
+          className={styles.SearchInput}
         />
       </div>
       {filteredUsers.length === 0 ? (
         <p>No users found</p>
       ) : (
-        <table>
-          <thead>
+        <table className={styles.Table}>
+          <thead className={styles.tHead}>
             <tr>
               <th>Profile Picture</th>
               <th>Username</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={styles.tBody}>
             {filteredUsers.map((user) => (
               <tr key={user._id}>
                 <td>
                   <img
                     src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
                     alt={user.username}
-                    className="ProfilePicture"
+                    className={styles.ProfilePicture}
                     onError={(e) => { e.target.src = '/user.png'; }}
                   />
                 </td>
@@ -125,6 +125,7 @@ const FindFriend = () => {
                 <td>
                   <button
                     onClick={() => handleFollowToggle(user._id, user.isFollowing)}
+                    className={styles.FollowUnfollow}
                   >
                     {user.isFollowing ? 'Unfollow' : 'Follow'}
                   </button>
