@@ -15,7 +15,7 @@ const SignUp = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false); 
-  const[loading,setLoading]=useState(false)
+  const [loading,setLoading]=useState(false)
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -51,6 +51,7 @@ const SignUp = () => {
     }
 
     if (name === "username") {
+      setUsername(value);
       if (value.trim() === "") {
         setErrors((prevErrors) => ({ ...prevErrors, username: "Username is required." }));
       } else {
@@ -155,15 +156,15 @@ const SignUp = () => {
             <div className={`form-group ${styles.inputContainer}`}>
               <label className={styles.labelField}>Username:</label>
               <input
-                type="text"
-                name="username"
-                value={username}
-                onChange={handleChange}
-                className={`form-control ${styles.inputField} ${errors.username ? styles.errorBorder : ""}`}
-                placeholder="Enter your username"
-                autoComplete="off"
-                required
-              />
+  type="text"
+  name="username"
+  value={username}
+  onChange={handleChange}
+  className={`form-control ${styles.inputField} ${errors.username ? styles.errorBorder : ""}`}
+  placeholder="Enter your username"
+  autoComplete="off"
+  required
+/>
               {errors.username && <span className={styles.errorText}>{errors.username}</span>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
