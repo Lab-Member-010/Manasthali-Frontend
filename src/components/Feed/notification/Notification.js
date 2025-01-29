@@ -1,5 +1,4 @@
 import construction from "../../../images/Under-Construction.gif";
-
 const Notification = () => {
   return (
     <div className="container-fluid d-flex justify-content-center">
@@ -9,3 +8,4 @@ const Notification = () => {
 };
 
 export default Notification;
+ 

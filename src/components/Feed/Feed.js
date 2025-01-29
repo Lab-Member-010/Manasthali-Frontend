@@ -13,7 +13,7 @@ import {
   Forum,
   Group as GroupIcon,
 } from "@mui/icons-material";
-import "./Feed.css";
+import styles from "./Feed.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { signOut } from "../../redux-config/UserSlice";
@@ -100,54 +100,54 @@ const Feed = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className={styles.mainContainer}>
       {/* Header */}
-      <div className="header">
-        <div className="header-left">
-          <img className="rotating-logo" src={ManasthaliLogo} alt="Manasthali Logo" width={70} height={70} />
-          <div className="site-logo">Manasthali</div>
+      <div className={styles.header}>
+        <div className={styles.headerLeft}>
+          <img className={styles.rotatingLogo} src={ManasthaliLogo} alt="Manasthali Logo" width={70} height={70} />
+          <div className={styles.siteLogo}>Manasthali</div>
         </div>
       </div>
       <br /> <br /> <br />
       {/* Content Section */}
-      <div className="content-container">
+      <div className={styles.contentContainer}>
         {/* Left Navbar */}
-        <div className="left-navbar">
-          <div className="nav-item navItem" onClick={() => setActiveComponent("home")}>
+        <div className={styles.leftNavbar}>
+          <div className={`nav-item ${styles.navItem}`} onClick={() => setActiveComponent("home")}>
             <HomeIcon />
             <span className="icon-text ml-2">Home</span>
           </div>
-          <div className="nav-item navItem" onClick={() => setActiveComponent("groups")}>
+          <div className={`nav-item ${styles.navItem}`} onClick={() => setActiveComponent("groups")}>
             <GroupIcon />
             <span className="icon-text ml-2">Group</span>
           </div>
-          <div className="nav-item navItem" onClick={() => setActiveComponent("chat")}>
+          <div className={`nav-item ${styles.navItem}`} onClick={() => setActiveComponent("chat")}>
             <ChatIcon />
             <span className="icon-text ml-2">Chat</span>
           </div>
-          <div className="nav-item navItem" onClick={() => setActiveComponent("group-chat")}>
+          <div className={`nav-item ${styles.navItem}`} onClick={() => setActiveComponent("group-chat")}>
             <Forum />
             <span className="icon-text ml-2">GroupChat</span>
           </div>
-          <div className="nav-item navItem" onClick={() => setActiveComponent("notifications")}>
+          <div className={`nav-item ${styles.navItem}`} onClick={() => setActiveComponent("notifications")}>
             <NotificationsIcon />
             <span className="icon-text ml-2">Notifications</span>
           </div>
-          <div className="nav-item navItem" onClick={() => setActiveComponent("find-friends")}>
+          <div className={`nav-item ${styles.navItem}`} onClick={() => setActiveComponent("find-friends")}>
             <PersonAddAlt1 />
             <span className="icon-text ml-2">Find-Friends</span>
           </div>
-          <div className="nav-item navItem" onClick={() => setActiveComponent("post")}>
+          <div className={`nav-item ${styles.navItem}`} onClick={() => setActiveComponent("post")}>
             <AddCircleOutline />
             <span className="icon-text ml-2">Post</span>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="mid-part">
-          <div className="innerDb">
+        <div className={styles.midPart}>
+          <div className={styles.innerDb}>
             {activeComponent === "home" && (
-              <div className="storiesDiv">
+              <div className={styles.storiesDiv}>
                 <Story />
               </div>
             )}
@@ -156,30 +156,30 @@ const Feed = () => {
         </div>
 
         {/* Right Navbar */}
-        <div className="right-navbar">
-          <div className="nav-item navItems" onClick={() => handleProfileClick()}>
+        <div className={styles.rightNavbar}>
+          <div className={`nav-item ${styles.navItems}`} onClick={() => handleProfileClick()}>
             {/* Conditional Rendering for Profile Image */}
             {loadingProfile ? (
-              <img src="loading-spinner.gif" alt="Loading..." className="profileIcon" />
+              <img src="loading-spinner.gif" alt="Loading..." className={styles.profileIcon} />
             ) : profileData ? (
-              <img src={profileData.profile_picture} alt="user" className="profileIcon" />
+              <img src={profileData.profile_picture} alt="user" className={styles.profileIcon} />
             ) : (
-              <img src="default-profile.jpg" alt="Default User" className="profileIcon" />
+              <img src="default-profile.jpg" alt="Default User" className={styles.profileIcon} />
             )}
           </div>
-          <div className="nav-item navItems" onClick={() => setActiveComponent("challenge")}>
+          <div className={`nav-item ${styles.navItems}`} onClick={() => setActiveComponent("challenge")}>
             <EventIcon />
           </div>
-          <div className="nav-item navItems" onClick={() => setActiveComponent("badge")}>
+          <div className={`nav-item ${styles.navItems}`} onClick={() => setActiveComponent("badge")}>
             <WorkspacePremiumIcon />
           </div>
-          <div className="nav-item navItems" onClick={() => setActiveComponent("setting")}>
+          <div className={`nav-item ${styles.navItems}`} onClick={() => setActiveComponent("setting")}>
             <Settings />
           </div>
-          <div className="nav-item navItems" onClick={() => setActiveComponent("community")}>
+          <div className={`nav-item ${styles.navItems}`} onClick={() => setActiveComponent("community")}>
             <GroupsIcon />
           </div>
-          <div className="nav-item navItems" onClick={() => dispatch(signOut())}>
+          <div className={`nav-item ${styles.navItems}`} onClick={() => dispatch(signOut())}>
             <PowerSettingsNewIcon />
           </div>
         </div>

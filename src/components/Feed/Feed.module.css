@@ -1,18 +1,18 @@
-.main-container {
+.mainContainer {
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
 }
 
-.content-container {
+.contentContainer {
   display: flex;
   flex: 1;
   width: 100%;
   margin-top: 18px;
 }
 
-.left-navbar{
+.leftNavbar{
   width:180px;
   border-right:1px solid lightgrey;
   background-color: white;
@@ -39,7 +39,7 @@
   padding-left: 11px;
 }
 
-.right-navbar {
+.rightNavbar {
   width: 100px;
   height: 100%;
   background-color: white;
@@ -47,13 +47,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  border-right: 1px solid #ccc;
+  border-left: 1px solid lightgray;
   overflow-y: auto;
-}
-
-.right-navbar {
-  border-right: none;
-  border-left: 1px solid #ccc;
 }
 
 .navItems {
@@ -69,8 +64,8 @@
   background-color: #e7e4f1;
 }
 
-.mid-part {
-  background-color: lightgray;
+.midPart {
+  background-color: white;
   flex: 1;
   color: white;
   font-size: 24px;
@@ -82,10 +77,11 @@
 
 .innerDb{
   background-color: white;
-  height: calc(100vh - 5px); 
+  height: calc(100vh - 100px); 
   overflow-y: scroll; 
   -ms-overflow-style: none;
   scrollbar-width: none;
+  margin-bottom: 20px;
 }
 
 .storiesDiv{
@@ -116,33 +112,26 @@
   z-index: 1000;
 }
 
-.header-left,
-.header-right {
+.headerLeft {
   display: flex;
   align-items: center;
 }
 
-.header-left img {
+.headerLeft img {
   margin-right: 10px;
 }
 
-.site-logo {
-  font-size: 40px;
-  font-weight: bold;
-  color: #333;
-}
-
-.menu-button {
+.menuButton {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
-.menu-button:hover {
+.menuButton:hover {
   transform: scale(1.1);
 }
 
-.rotating-logo {
+.rotatingLogo {
   animation: animate 5s infinite ease-in-out;
 }
 
@@ -181,7 +170,7 @@
   }
 }
 
-.site-logo {
+.siteLogo {
   font-size: 40px;
   font-weight: bold;
   background: linear-gradient(45deg, #1a5a6d, #39a4bf, #25768a, #8d7fd2, #7c5fb5, #a06bba, #e584b5, #e0718e);

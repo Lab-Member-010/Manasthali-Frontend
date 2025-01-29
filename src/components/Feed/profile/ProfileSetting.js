@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch,useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./ProfileSetting.css"; 
+import styles from "./ProfileSetting.module.css"; 
 import { signOut } from "../../../redux-config/UserSlice";
 
 
@@ -159,49 +159,38 @@ const ProfileSetting= () => {
     }
   };
 
-  const handleUserDelete = async (e) => {
+  const handleUserDelete = async (e)=>{
     e.preventDefault();
     try {
-      console.log(token)
-        const response = await axios.delete(
-            `http://localhost:3001/users/${userId}/delete`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`  // Make sure token is attached here
-                }
-            }
-        );
-        if (response.data.success) {
-            toast.success("User Deleted successfully!");
-            setMessage("User Deleted successfully!");
-            dispatch(signOut());  // Log the user out if successful
-        } else {
-            toast.error("Failed to Delete User.");
-            setMessage("Failed to Delete User. Please try again.");
+      const response = await axios.delete(
+        `http://localhost:3001/users/${userId}/delete`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}` 
+          }
         }
-    } catch (err) {
-        console.error(err);
-        toast.error("Failed to Delete User.");
-        setMessage("Failed to Delete User. Please try again.");
+      );
+        toast.success("User Deleted successfully!");
+        setMessage("User Deleted successfully!");
+        dispatch(signOut());
+    }catch(err){
+      toast.error("Failed to Delete User.2");
+      setMessage("Failed to Delete User. Please try again.");
     }
-};
-
+  };
   
   return (
     <div className="container py-4">
       <ToastContainer />
-      <h2 className="text-center mb-4">Your Profile</h2>
-
-      <div className="card shadow-sm">
-        <div className="card-body">
-          <h4 className="card-title">Profile Information</h4>
-        </div>
+      
+      <div>
+          <h2 className="text-center text-dark mb-4">Your Profile</h2>
       </div>
 
       {!showUpdateForm && (
         <div className="text-center mt-4">
           <button
-            className="form-control w-100"
+            className={`form-control w-100 ${styles.updateProfile}`}
             onClick={() => setShowUpdateForm(true)}
           >
             Update Your Details
@@ -211,8 +200,8 @@ const ProfileSetting= () => {
 
       {showUpdateForm && (
         <div className="row mt-4">
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Profile Picture</h5>
                 <form onSubmit={handleProfilePictureUpdate}>
@@ -223,7 +212,7 @@ const ProfileSetting= () => {
                     onChange={(e) => setProfilePicture(e.target.files[0])}
                     required
                   />
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update Picture
                   </button>
                 </form>
@@ -231,8 +220,8 @@ const ProfileSetting= () => {
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Contact</h5>
                 <form onSubmit={handleContactUpdate}>
@@ -244,7 +233,7 @@ const ProfileSetting= () => {
                     placeholder="Enter new contact"
                     required
                   />
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update Contact
                   </button>
                 </form>
@@ -252,19 +241,19 @@ const ProfileSetting= () => {
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Date of Birth</h5>
                 <form onSubmit={handleDobUpdate}>
                   <input
                     type="date"
-                    className="form-control mb-2"
+                    className="form-control mb-2 abc"
                     value={dob}
                     onChange={(e) => setDob(e.target.value)}
                     required
                   />
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update DOB
                   </button>
                 </form>
@@ -272,8 +261,8 @@ const ProfileSetting= () => {
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Gender</h5>
                 <form onSubmit={handleGenderUpdate}>
@@ -288,7 +277,7 @@ const ProfileSetting= () => {
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                   </select>
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update Gender
                   </button>
                 </form>
@@ -297,8 +286,8 @@ const ProfileSetting= () => {
           </div>
 
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Update Bio</h5>
                 <form onSubmit={handleBioUpdate}>
@@ -310,7 +299,7 @@ const ProfileSetting= () => {
                     placeholder="Enter new Bio"
                     required
                   />
-                  <button className="form-control" type="submit">
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Update Bio
                   </button>
                 </form>
@@ -318,20 +307,20 @@ const ProfileSetting= () => {
             </div>
           </div>
 
-          <div className="col-md-3">
-            <div className="card shadow-sm">
+          <div className="col-md-4 mb-2">
+            <div className={`card shadow-sm ${styles.divSize}`}>
               <div className="card-body">
                 <h5 className="card-title">Delete User</h5>
                 <form onSubmit={handleUserDelete}>
-                <input
-                  type="text"
-                  className="form-control mb-2"
-                  value={Delete}
-                  onChange={(e) => setDelete(e.target.value)}
-                  placeholder="Type 'yes' to confirm deletion"
-                  required
-                />
-                  <button className="form-control" type="submit">
+                  <input
+                    type="text"
+                    className="form-control mb-2"
+                    value={Delete}
+                    onChange={(e) => setDelete(e.target.value)}
+                    placeholder="Enter yes to delete"
+                    required
+                  />
+                  <button className={`form-control ${styles.updateProfile}`} type="submit">
                     Delete User
                   </button>
                 </form>
