@@ -14,15 +14,22 @@ const SignUp = () => {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+<<<<<<< HEAD
+  const [passwordVisible, setPasswordVisible] = useState(false); // Manage password visibility
+=======
   const [passwordVisible, setPasswordVisible] = useState(false); 
   const [loading,setLoading]=useState(false)
+>>>>>>> origin/main
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name === "email") {
+<<<<<<< HEAD
+=======
       setEmail(value);
+>>>>>>> origin/main
       const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
       if (!emailRegex.test(value)) {
         setErrors((prevErrors) => ({ ...prevErrors, email: "Invalid email format. Email must include '@' and end with '.com'." }));
@@ -34,6 +41,20 @@ const SignUp = () => {
       }
     }
 
+<<<<<<< HEAD
+  if (name === "password") {
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
+    if (!passwordRegex.test(value)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "Password must be 8-16 characters long, alphanumeric, and can include '@'.",
+      }));
+    } else {
+      setErrors((prevErrors) => {
+        const { password, ...rest } = prevErrors;
+        return rest;
+      });
+=======
     if (name === "password") {
       setPassword(value);
       const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
@@ -48,6 +69,7 @@ const SignUp = () => {
           return rest;
         });
       }
+>>>>>>> origin/main
     }
 
     if (name === "username") {
@@ -68,7 +90,11 @@ const SignUp = () => {
     const emailRegex = /^[^@\s]+@[^@\s]+\.com$/;
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d@]{8,16}$/;
 
+<<<<<<< HEAD
+    if (!formData.email) {
+=======
     if (!email) {
+>>>>>>> origin/main
       newErrors.email = "Email is required.";
     } else if (!emailRegex.test(email)) {
       newErrors.email = "Invalid email format. Email must include '@' and end with '.com'.";
@@ -108,11 +134,8 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    if (!(await validateForm()))  {
-      setLoading(false);
-      return;
-    }
+    if (!(await validateForm())) return;
+
     try {
       const response = await axios.post(Api.SIGN_UP, {email, username, password});
       setSuccessMessage(response.data.message);
@@ -120,9 +143,6 @@ const SignUp = () => {
       navigate("/verify-otp", { state: { email:email } });
     } catch (err) {
       setErrorMessage(err.response?.data?.error || "Something went wrong.");
-    }
-    finally{
-      setLoading(false)
     }
   };
 
