@@ -35,6 +35,7 @@ const SignUp = () => {
         });
       }
     }
+
     if (name === "password") {
       const passwordRegex =/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@]{8,16}$/;
       if (!passwordRegex.test(value)) {
@@ -49,7 +50,6 @@ const SignUp = () => {
         });
       }
     }
-  }
 
     if (name === "username") {
       if (value.trim() === "") {
@@ -67,6 +67,7 @@ const SignUp = () => {
     const newErrors = {};
     const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.\d)[A-Za-z\d@]{8,16}$/;
+
     if (!formData.email) {
       newErrors.email = "Email is required.";
     } else if (!emailRegex.test(formData.email)) {
@@ -97,15 +98,14 @@ const SignUp = () => {
       }
     }
 
-    // Password Validation
-  if (!formData.password) {
-    newErrors.password = "Password is required.";
-  } else if (!passwordRegex.test(formData.password)) {
-    newErrors.password = "Password must be 8-16 characters long, alphanumeric, and can include '@'.";
-  }
+    if (!formData.password) {
+      newErrors.password = "Password is required.";
+    } else if (!passwordRegex.test(formData.password)) {
+      newErrors.password = "Password must be 8-16 characters long, alphanumeric, and can include '@'.";
+    }
 
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
@@ -153,7 +153,7 @@ const SignUp = () => {
                 autoComplete="off"
                 required
               />
-              {errors.email && <span className={styles.errorText}>{errors.email}</span>}
+              {errors.email && <p className={styles.errorText}>{errors.email}</p>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
               <label className={styles.labelField}>Username:</label>
@@ -167,7 +167,7 @@ const SignUp = () => {
                 autoComplete="off"
                 required
               />
-              {errors.username && <span className={styles.errorText}>{errors.username}</span>}
+              {errors.username && <p className={styles.errorText}>{errors.username}</p>}
             </div>
             <div className={`form-group ${styles.inputContainer}`}>
               <label className={styles.labelField}>Password:</label>
@@ -190,7 +190,7 @@ const SignUp = () => {
                   {passwordVisible ? <VisibilityOff /> : <Visibility />}
                 </span>
               </div>
-              {errors.password && <span className={styles.errorText}>{errors.password}</span>}
+              {errors.password && <p className={styles.errorText}>{errors.password}</p>}
             </div>
             <button type="submit" className={`btn custom-btn ${styles.upBtnOutline}`}>
               Sign Up
@@ -199,7 +199,7 @@ const SignUp = () => {
           <h5>
             Already have an account?  
             
-              <Link to="/signin" style={{ textDecoration: "none",color:"" }}> Sign In</Link>
+              <Link to="/signin" style={{ textDecoration: "none" }}> Sign In</Link>
            
           </h5>
         </div>

@@ -81,6 +81,7 @@
   overflow-y: scroll; 
   -ms-overflow-style: none;
   scrollbar-width: none;
+  margin-bottom: 20px;
 }
 
 .storiesDiv{
