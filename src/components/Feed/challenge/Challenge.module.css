@@ -1,0 +1,72 @@
+.challengeContainer{
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.challengeContainer h2 {
+    font-size: 2.2rem;
+    color: #c093fc;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.fetchChallengeButton{
+    background-color:#c093fc;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fetchChallengeButton:hover{
+    background-color:#ae7af2;
+    transform: scale(1.025);
+}
+
+.complete{
+    background-color:rgb(238, 132, 132);
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    width: 300px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.complete:hover{
+    background-color:#fb6a6a;
+    transform: scale(1.025);
+}
+
+.incomplete{
+    background-color:rgb(59, 228, 76);
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    width: 300px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.incomplete:hover{
+    background-color:#3bdb48;
+    transform: scale(1.025);
+}
