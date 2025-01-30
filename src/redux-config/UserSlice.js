@@ -7,6 +7,7 @@ const slice = createSlice({
     token: null,
     message: "",
     isLoggedIn: false, // Added this field
+    likedPosts: {}
   },
   reducers: {
     setUser: (state, action) => {
@@ -26,6 +27,7 @@ const slice = createSlice({
     updateUserProfile(state, action) {
       state.user = action.payload;  // Update user profile data in Redux
     },
+     
   },
 });
 
