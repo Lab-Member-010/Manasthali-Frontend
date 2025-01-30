@@ -62,6 +62,7 @@ const FeedHome = () => {
   
 
   const handleCommentToggle = (postId) => {
+    console.log(postId)
     setActiveCommentPost(activeCommentPost === postId ? null : postId);
   };
 
@@ -69,8 +70,8 @@ const FeedHome = () => {
     if (newComment.trim()) {
       try {
         await axios.post(
-          `http://localhost:3001/posts/posts/${postId}/addcomment`,
-          { text: newComment },
+          `http://localhost:3001/comments/addComment/${postId}`,
+          { comment: newComment,userId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         toast.success("Comment added successfully");
