@@ -73,7 +73,7 @@ const FeedHome = () => {
       try {
         await axios.post(
           `http://localhost:3001/comments/addComment/${postId}`,
-          { comment: newComment, userId },
+          { comments: newComment, userId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         toast.success("Comment added successfully");
@@ -91,11 +91,11 @@ const FeedHome = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center feedContainer">
+    <div className={styles.feedContainer}>
       <ToastContainer />
       <div className="row">
         {posts.map((post) => (
-          <div key={post._id} className="col-md-12 mb-4">
+          <div key={post._id} className={`col-md-12 ${styles.postCardContainer}`}>
             <div className="postCard card">
               <div className={styles.cardHeader}>
                 <img src={post?.userId?.profile_picture || "default-profile.jpg"} alt="Profile" className={styles.roundedProfile}/>
@@ -103,7 +103,7 @@ const FeedHome = () => {
               </div>
               <div className="card-body cardBody">
                 <p className={styles.postDescription}>{post.description}</p>
-                {post.media?.[0] && <img src={post.media[0]} alt="Post" className="postImage" />}
+                {post.media?.[0] && <img src={post.media[0]} alt="Post" className={styles.postImage} />}
                 <div className=" likeCommentShareButton d-flex align-items-center">
                   <button className={styles.likeButton} onClick={() => handleLike(post)}>
                     {post.likes.includes(userId) ? <AiFillHeart size={24} color="red" /> : <AiOutlineHeart size={24} color="black" />}
