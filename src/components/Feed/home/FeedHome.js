@@ -5,13 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from "react-icons/ai";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
-import { BiSolidCommentDetail } from "react-icons/bi";
 import { RiSendPlaneFill } from "react-icons/ri";
-import Modal from "react-modal";  // Modal import
+import Modal from "react-modal";
 import styles from "./FeedHome.module.css";
 
-// Modal styles
-Modal.setAppElement('#root'); 
+Modal.setAppElement('#root');
 
 const FeedHome = () => {
   const [posts, setPosts] = useState([]);
@@ -47,9 +45,9 @@ const FeedHome = () => {
       const updatedPosts = posts.map((p) =>
         p._id === post._id
           ? {
-              ...p,
-              likes: likeAction === "like" ? [...p.likes, userId] : p.likes.filter((id) => id !== userId),
-            }
+            ...p,
+            likes: likeAction === "like" ? [...p.likes, userId] : p.likes.filter((id) => id !== userId),
+          }
           : p
       );
       setPosts(updatedPosts);
@@ -62,8 +60,27 @@ const FeedHome = () => {
     }
   };
 
-  const handleCommentToggle = (postId) => {
-    setActiveCommentPost(activeCommentPost === postId ? null : postId);
+  const handleCommentPost = async (postId) =>{
+      const id = postId;
+      try{
+        const response=await axios.get(`http://localhost:3001/posts/posts/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log(response.data.post)
+        return response.data.post;
+      }catch(error){
+        toast.error(error.response?.data?.message || "Error fetching comments");
+      }
+  };
+
+  const handleCommentToggle = async (postId) => {
+    try{
+      const post=await handleCommentPost(postId);
+      console.log(post)
+      setActiveCommentPost(activeCommentPost === postId ? null : post );
+    }catch(err){
+      console.log(err);
+    }
   };
 
   const handleCommentSubmit = async (postId) => {
@@ -76,7 +93,7 @@ const FeedHome = () => {
         );
         toast.success("Comment added successfully");
         setNewComment("");
-        setActiveCommentPost(null);  // Close modal after submitting comment
+        setActiveCommentPost(null);
 
         setPosts((prevPosts) =>
           prevPosts.map((p) =>
@@ -91,7 +108,7 @@ const FeedHome = () => {
 
   const handleInlineCommentSubmit = (postId) => {
     if (newComment.trim()) {
-      handleCommentSubmit(postId);  // Reuse the comment submit functionality
+      handleCommentSubmit(postId);
     }
   };
 
@@ -115,11 +132,7 @@ const FeedHome = () => {
                   </button>
                   <span>{post.likes.length} Likes</span>
                   <button className={styles.commentButton} onClick={() => handleCommentToggle(post._id)}>
-                    {activeCommentPost === post._id ? (
-                      <BiSolidCommentDetail size={26} color="blue" />
-                    ) : (
-                      <AiOutlineComment size={26} color="black" />
-                    )}
+                    <AiOutlineComment size={26} color="black" />
                   </button>
                   <span>{post.comments.length} Comments</span>
                   <button className={styles.shareButton} style={{ background: "none", border: "none", padding: 0 }}>
@@ -128,17 +141,15 @@ const FeedHome = () => {
                   <span>Share</span>
                 </div>
                 <div className={styles.commentTextbox}>
-                 <input
-                      type="text"
-                      className={styles.commentTextField}
-                      value={newComment}
-                      onChange={(e) => setNewComment(e.target.value)}
-                      placeholder="Add a comment..."
-                    />
-                    <span><button className={styles.commentPostButton} onClick={() => handleCommentSubmit(post._id)}>Post</button></span>
-                  </div>
-
-
+                  <input
+                    type="text"
+                    className={styles.commentTextField}
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    placeholder="Add a comment..."
+                  />
+                  <span><button className={styles.commentPostButton} onClick={() => handleCommentSubmit(post._id)}>Post</button></span>
+                </div>
 
                 {/* Inline Comment Box */}
                 {activeCommentPost === post._id && (
@@ -150,12 +161,12 @@ const FeedHome = () => {
                       onChange={(e) => setNewComment(e.target.value)}
                       placeholder="Add a comment..."
                     />
-                    <button className={styles.commentPostButton} onClick={() => handleInlineCommentSubmit(post._id)}>
+                    <button className={styles.commentPostButton} onClick={() => handleInlineCommentSubmit(post._id)} disabled={!newComment}>
                       Post
                     </button>
                   </div>
                 )}
- 
+
               </div>
             </div>
           </div>
@@ -165,30 +176,30 @@ const FeedHome = () => {
       {/* Modal for Commenting */}
 
       <Modal
-  isOpen={activeCommentPost !== null}
-  onRequestClose={() => setActiveCommentPost(null)}
-  contentLabel="Add Comment"
-  className={styles.modalContent}
-  overlayClassName={styles.modalOverlay}
->
-  <h2>Add a Comment</h2>
-  <textarea
-    className={styles.commentTextArea}
-    value={newComment}
-    onChange={(e) => setNewComment(e.target.value)}
-    placeholder="Type your comment here..."
-  />
-  <button className={styles.commentPostButton} onClick={() => handleCommentSubmit(activeCommentPost)}>
-    Post Comment
-  </button>
-  <button className={styles.closeModalButton} onClick={() => setActiveCommentPost(null)}>Close</button>
-</Modal>
+        isOpen={activeCommentPost !== null}
+        onRequestClose={() => setActiveCommentPost(null)}
+        contentLabel="Add Comment"
+        className={styles.modalContent}
+        overlayClassName={styles.modalOverlay}
+      >
+        <div className={styles.postMedia}>
+          {activeCommentPost?.media?.[0] && (
+            <img src={activeCommentPost.media[0]} alt="Post" className={styles.modalPostImage} />
+          )}
+        </div>
+        <div className={styles.postComments}>
 
-      
+        </div>
+        <div className={styles.closeButton}>
+          <button className={styles.closeModalButton} onClick={() => setActiveCommentPost(null)}>X</button>
+        </div>
+      </Modal>
+
+
+
     </div>
   );
 };
 
 export default FeedHome;
 
- 
