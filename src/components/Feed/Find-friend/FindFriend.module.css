@@ -95,12 +95,12 @@
 }
 
 .FollowUnfollow:hover {
-    background-color:#c093fc;
+    background-color:#ae7af2;
     transform: translateY(-2px);
 }
 
 .FollowUnfollow:active {
-    background-color:#c093fc;
+    background-color:#ae7af2;
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
