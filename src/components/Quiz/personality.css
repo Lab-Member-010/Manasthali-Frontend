@@ -1,8 +1,3 @@
-*{
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-}
 .type-container {
     background-image: url('../../images/quiz_gif.gif');
     background-size: cover;
@@ -30,3 +25,19 @@
     filter: brightness(100%);
   }
  
+  .nextButton{
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    border-radius: 40px;
+    background-color: #c093fc;
+    color:white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .nextButton:hover{
+    background-color:#ae7af2;
+    transform: scale(1.1);
+    color: #000;
+  }

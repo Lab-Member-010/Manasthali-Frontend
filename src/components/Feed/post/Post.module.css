@@ -1,7 +1,19 @@
-.createPost:hover{
-    color:white;
-}
-
 .container{
     padding: 20px;
+}
+
+.createPost{
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.25rem;
+    border-radius: 10px;
+    background-color: #c093fc;
+    color:white;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.createPost:hover{
+    background-color:#ae7af2;
+    transform: scale(1.0125);
 }

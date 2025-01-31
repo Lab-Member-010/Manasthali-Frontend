@@ -43,6 +43,8 @@
     padding: 0.75rem 1.5rem;
     font-size: 1.25rem;
     border-radius: 50px;
+    background-color: #c093fc;
+    color:white;
     transition: transform 0.3s ease, background-color 0.3s ease;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   }
@@ -50,6 +52,7 @@
   .nextButton:hover {
     background-color:transparent;
     transform: scale(1.1);
+    color: #000;
   }
   
   @media (max-width: 768px) {

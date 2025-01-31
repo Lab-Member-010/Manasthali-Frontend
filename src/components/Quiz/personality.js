@@ -21,7 +21,7 @@ const Personality = () => {
      
         <h2>Hey, your personality type is:</h2>
         <h1>{personality}</h1>
-        <button type="submit" onClick={()=>handleSubmit()}>Next</button>
+        <button type="submit" className="nextButton" onClick={()=>handleSubmit()}>Next</button>
     </div>
   );
 };

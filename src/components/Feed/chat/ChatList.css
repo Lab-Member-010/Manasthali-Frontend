@@ -8,14 +8,14 @@
 /* Sidebar styling */
 .sidebar {
   width: 250px;
-  background-color: #e6d7f3; /* Light lavender */
+  background-color:#c093fc;
   border-right: 2px solid #d4c7e0;
   padding: 20px;
 }
 
 .sidebar-header h2 {
   font-size: 1.5em;
-  color: #5f4b8b; /* Dark lavender */
+  color: #5f4b8b; 
   margin: 0;
 }
 
@@ -161,36 +161,6 @@
 /* New message input area */
 .newMessage {
   flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-textarea {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 1em;
-  resize: none;
-  height: 60px;
-  width: 80%;
-  color: #5f4b8b;
-  background-color: #f3f0f9;
-}
-
-button.sentbutton {
-  height: 60px;
-  width: 20%;
-  background-color: #5f4b8b;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button.sentbutton:hover {
-  background-color: #7e66b2; /* Darker lavender */
 }
 
 /* Placeholder for no selected chat */
@@ -201,4 +171,35 @@ button.sentbutton:hover {
   height: 100%;
   font-size: 1.2em;
   color: #7c6d96;
+}
+
+/* textarea */
+.textArea{
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1em;
+  resize: none;
+  height: 60px;
+  width: 85%;
+  color: #5f4b8b;
+  background-color: #f3f0f9;
+}
+
+/* buttons */
+.sentbutton{
+  height: 60px;
+  width: 14%;
+  margin-left: 1%;
+  background-color: #c093fc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sentbutton:hover {
+  background-color: #7e66b2;
 }

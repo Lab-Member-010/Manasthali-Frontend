@@ -2,34 +2,30 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import styles from "./Challenge.module.css";
 
 const Challenge = () => {
     const [challenge, setChallenge] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState(null);
 
     const userId = useSelector((state) => state.user?.user?._id);
     const token = useSelector((state) => state.user?.token);
 
-    // Function to show error or success toast
     const showToast = (message, type) => {
         const options = {
-            position: "top-right",  // Specify the position of the toast
+            position: "top-right",
         };
 
         if (type === 'error') {
-            toast.error(message, options);  // Show error toast
+            toast.error(message, options); 
         } else {
-            toast.success(message, options);  // Show success toast
+            toast.success(message, options);  
         }
     };
 
     const handleChallenge = async () => {
-        setLoading(true);
-        setStatus(null);  // Reset previous status message
 
         try {
             const response = await axios.get(`http://localhost:3001/challenge/daily-challenge/${userId}`, {
@@ -45,8 +41,6 @@ const Challenge = () => {
             }
         } catch (err) {
             showToast(err.response?.data?.message || 'Failed to fetch challenge', "error");
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -61,31 +55,32 @@ const Challenge = () => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className={styles.challengeContainer}>
             <h2>Daily Challenge</h2>
-            <div className="my-3">
-                <Button variant="primary" onClick={handleChallenge} disabled={loading}>
-                    {loading ? <Spinner animation="border" size="sm" /> : 'Get Today\'s Challenge'}
-                </Button>
-            </div>
-
+            {!challenge &&
+                <div>
+                    <Button onClick={handleChallenge} className={`form-control w-100 ${styles.fetchChallengeButton}`}>
+                        Get Today's Challenge
+                    </Button>
+                </div>
+            }
             {challenge && (
                 <div className="mt-4">
-                    <h4>Today's Challenge:</h4>
-                    <p>{challenge}</p>
+                    <h3 className="text-dark">Today's Challenge:</h3>
+                    <p className="text-dark">{challenge}</p>
 
-                    <div className="mt-3">
-                        <Button variant="success" onClick={handleComplete} className="me-2">
+                    <div className="d-flex justify-content-evenly align-items-center">
+                        <Button  onClick={handleComplete} className={`btn ${styles.complete}`}>
                             Complete
                         </Button>
-                        <Button variant="danger" onClick={handleIncomplete}>
+                        <Button onClick={handleIncomplete} className={`btn ${styles.incomplete}`}>
                             Incomplete
                         </Button>
                     </div>
 
                     {status && (
-                        <div className="mt-3">
-                            <p>Challenge status: {status}</p>
+                        <div className="text-dark mt-5">
+                            <p><b>Challenge status:</b> {status}</p>
                         </div>
                     )}
                 </div>
