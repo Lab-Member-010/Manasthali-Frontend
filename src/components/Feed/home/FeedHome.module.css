@@ -1,0 +1,65 @@
+.cardHeader{
+    margin: 20px;
+}
+
+.userName{
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.commentTextbox{
+    border-bottom: 1px solid lightgray;
+}
+
+.commentTextField{
+    border: none;
+    margin-left: 2px;
+    width: 88%;
+}
+
+.commentPostButton{
+    background:none;
+    color: blue;
+    font-size: 15px;
+    border: none;
+    margin-left: 2%;
+    width: 8%;
+}
+
+.commentPostButton:hover{
+    color: #0e0eb0;
+}
+
+.postDescription{
+    margin: 0;
+    font-size: 20px;
+}
+
+.likeButton{
+    margin: 0px 10px;
+    background: none;
+    border: none;
+    padding:0;
+}
+
+.commentButton{
+    margin: 0px 10px;
+    background: none;
+    border: none;
+    padding:0;
+}
+
+.shareButton{
+    margin: 0px 10px;
+    background: none;
+    border: none;
+    padding:0;
+}
+
+.roundedProfile{
+    height: 40px;
+    width: 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
