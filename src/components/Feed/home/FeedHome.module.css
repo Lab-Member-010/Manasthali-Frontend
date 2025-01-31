@@ -1,5 +1,18 @@
+.feedContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.postCardContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 .cardHeader{
-    margin: 20px;
+    border-bottom: 1px solid lightgray;
+    background-color: rgb(246, 241, 241);
+    margin: 0;
 }
 
 .userName{
@@ -18,6 +31,11 @@
     width: 88%;
 }
 
+.commentTextField:active{
+    border: none;
+    outline: none;
+}
+
 .commentPostButton{
     background:none;
     color: blue;
@@ -34,6 +52,11 @@
 .postDescription{
     margin: 0;
     font-size: 20px;
+}
+
+.postImage{
+    width: 550px;
+    height: 400px;
 }
 
 .likeButton{
@@ -58,8 +81,9 @@
 }
 
 .roundedProfile{
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     border: 1px solid black;
     border-radius: 50%;
+    margin:0px 10px 0px 10px;
 }
