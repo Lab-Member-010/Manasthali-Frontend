@@ -60,25 +60,25 @@ const FeedHome = () => {
     }
   };
 
-  const handleCommentPost = async (postId) =>{
-      const id = postId;
-      try{
-        const response=await axios.get(`http://localhost:3001/posts/posts/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        console.log(response.data.post)
-        return response.data.post;
-      }catch(error){
-        toast.error(error.response?.data?.message || "Error fetching comments");
-      }
+  const handleCommentPost = async (postId) => {
+    const id = postId;
+    try {
+      const response = await axios.get(`http://localhost:3001/posts/posts/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(response.data.post)
+      return response.data.post;
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Error fetching comments");
+    }
   };
 
   const handleCommentToggle = async (postId) => {
-    try{
-      const post=await handleCommentPost(postId);
+    try {
+      const post = await handleCommentPost(postId);
       console.log(post)
-      setActiveCommentPost(activeCommentPost === postId ? null : post );
-    }catch(err){
+      setActiveCommentPost(activeCommentPost === postId ? null : post);
+    } catch (err) {
       console.log(err);
     }
   };
@@ -121,24 +121,24 @@ const FeedHome = () => {
             <div className="postCard card">
               <div className={styles.cardHeader}>
                 <img src={post?.userId?.profile_picture || "default-profile.jpg"} alt="Profile" className={styles.roundedProfile} />
-                <span className="userName">{post?.userId?.username || "Unknown User"}</span>
+                <span className={styles.userName}>{post?.userId?.username || "Unknown User"}</span>
               </div>
               <div className="card-body cardBody">
                 <p className={styles.postDescription}>{post.description}</p>
                 {post.media?.[0] && <img src={post.media[0]} alt="Post" className={styles.postImage} />}
-                <div className="likeCommentShareButton d-flex align-items-center">
+                <div className={styles.likeCommentShareButton}>
                   <button className={styles.likeButton} onClick={() => handleLike(post)}>
                     {post.likes.includes(userId) ? <AiFillHeart size={24} color="red" /> : <AiOutlineHeart size={24} color="black" />}
                   </button>
-                  <span>{post.likes.length} Likes</span>
+                  <span className={styles.likeCount}>{post.likes.length} Likes</span>
                   <button className={styles.commentButton} onClick={() => handleCommentToggle(post._id)}>
                     <AiOutlineComment size={26} color="black" />
                   </button>
-                  <span>{post.comments.length} Comments</span>
+                  <span className={styles.commentCount}>{post.comments.length} Comments</span>
                   <button className={styles.shareButton} style={{ background: "none", border: "none", padding: 0 }}>
                     <RiSendPlaneFill size={24} color="black" />
                   </button>
-                  <span>Share</span>
+                  <span className={styles.shareCount}>Share</span>
                 </div>
                 <div className={styles.commentTextbox}>
                   <input
@@ -148,25 +148,8 @@ const FeedHome = () => {
                     onChange={(e) => setNewComment(e.target.value)}
                     placeholder="Add a comment..."
                   />
-                  <span><button className={styles.commentPostButton} onClick={() => handleCommentSubmit(post._id)}>Post</button></span>
+                  <span><button className={styles.commentPostButton} onClick={() => handleCommentSubmit(post._id)} disabled={!newComment}>Post</button></span>
                 </div>
-
-                {/* Inline Comment Box */}
-                {activeCommentPost === post._id && (
-                  <div className={styles.commentTextbox}>
-                    <input
-                      type="text"
-                      className={styles.commentTextField}
-                      value={newComment}
-                      onChange={(e) => setNewComment(e.target.value)}
-                      placeholder="Add a comment..."
-                    />
-                    <button className={styles.commentPostButton} onClick={() => handleInlineCommentSubmit(post._id)} disabled={!newComment}>
-                      Post
-                    </button>
-                  </div>
-                )}
-
               </div>
             </div>
           </div>
@@ -188,15 +171,14 @@ const FeedHome = () => {
           )}
         </div>
         <div className={styles.postComments}>
-
-        </div>
-        <div className={styles.closeButton}>
-          <button className={styles.closeModalButton} onClick={() => setActiveCommentPost(null)}>X</button>
+          <div className={styles.closeButton}>
+            <button className={styles.closeModalButton} onClick={() => setActiveCommentPost(null)}>X</button>
+          </div>
+          <div className={styles.postCommentsInnerDiv}>
+          
+          </div>
         </div>
       </Modal>
-
-
-
     </div>
   );
 };

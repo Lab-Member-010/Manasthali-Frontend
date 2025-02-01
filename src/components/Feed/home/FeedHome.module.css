@@ -11,14 +11,14 @@
 
 .cardHeader{
     border-bottom: 1px solid lightgray;
-    background-color: rgb(246, 241, 241);
+    background-color: rgb(248, 248, 248);
     margin: 0;
 }
 
 .userName{
-    text-decoration: none;
     font-size: 20px;
-    margin-left: 20px;
+    font-weight: bold;
+    margin-left: 5px;
 }
 
 .commentTextbox{
@@ -48,13 +48,14 @@
     width: 8%;
 }
 
+.commentPostButton:hover{
+    color: #0e0eb0;
+}
+
 .commentPostButton:disabled {
     color: #666;
     cursor: not-allowed;
-}
-
-.commentPostButton:hover{
-    color: #0e0eb0;
+    font-weight: lighter;
 }
 
 .postDescription{
@@ -68,21 +69,21 @@
 }
 
 .likeButton{
-    margin: 0px 10px;
+    margin-right:5px;
     background: none;
     border: none;
     padding:0;
 }
 
 .commentButton{
-    margin: 0px 10px;
+    margin: 0px 5px 0px 15px;
     background: none;
     border: none;
     padding:0;
 }
 
 .shareButton{
-    margin: 0px 10px;
+    margin: 0px 5px 0px 15px;
     background: none;
     border: none;
     padding:0;
@@ -94,6 +95,23 @@
     border: 1px solid black;
     border-radius: 50%;
     margin:0px 10px 0px 10px;
+}
+
+.likeCommentShareButton{
+    display: flex;
+    align-items: center;
+}
+
+.likeCount{
+    font-size: 16px;
+}
+
+.commentCount{
+    font-size: 16px;
+}
+
+.shareCount{
+    font-size: 16px;
 }
   
 .modalContent {
@@ -124,19 +142,34 @@
 
   .closeModalButton{
     background: none;
-    width: 30px;
-    height: 30px;
+    width: 4%;
+    height: 100%;
+    border: 1px solid gray;
     border-radius: 50%;
+    font-weight: bold;
+    font-size: 10px;
+    color: lightgray;
+    background-color: white;
+  }
+
+  .closeModalButton:hover{
+    color: gray;
   }
 
   .closeButton{
-    width: 2%;
-    height: 100%;
+    width: 100%;
+    height: 4%;
+    display: flex;
+    justify-content: end;
+    padding-right: 5px;
   }
 
   .postComments{
-    width: 47%;
+    width: 50%;
     height: 100%;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
   }
 
   .postMedia{
@@ -146,16 +179,21 @@
     width: 50%;
     height: 100%;
     border-radius: 10px 0px 0px 10px;
-    border: 1px solid black;
-    background-color: black;
   }
 
   .modalPostImage{
-    width: 98%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
   }
 
-  .postComments {
+  .postCommentsInnerDiv {
+    height: 96%;
+    width: 100%;
     max-height: 100%;
-    overflow-y: auto;
-  }
+    overflow-y: scroll;
+    ::-webkit-scrollbar {
+        height: 100%;
+    };
+    scrollbar-width: thin; 
+    scrollbar-color: auto transparent;
+}
