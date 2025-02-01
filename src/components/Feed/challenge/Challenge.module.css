@@ -34,7 +34,7 @@
 }
 
 .complete{
-    background-color:rgb(238, 132, 132);
+    background-color:rgb(59, 228, 76);
     color: white;
     border: none;
     padding: 5px 20px;
@@ -48,12 +48,12 @@
 }
 
 .complete:hover{
-    background-color:#fb6a6a;
+    background-color:#3bdb48;
     transform: scale(1.025);
 }
 
 .incomplete{
-    background-color:rgb(59, 228, 76);
+    background-color:rgb(238, 132, 132);
     color: white;
     border: none;
     padding: 5px 20px;
@@ -67,6 +67,6 @@
 }
 
 .incomplete:hover{
-    background-color:#3bdb48;
+    background-color:#fb6a6a;
     transform: scale(1.025);
 }

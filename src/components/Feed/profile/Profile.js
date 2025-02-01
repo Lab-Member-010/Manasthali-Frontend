@@ -1,4 +1,4 @@
-
+import defaultImage from "../../../images/default_profile.jpg";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -186,9 +186,10 @@ const Profile = ({ user, loading, updateProfilePicture }) => {
                             src={
                               user.profile_picture
                                 ? user.profile_picture
-                                : "./default_profile.jpg"
+                                : defaultImage
                             }
                             alt={user.username}
+                            className={styles.toggleProfilePhoto}
                           />
                           <span>{user.username}</span>
                         </div>

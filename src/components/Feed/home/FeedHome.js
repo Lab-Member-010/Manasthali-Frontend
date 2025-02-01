@@ -5,18 +5,20 @@ import { ToastContainer, toast } from "react-toastify";
 import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from "react-icons/ai";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
-import { BiSolidCommentDetail } from "react-icons/bi";
 import { RiSendPlaneFill } from "react-icons/ri";
+import Modal from "react-modal";
 import styles from "./FeedHome.module.css";
+
+Modal.setAppElement('#root');
 
 const FeedHome = () => {
   const [posts, setPosts] = useState([]);
-  console.log(posts)
   const [newComment, setNewComment] = useState("");
   const [activeCommentPost, setActiveCommentPost] = useState(null);
 
   const userId = useSelector((state) => state?.user?.user?._id);
   const token = useSelector((state) => state?.user?.token);
+
   useEffect(() => {
     if (userId && token) {
       axios
@@ -25,8 +27,6 @@ const FeedHome = () => {
         })
         .then((response) => {
           const fetchedPosts = response.data.posts || [];
-
-
           const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
           const updatedPosts = fetchedPosts.map((post) => {
             const likedPost = likedPosts.find((lp) => lp.id === post._id);
@@ -38,11 +38,10 @@ const FeedHome = () => {
         .catch((error) => toast.error(error.response?.data?.message || "Error fetching posts"));
     }
   }, [userId, token]);
+
   const handleLike = async (post) => {
     try {
       const likeAction = post.likes.includes(userId) ? "unlike" : "like";
-
-
       const updatedPosts = posts.map((p) =>
         p._id === post._id
           ? {
@@ -55,17 +54,33 @@ const FeedHome = () => {
 
       localStorage.setItem("likedPosts", JSON.stringify(updatedPosts.map((p) => ({ id: p._id, likes: p.likes }))));
 
-
       await axios.post(`http://localhost:3001/posts/posts/${post._id}/${likeAction}`, { userId }, { headers: { Authorization: `Bearer ${token}` } });
     } catch (error) {
       toast.error("Error updating like status");
     }
   };
 
+  const handleCommentPost = async (postId) => {
+    const id = postId;
+    try {
+      const response = await axios.get(`http://localhost:3001/posts/posts/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(response.data.post)
+      return response.data.post;
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Error fetching comments");
+    }
+  };
 
-  const handleCommentToggle = (postId) => {
-    console.log(postId)
-    setActiveCommentPost(activeCommentPost === postId ? null : postId);
+  const handleCommentToggle = async (postId) => {
+    try {
+      const post = await handleCommentPost(postId);
+      console.log(post)
+      setActiveCommentPost(activeCommentPost === postId ? null : post);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleCommentSubmit = async (postId) => {
@@ -78,6 +93,7 @@ const FeedHome = () => {
         );
         toast.success("Comment added successfully");
         setNewComment("");
+        setActiveCommentPost(null);
 
         setPosts((prevPosts) =>
           prevPosts.map((p) =>
@@ -90,6 +106,12 @@ const FeedHome = () => {
     }
   };
 
+  const handleInlineCommentSubmit = (postId) => {
+    if (newComment.trim()) {
+      handleCommentSubmit(postId);
+    }
+  };
+
   return (
     <div className={styles.feedContainer}>
       <ToastContainer />
@@ -98,50 +120,68 @@ const FeedHome = () => {
           <div key={post._id} className={`col-md-12 ${styles.postCardContainer}`}>
             <div className="postCard card">
               <div className={styles.cardHeader}>
-                <img src={post?.userId?.profile_picture || "default-profile.jpg"} alt="Profile" className={styles.roundedProfile}/>
-                <span className="userName">{post?.userId?.username || "Unknown User"}</span>
+                <img src={post?.userId?.profile_picture || "default-profile.jpg"} alt="Profile" className={styles.roundedProfile} />
+                <span className={styles.userName}>{post?.userId?.username || "Unknown User"}</span>
               </div>
               <div className="card-body cardBody">
                 <p className={styles.postDescription}>{post.description}</p>
                 {post.media?.[0] && <img src={post.media[0]} alt="Post" className={styles.postImage} />}
-                <div className=" likeCommentShareButton d-flex align-items-center">
+                <div className={styles.likeCommentShareButton}>
                   <button className={styles.likeButton} onClick={() => handleLike(post)}>
                     {post.likes.includes(userId) ? <AiFillHeart size={24} color="red" /> : <AiOutlineHeart size={24} color="black" />}
                   </button>
-                  <span>{post.likes.length} Likes</span>
-                  <button
-                    className={styles.commentButton}
-                    onClick={() => handleCommentToggle(post._id)}
-                  >
-                    {activeCommentPost === post._id ? (
-                      <BiSolidCommentDetail size={26} color="blue" />
-                    ) : (
-                      <AiOutlineComment size={26} color="black" />
-                    )}
+                  <span className={styles.likeCount}>{post.likes.length} Likes</span>
+                  <button className={styles.commentButton} onClick={() => handleCommentToggle(post._id)}>
+                    <AiOutlineComment size={26} color="black" />
                   </button>
-                  <span>{post.comments.length} Comments</span>
+                  <span className={styles.commentCount}>{post.comments.length} Comments</span>
                   <button className={styles.shareButton} style={{ background: "none", border: "none", padding: 0 }}>
-                      <RiSendPlaneFill size={24} color="black" />
+                    <RiSendPlaneFill size={24} color="black" />
                   </button>
-                  <span>Share</span>
+                  <span className={styles.shareCount}>Share</span>
                 </div>
-                  <div className={styles.commentTextbox}>
-                    <input
-                      type="text"
-                      className={styles.commentTextField}
-                      value={newComment}
-                      onChange={(e) => setNewComment(e.target.value)}
-                      placeholder="Add a comment..."
-                    />
-                    <span><button className={styles.commentPostButton} onClick={() => handleCommentSubmit(post._id)}>Post</button></span>
-                  </div>
+                <div className={styles.commentTextbox}>
+                  <input
+                    type="text"
+                    className={styles.commentTextField}
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    placeholder="Add a comment..."
+                  />
+                  <span><button className={styles.commentPostButton} onClick={() => handleCommentSubmit(post._id)} disabled={!newComment}>Post</button></span>
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
-    </div>
 
+      {/* Modal for Commenting */}
+
+      <Modal
+        isOpen={activeCommentPost !== null}
+        onRequestClose={() => setActiveCommentPost(null)}
+        contentLabel="Add Comment"
+        className={styles.modalContent}
+        overlayClassName={styles.modalOverlay}
+      >
+        <div className={styles.postMedia}>
+          {activeCommentPost?.media?.[0] && (
+            <img src={activeCommentPost.media[0]} alt="Post" className={styles.modalPostImage} />
+          )}
+        </div>
+        <div className={styles.postComments}>
+          <div className={styles.closeButton}>
+            <button className={styles.closeModalButton} onClick={() => setActiveCommentPost(null)}>X</button>
+          </div>
+          <div className={styles.postCommentsInnerDiv}>
+          
+          </div>
+        </div>
+      </Modal>
+    </div>
   );
 };
+
 export default FeedHome;
+

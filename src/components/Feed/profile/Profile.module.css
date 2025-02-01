@@ -132,6 +132,13 @@
     background-color: #0078d4;
   }
   
+  .toggleProfilePhoto{
+    width: 35px;
+    height: 35px;
+    border: 1px solid black;
+    border-radius: 50%;
+  }
+
   @media (max-width: 768px) {
     .profileHeader {
       flex-direction: column;
