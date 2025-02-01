@@ -1,4 +1,4 @@
-import defaultImage from "./default_profile.jpg";
+import defaultImage from "../../../images/default_profile.jpg";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";

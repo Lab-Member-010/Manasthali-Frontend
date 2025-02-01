@@ -31,6 +31,7 @@ import Story from "./story/Story";
 import Post from "./post/Post";
 import ProfileSetting from "./profile/ProfileSetting";
 import Community from "./community/community";
+import defaultProfile from "../../images/default_profile.jpg";
 
 const Feed = () => {
   const { token } = useSelector((store) => store.user);
@@ -158,13 +159,10 @@ const Feed = () => {
         {/* Right Navbar */}
         <div className={styles.rightNavbar}>
           <div className={`nav-item ${styles.navItems}`} onClick={() => handleProfileClick()}>
-            {/* Conditional Rendering for Profile Image */}
-            {loadingProfile ? (
-              <img src="loading-spinner.gif" alt="Loading..." className={styles.profileIcon} />
-            ) : profileData ? (
+            {profileData ? (
               <img src={profileData.profile_picture} alt="user" className={styles.profileIcon} />
             ) : (
-              <img src="default-profile.jpg" alt="Default User" className={styles.profileIcon} />
+              <img src={defaultProfile} alt="Default User" className={styles.profileIcon} />
             )}
           </div>
           <div className={`nav-item ${styles.navItems}`} onClick={() => setActiveComponent("challenge")}>
