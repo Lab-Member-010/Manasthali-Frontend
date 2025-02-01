@@ -134,3 +134,42 @@
 .errorBorder {
   border: 1px solid rgb(254, 73, 73) !important;
 }
+
+
+@media (max-width: 768px) { /* Tablet */
+  .signinContainer {
+    padding-right: 20px;
+  }
+  .signinBox {
+    width: 90%;
+  }
+  .inputField {
+    width: 100%;
+  }
+  .inBtn, .inBtnOutline {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) { /* Mobile */
+  .signinContainer {
+    padding-right: 10px;
+  }
+  .signinBox {
+    width: 95%;
+  }
+  .inputField {
+    width: 100%;
+  }
+  .inBtn, .inBtnOutline {
+    width: 100%;
+    padding: 12px;
+  }
+  .signinBox h3 {
+    font-size: 1.5rem;
+  }
+  .signinLogo {
+    width: 80px;
+    height: 80px;
+  }
+}

@@ -126,3 +126,41 @@
 .row {
   gap: 0px !important;
 }
+
+@media screen and (max-width: 768px) {
+  .signupContainer {
+    justify-content: center;
+    padding-right: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .signupBox {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .inputContainer {
+    width: 100%;
+  }
+
+  .inputField {
+    width: 100% !important;
+  }
+
+  .errorText {
+    width: 100%;
+  }
+
+  .togglePassword {
+    right: 10px;
+  }
+
+  .upBtn,
+  .upBtnOutline {
+    width: 100%;
+  }
+}
+
