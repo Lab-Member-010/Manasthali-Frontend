@@ -13,6 +13,7 @@ import Auth from "./components/Authorization/Auth";
 import Personality from "./components/Quiz/personality";
 import Profile from "./components/Feed/profile/ProfileSetting";
 import Notification from "./components/Feed/notification/Notification";
+import Admin from "./components/Admin/Admin"
  
 const App = () => {
   return (
@@ -20,6 +21,9 @@ const App = () => {
       <Routes>
         {/* Home Page */}
         <Route path="/" element={<Home />} />
+        
+        {/* Admin Page */}
+        <Route path="/admin" element={<Admin/>}/>
 
         {/* Signup Page */}
         <Route path="/signup" element={<SignUp />} />
@@ -54,8 +58,6 @@ const App = () => {
         {/* Personality Page */}
         <Route path="/personality" element={<Auth><Personality/></Auth>}/>
     
-        
-
       </Routes>
 
     </>
