@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import io from 'socket.io-client';
-import './ChatList.css'; // Assuming you have a separate CSS file
+import EmojiPicker from 'emoji-picker-react';
+import io from 'socket.io-client'; 
+import './ChatList.css';
 
 const MessageComponent = () => {
-  const [dmList, setDmList] = useState([]); // DM list state
-  const [messages, setMessages] = useState([]); // Messages for selected user
-  const [message, setMessage] = useState(''); // Message input
-  const [selectedUser, setSelectedUser] = useState(null); // Selected user for chat
+  const [dmList, setDmList] = useState([]); 
+  const [messages, setMessages] = useState([]); 
+  const [message, setMessage] = useState(''); 
+  const [selectedUser, setSelectedUser] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [emojiPickerVisible, setEmojiPickerVisible] = useState(false); 
   const userId = useSelector((state) => state.user?.user?._id);
   const token = useSelector((state) => state.user?.token);
-  const socket = useRef(null); // For socket.io reference
+  const socket = useRef(null); 
 
   // Fetch DM list (combined followers and following)
   useEffect(() => {
@@ -82,7 +84,7 @@ const MessageComponent = () => {
     try {
       // Send the message to the server
       const response = await axios.post('http://localhost:3001/message/send', {
-        receiverId: selectedUser._id, // Ensure you're using _id instead of id
+        receiverId: selectedUser._id,
         message,
       }, {
         headers: { Authorization: `Bearer ${token}` },
@@ -127,6 +129,17 @@ const MessageComponent = () => {
   // Handle message input change
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
+  };
+
+  // Handle emoji click
+  const handleEmojiClick = (emojiData) => {
+    setMessage((prevMessage) => prevMessage + emojiData.emoji); // Append the selected emoji to the message
+    setEmojiPickerVisible(false); // Close emoji picker after selecting
+  };
+
+  // Toggle emoji picker visibility
+  const toggleEmojiPicker = () => {
+    setEmojiPickerVisible((prev) => !prev);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -192,10 +205,16 @@ const MessageComponent = () => {
             <div className="newMessage">
               <textarea
                 value={message}
-                onChange={handleMessageChange} 
+                onChange={handleMessageChange}
                 placeholder="Type your message..."
-                className='textArea'
+                className="textArea"
               />
+              <button className="emoji-button" onClick={toggleEmojiPicker}>
+                😀
+              </button>
+              {emojiPickerVisible && (
+                <EmojiPicker onEmojiClick={handleEmojiClick} />
+              )}
               <button className="sentbutton" onClick={handleSendMessage}>Send</button>
             </div>
           </div>
