@@ -17,14 +17,13 @@ const MessageComponent = () => {
   const token = useSelector((state) => state.user?.token);
   const socket = useRef(null); 
 
-  // Fetch DM list (combined followers and following)
   useEffect(() => {
     const fetchDMList = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/users/dmlist/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setDmList(response.data); // Set DM list from API response
+        setDmList(response.data); 
       } catch (err) {
         setError(err.response?.data?.message || 'Failed to fetch DM list');
       } finally {
@@ -34,31 +33,27 @@ const MessageComponent = () => {
     fetchDMList();
   }, [userId, token]);
 
-  // Setup Socket.IO connection
   useEffect(() => {
-    socket.current = io('http://localhost:3001'); // Ensure this matches your server's socket URL
-    socket.current.emit('join', userId); // Join the socket room (with userId)
+    socket.current = io('http://localhost:3001');
+    socket.current.emit('join', userId); 
 
-    // Listen for new messages from other users
     socket.current.on('new_message', (newMessage) => {
       if (selectedUser && (newMessage.sender === selectedUser._id || newMessage.receiver === selectedUser._id)) {
         setMessages((prevMessages) => [...prevMessages, newMessage]);
       }
     });
 
-    // Cleanup socket connection on unmount
     return () => {
       socket.current.disconnect();
     };
   }, [userId, selectedUser]);
 
-  // Fetch messages for the selected user
   useEffect(() => {
     if (selectedUser) {
       const fetchMessages = async () => {
         try {
           const response = await axios.get(`http://localhost:3001/message/${selectedUser._id}`, {
-            headers: { Authorization: `Bearer ${token}`},
+            headers: { Authorization: `Bearer ${token}` },
           });
           setMessages(response.data.messages);
         } catch (err) {
@@ -69,12 +64,10 @@ const MessageComponent = () => {
     }
   }, [selectedUser, token]);
 
-  // Handle selecting a user for chat
   const handleSelectUser = (user) => {
-    setSelectedUser(user); // Set selected user
+    setSelectedUser(user); 
   };
 
-  // Handle sending a message
   const handleSendMessage = async () => {
     if (!selectedUser || !message.trim()) {
       alert('Please select a user and enter a message.');
@@ -82,7 +75,6 @@ const MessageComponent = () => {
     }
 
     try {
-      // Send the message to the server
       const response = await axios.post('http://localhost:3001/message/send', {
         receiverId: selectedUser._id,
         message,
@@ -90,21 +82,18 @@ const MessageComponent = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      // Emit the message via socket after it's stored in DB
       socket.current.emit('send_message', response.data.newMessage);
 
-      // Add the message to the local state for immediate UI update
       setMessages((prevMessages) => [
         ...prevMessages,
         response.data.newMessage,
       ]);
-      setMessage(''); // Clear the message input
+      setMessage(''); 
     } catch (err) {
       console.error('Error sending message:', err);
     }
   };
 
-  // Mark a message as read
   const handleMarkAsRead = async (messageId) => {
     try {
       const response = await axios.post('http://localhost:3001/message/read', {
@@ -113,31 +102,26 @@ const MessageComponent = () => {
         headers: { Authorization:` Bearer ${token}` },
       });
 
-      // Update the message in the state as read
       setMessages((prevMessages) =>
         prevMessages.map((msg) =>
           msg._id === messageId ? { ...msg, read: true } : msg
         )
       );
-
-      console.log(response.data.message); // Log success
+      console.log(response.data.message); 
     } catch (err) {
       console.error("Error marking message as read:", err);
     }
   };
 
-  // Handle message input change
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
   };
 
-  // Handle emoji click
   const handleEmojiClick = (emojiData) => {
-    setMessage((prevMessage) => prevMessage + emojiData.emoji); // Append the selected emoji to the message
-    setEmojiPickerVisible(false); // Close emoji picker after selecting
+    setMessage((prevMessage) => prevMessage + emojiData.emoji); 
+    setEmojiPickerVisible(false); 
   };
 
-  // Toggle emoji picker visibility
   const toggleEmojiPicker = () => {
     setEmojiPickerVisible((prev) => !prev);
   };
@@ -148,27 +132,30 @@ const MessageComponent = () => {
   return (
     <div className="chat-container">
       <div className="sidebar">
-        <div className="sidebar-header">
-          <h2>Chats</h2>
-        </div>
-        <div className="user-list">
-          {dmList.map((user) => (
-            <div
-              className="user-item"
-              key={user._id}
-              onClick={() => handleSelectUser(user)} // Set selected user on click
-            >
-              <img
-                src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
-                alt={"../../"}
-                className="user-img"
-              />
-              <div className="user-info">
-                <p className="username">{user.username}</p>
-                <p className="last-message">Last message preview...</p>
+        <div className="sidebar-wrapper">
+          <div className="sidebar-header">
+            <h2>Chats</h2>
+          </div>
+
+          <div className="user-list">
+            {dmList.map((user) => (
+              <div
+                className="user-item"
+                key={user._id}
+                onClick={() => handleSelectUser(user)} 
+              >
+                <img
+                  src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
+                  alt="user"
+                  className="user-img"
+                />
+                <div className="user-info">
+                  <p className="username">{user.username}</p>
+                  <p className="last-message">Last message preview...</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
@@ -176,8 +163,8 @@ const MessageComponent = () => {
         {selectedUser ? (
           <div className="chat-box">
             <div className="chat-header">
-              <img
-                src={selectedUser.profile_picture ? `${selectedUser.profile_picture}` : '/user.png'}
+              <img style={{width:"70px", height:"70px"}}
+                src={selectedUser.profile_picture ? `${selectedUser.profile_picture}` : '/user.png' }
                 alt={selectedUser.username}
                 className="chat-user-img"
               />
@@ -203,18 +190,27 @@ const MessageComponent = () => {
             </div>
 
             <div className="newMessage">
+              {/* Emoji Button */}
+              <button className="emoji-button" onClick={toggleEmojiPicker}>
+                😀
+              </button>
+
+              {/* Message Textarea */}
               <textarea
                 value={message}
                 onChange={handleMessageChange}
                 placeholder="Type your message..."
                 className="textArea"
               />
-              <button className="emoji-button" onClick={toggleEmojiPicker}>
-                😀
-              </button>
+              
+              {/* Emoji Picker */}
               {emojiPickerVisible && (
-                <EmojiPicker onEmojiClick={handleEmojiClick} />
+                <div className="emoji-picker-container">
+                  <EmojiPicker onEmojiClick={handleEmojiClick} />
+                </div>
               )}
+
+              {/* Send Button */}
               <button className="sentbutton" onClick={handleSendMessage}>Send</button>
             </div>
           </div>
