@@ -27,7 +27,7 @@
 }
 
 .card h2 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #391694;
 }
 
@@ -36,6 +36,11 @@
   color: grey;
   line-height: 1.6;
   margin-bottom: 10px;
+}
+
+.personalityImage{
+  height: 100px;
+  width: 120px;
 }
 
 @media (max-width: 768px) {

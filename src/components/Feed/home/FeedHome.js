@@ -76,7 +76,7 @@ const FeedHome = () => {
   const handleCommentToggle = async (postId) => {
     try {
       const post = await handleCommentPost(postId);
-      console.log(post)
+      console.log(post);
       setActiveCommentPost(activeCommentPost === postId ? null : post);
     } catch (err) {
       console.log(err);
@@ -103,12 +103,6 @@ const FeedHome = () => {
       } catch (error) {
         toast.error("Error adding comment");
       }
-    }
-  };
-
-  const handleInlineCommentSubmit = (postId) => {
-    if (newComment.trim()) {
-      handleCommentSubmit(postId);
     }
   };
 
