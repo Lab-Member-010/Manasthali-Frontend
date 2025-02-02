@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import styles from "./Notification.module.css";
  
 const NotificationComponent = () => {
   const [notifications, setNotifications] = useState([]);

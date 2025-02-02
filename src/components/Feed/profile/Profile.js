@@ -47,6 +47,7 @@ const Profile = ({ user, loading, updateProfilePicture,updateProfile }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
+
       const followingResponse = await axios.get(`http://localhost:3001/users/${loggedInUserId}/following`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -61,7 +62,6 @@ const Profile = ({ user, loading, updateProfilePicture,updateProfile }) => {
       setPopupUsers(usersWithFollowStatus);
     } catch (error) {
       console.error("Error fetching users:", error);
-      return [];
     }
   };
 
@@ -102,15 +102,6 @@ const Profile = ({ user, loading, updateProfilePicture,updateProfile }) => {
   const handlePopup = (type) => {
     setPopupType(type);
     setShowPopup(true);
-
-   
-    const updatedUsers = await fetchUsersData(type, token);
-
-    setUserData((prevData) => ({
-      ...prevData,
-      followers: type === "followers" ? updatedUsers : prevData.followers,
-      following: type === "following" ? updatedUsers : prevData.following,
-    }));
   };
 
   const closePopup = () => {
@@ -143,7 +134,9 @@ const Profile = ({ user, loading, updateProfilePicture,updateProfile }) => {
         `http://localhost:3001/users/${user._id}/updateProfilePicture`,
         formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
       updateProfilePicture(response.data.user);
@@ -275,5 +268,3 @@ const Profile = ({ user, loading, updateProfilePicture,updateProfile }) => {
   );
 };
 export default Profile;
- 
-
