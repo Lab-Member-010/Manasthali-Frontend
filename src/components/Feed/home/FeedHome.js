@@ -32,7 +32,6 @@ const FeedHome = () => {
             const likedPost = likedPosts.find((lp) => lp.id === post._id);
             return likedPost ? { ...post, likes: likedPost.likes } : post;
           });
-
           setPosts(updatedPosts);
         })
         .catch((error) => toast.error(error.response?.data?.message || "Error fetching posts"));
@@ -55,6 +54,18 @@ const FeedHome = () => {
       localStorage.setItem("likedPosts", JSON.stringify(updatedPosts.map((p) => ({ id: p._id, likes: p.likes }))));
 
       await axios.post(`http://localhost:3001/posts/posts/${post._id}/${likeAction}`, { userId }, { headers: { Authorization: `Bearer ${token}` } });
+    
+      if (likeAction === "like") {
+        const notificationData = {
+          userId: post.userId,
+          notification_type: "like",
+          sender_id: userId,
+        };
+        console.log(notificationData); 
+      
+        await axios.post(`http://localhost:3001/notifications/notifications`, notificationData, { headers: { Authorization: `Bearer ${token}` } });
+      }
+    
     } catch (error) {
       toast.error("Error updating like status");
     }
@@ -91,6 +102,16 @@ const FeedHome = () => {
           { comments: newComment, userId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
+        const notificationData = {
+          userId: postId.userId,   
+          notification_type: "comment",  // Yeh "like" se "comment" ho gaya hai
+          sender_id: userId,  // Jo comment kar raha hai
+        };
+  
+        // Comment notification ko send karna
+        await axios.post(`http://localhost:3001/notifications/notifications`, notificationData, { headers: { Authorization: `Bearer ${token}` } });
+  
+
         toast.success("Comment added successfully");
         setNewComment("");
         setActiveCommentPost(null);

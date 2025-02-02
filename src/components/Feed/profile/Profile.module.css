@@ -131,13 +131,56 @@
   .popupContent button:hover {
     background-color: #0078d4;
   }
-  
-  .toggleProfilePhoto{
-    width: 35px;
-    height: 35px;
-    border: 1px solid black;
-    border-radius: 50%;
+  /* .ProfileContainer .SearchBarContainer {
+    margin-bottom: 20px;
   }
+  
+  .ProfileContainer .SearchInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  } */
+
+
+  .ProfileContainer .SearchBarContainer {
+    margin-bottom: 20px;
+    position: relative; /* To position the icon inside the search input */
+  }
+  
+  .ProfileContainer .SearchInput {
+    width: 100%;
+    padding: 10px 30px; /* Add space to the right for the icon */
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  .ProfileContainer .FollowUnfollow {
+    background-color:#c093fc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    width:100px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ProfileContainer .FollowUnfollow:hover {
+    background-color:#ae7af2;
+    transform: translateY(-2px);
+  }
+  
+  .ProfileContainer .FollowUnfollow:active {
+    background-color:#ae7af2;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
 
   @media (max-width: 768px) {
     .profileHeader {
