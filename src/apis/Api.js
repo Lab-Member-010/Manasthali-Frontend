@@ -8,6 +8,7 @@ const Api = {
     COMMUNITY_URL:"http://localhost:3001/communities/view",
     CHECK_EMAIL:"http://localhost:3001/users/email",
     CHECK_USERNAME:"http://localhost:3001/users/username",
+    COMMUNITY_GET_URL:"http://localhost:3001/communities/viewAll",
 };
 
 export default Api;

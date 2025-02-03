@@ -13,7 +13,8 @@ import Auth from "./components/Authorization/Auth";
 import Personality from "./components/Quiz/personality";
 import Profile from "./components/Feed/profile/ProfileSetting";
 import Notification from "./components/Feed/notification/Notification";
-import Admin from "./components/Admin/Admin"
+import Admin from "./components/Admin/Admin";
+import CommunityAdmin from "./components/Admin/Community/communityAdmin";
  
 const App = () => {
   return (
@@ -58,6 +59,8 @@ const App = () => {
         {/* Personality Page */}
         <Route path="/personality" element={<Auth><Personality/></Auth>}/>
     
+        {/* Community Admin */}
+        <Route path="/admin-community" element={<CommunityAdmin/>}/>
       </Routes>
 
     </>
