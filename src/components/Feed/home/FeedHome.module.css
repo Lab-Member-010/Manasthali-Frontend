@@ -28,8 +28,31 @@
 .commentTextField{
     border: none;
     margin-left: 2px;
-    width: 88%;
+    width: 80%;
     font-size: 15px;
+}
+
+.emojiButton{
+    background: none;
+    border: none;
+    width: 8%;
+    height: 7px;
+    color: #6e6767;
+}
+
+.emojiButton:hover{
+    color: lightgray;
+}
+
+.emojiPickerContainer{
+    position: absolute;
+    bottom: 70px;
+    left: 20px;
+    z-index: 15;
+    background-color: #ffffff;
+    border: 1px solid #d4c7e0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .commentTextField:focus {

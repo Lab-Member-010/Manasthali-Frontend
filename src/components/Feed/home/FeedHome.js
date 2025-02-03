@@ -8,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { RiSendPlaneFill } from "react-icons/ri";
 import Modal from "react-modal";
 import styles from "./FeedHome.module.css";
+import EmojiPicker from 'emoji-picker-react';
+import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 
 Modal.setAppElement('#root');
 
@@ -15,6 +17,8 @@ const FeedHome = () => {
   const [posts, setPosts] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [activeCommentPost, setActiveCommentPost] = useState(null);
+  const [activeEmojiPicker, setActiveEmojiPicker] = useState(null);
+  const [emojiPickerVisible, setEmojiPickerVisible] = useState(false); 
 
   const userId = useSelector((state) => state?.user?.user?._id);
   const token = useSelector((state) => state?.user?.token);
@@ -54,18 +58,18 @@ const FeedHome = () => {
       localStorage.setItem("likedPosts", JSON.stringify(updatedPosts.map((p) => ({ id: p._id, likes: p.likes }))));
 
       await axios.post(`http://localhost:3001/posts/posts/${post._id}/${likeAction}`, { userId }, { headers: { Authorization: `Bearer ${token}` } });
-    
+
       if (likeAction === "like") {
         const notificationData = {
           userId: post.userId,
           notification_type: "like",
           sender_id: userId,
         };
-        console.log(notificationData); 
-      
+        console.log(notificationData);
+
         await axios.post(`http://localhost:3001/notifications/notifications`, notificationData, { headers: { Authorization: `Bearer ${token}` } });
       }
-    
+
     } catch (error) {
       toast.error("Error updating like status");
     }
@@ -103,14 +107,14 @@ const FeedHome = () => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const notificationData = {
-          userId: postId.userId,   
+          userId: postId.userId,
           notification_type: "comment",  // Yeh "like" se "comment" ho gaya hai
           sender_id: userId,  // Jo comment kar raha hai
         };
-  
+
         // Comment notification ko send karna
         await axios.post(`http://localhost:3001/notifications/notifications`, notificationData, { headers: { Authorization: `Bearer ${token}` } });
-  
+
 
         toast.success("Comment added successfully");
         setNewComment("");
@@ -125,6 +129,15 @@ const FeedHome = () => {
         toast.error("Error adding comment");
       }
     }
+  };
+
+  const handleEmojiClick = (emojiData) => {
+    setNewComment((newComment) => newComment + emojiData.emoji);
+    setEmojiPickerVisible(false);
+  };
+
+  const toggleEmojiPicker = (postId) => {
+    setActiveEmojiPicker(activeEmojiPicker === postId ? null : postId);
   };
 
   return (
@@ -156,6 +169,15 @@ const FeedHome = () => {
                   <span className={styles.shareCount}>Share</span>
                 </div>
                 <div className={styles.commentTextbox}>
+                  <button className={styles.emojiButton} onClick={() => toggleEmojiPicker(post._id)}>
+                    <EmojiEmotionsOutlinedIcon/>
+                  </button>
+
+                  {activeEmojiPicker === post._id && (
+                    <div className={styles.emojiPickerContainer}>
+                      <EmojiPicker onEmojiClick={handleEmojiClick} />
+                    </div>
+                  )}
                   <input
                     type="text"
                     className={styles.commentTextField}
@@ -190,7 +212,7 @@ const FeedHome = () => {
             <button className={styles.closeModalButton} onClick={() => setActiveCommentPost(null)}>X</button>
           </div>
           <div className={styles.postCommentsInnerDiv}>
-          
+
           </div>
         </div>
       </Modal>
