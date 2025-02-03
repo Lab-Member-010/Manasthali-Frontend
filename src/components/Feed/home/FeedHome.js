@@ -103,7 +103,7 @@ const FeedHome = () => {
       try {
         await axios.post(
           `http://localhost:3001/comments/addComment/${postId}`,
-          { comments: newComment, userId },
+          { comment: newComment, userId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const notificationData = {
