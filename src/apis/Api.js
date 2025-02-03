@@ -9,6 +9,7 @@ const Api = {
     CHECK_EMAIL:"http://localhost:3001/users/email",
     CHECK_USERNAME:"http://localhost:3001/users/username",
     COMMUNITY_GET_URL:"http://localhost:3001/communities/viewAll",
+    CREATE_GROUP:"http://localhost:3001/groups/create",
 };
 
 export default Api;

@@ -2,12 +2,11 @@ import styles from "./Admin.module.css";
 import ManasthaliLogo from "../../images/Manasthali.png";
 import {
     Home as HomeIcon,
-    Forum,
     Group as GroupIcon,
 } from "@mui/icons-material";
 import { useState } from "react";
 import CommunityAdmin from "./Community/communityAdmin";
-import AdminHome from "./AdminHome/AdminHome";
+import Groups from "./Groups/Groups";
 
 const Admin = () => {
 
@@ -18,9 +17,9 @@ const Admin = () => {
             case "home":
                 return <CommunityAdmin />;
             case "group":
-                return <AdminHome />;
+                return <Groups />;
             default:
-                return <AdminHome />;
+                return <CommunityAdmin />;
         }
       };
 
