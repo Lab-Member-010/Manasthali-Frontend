@@ -10,6 +10,7 @@ import Modal from "react-modal";
 import styles from "./FeedHome.module.css";
 import EmojiPicker from 'emoji-picker-react';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
+import Api from "../../../apis/Api";
 
 Modal.setAppElement('#root');
 
@@ -26,7 +27,7 @@ const FeedHome = () => {
   useEffect(() => {
     if (userId && token) {
       axios
-        .get(`http://localhost:3001/posts/all-posts/${userId}`, {
+        .get(`${Api.GET_COMMUNITY_POST}/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
@@ -57,7 +58,7 @@ const FeedHome = () => {
 
       localStorage.setItem("likedPosts", JSON.stringify(updatedPosts.map((p) => ({ id: p._id, likes: p.likes }))));
 
-      await axios.post(`http://localhost:3001/posts/posts/${post._id}/${likeAction}`, { userId }, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post(`${Api.BASIC_POST_ROUTE}/${post._id}/${likeAction}`, { userId }, { headers: { Authorization: `Bearer ${token}` } });
 
       if (likeAction === "like") {
         const notificationData = {
@@ -67,7 +68,7 @@ const FeedHome = () => {
         };
         console.log(notificationData);
 
-        await axios.post(`http://localhost:3001/notifications/notifications`, notificationData, { headers: { Authorization: `Bearer ${token}` } });
+        await axios.post(Api.SEND_NOTIFICATION, notificationData, { headers: { Authorization: `Bearer ${token}` } });
       }
 
     } catch (error) {
@@ -78,7 +79,7 @@ const FeedHome = () => {
   const handleCommentPost = async (postId) => {
     const id = postId;
     try {
-      const response = await axios.get(`http://localhost:3001/posts/posts/${id}`, {
+      const response = await axios.get(`${Api.BASIC_POST_ROUTE}/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(response.data.post)
@@ -102,19 +103,17 @@ const FeedHome = () => {
     if (newComment.trim()) {
       try {
         await axios.post(
-          `http://localhost:3001/comments/addComment/${postId}`,
+          `${Api.ADD_COMMENT}/${postId}`,
           { comment: newComment, userId },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const notificationData = {
           userId: postId.userId,
-          notification_type: "comment",  // Yeh "like" se "comment" ho gaya hai
-          sender_id: userId,  // Jo comment kar raha hai
+          notification_type: "comment",
+          sender_id: userId,  
         };
 
-        // Comment notification ko send karna
-        await axios.post(`http://localhost:3001/notifications/notifications`, notificationData, { headers: { Authorization: `Bearer ${token}` } });
-
+        await axios.post(Api.SEND_NOTIFICATION, notificationData, { headers: { Authorization: `Bearer ${token}` } });
 
         toast.success("Comment added successfully");
         setNewComment("");
