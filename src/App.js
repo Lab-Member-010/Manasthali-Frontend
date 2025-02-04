@@ -13,7 +13,8 @@ import Auth from "./components/Authorization/Auth";
 import Personality from "./components/Quiz/personality";
 import Profile from "./components/Feed/profile/ProfileSetting";
 import Notification from "./components/Feed/notification/Notification";
-import Admin from "./components/Admin/Admin"
+import Admin from "./components/Admin/Admin";
+import AdminLogin from "./components/Admin/AdminLogin";
  
 const App = () => {
   return (
@@ -24,6 +25,9 @@ const App = () => {
         
         {/* Admin Page */}
         <Route path="/admin" element={<Admin/>}/>
+        
+        {/* Community Admin */}
+        <Route path="/admin-login" element={<AdminLogin/>}/>
 
         {/* Signup Page */}
         <Route path="/signup" element={<SignUp />} />

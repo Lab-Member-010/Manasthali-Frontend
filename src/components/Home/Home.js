@@ -12,7 +12,7 @@ const Home = () => {
   const [activeAbout, setActiveAbout] = useState(null);
 
   const handleAdminToggle=()=>{
-    navigate("/admin");
+    navigate("/admin-login");
   };
 
   const handleAboutToggle = () => {

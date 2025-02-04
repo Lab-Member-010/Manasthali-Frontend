@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import EmojiPicker from 'emoji-picker-react';
 import io from 'socket.io-client'; 
 import './ChatList.css';
+import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
 
 const MessageComponent = () => {
   const [dmList, setDmList] = useState([]); 
@@ -145,13 +146,12 @@ const MessageComponent = () => {
                 onClick={() => handleSelectUser(user)} 
               >
                 <img
-                  src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
+                  src={user.profile_picture ? `${user.profile_picture}` : '/user.png'}
                   alt="user"
                   className="user-img"
                 />
                 <div className="user-info">
                   <p className="username">{user.username}</p>
-                  <p className="last-message">Last message preview...</p>
                 </div>
               </div>
             ))}
@@ -181,7 +181,7 @@ const MessageComponent = () => {
                       className={`message ${msg.sender === userId ? 'sent' : 'received'} ${msg.read ? 'read' : 'unread'}`}
                       onClick={() => !msg.read && handleMarkAsRead(msg._id)}
                     >
-                      <p>{msg.message}</p>
+                      <p>{msg.message}</p><br/>
                       <span>{new Date(msg.createdAt).toLocaleString()}</span>
                     </div>
                   ))}
@@ -192,7 +192,7 @@ const MessageComponent = () => {
             <div className="newMessage">
               {/* Emoji Button */}
               <button className="emoji-button" onClick={toggleEmojiPicker}>
-                😀
+                <EmojiEmotionsOutlinedIcon/>
               </button>
 
               {/* Message Textarea */}

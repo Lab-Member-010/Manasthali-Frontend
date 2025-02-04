@@ -1,3 +1,126 @@
-.adminController{
-    color: black;
+.adminContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.headerAdmin{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 0px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.headerLeftAdmin{
+    display: flex;
+    align-items: center;
+}
+
+.rotatingLogoAdmin{
+    animation: animate 5s infinite ease-in-out;
+}
+
+@keyframes animate {
+    0% {
+      transform: rotateY(0deg);
+    }
+  
+    50% {
+      transform: rotateY(180deg);
+    }
+  
+    100% {
+      transform: rotateY(360deg);
+    }
+  }
+  
+  @keyframes fallIn {
+    0% {
+      transform: translateY(-200px);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+
+.siteLogoAdmin{
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #1a5a6d, #39a4bf, #25768a, #8d7fd2, #7c5fb5, #a06bba, #e584b5, #e0718e);
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    color: transparent; 
+    display: inline;
+    filter: brightness(1.2);
+    animation: fallIn 1.5s ease-in-out;
+    position: relative;
+}
+
+.contentContainerAdmin{
+    display: flex;
+    flex: 1;
+    width: 100%;
+    margin-top: 18px;
+}
+
+.leftNavbarAdmin{
+    width:180px;
+    border-right:1px solid lightgrey;
+    background-color: white;
+}
+
+.navItemAdmin{
+    border:0px solid black;
+    border-radius: 2px;
+    width: 170px;
+    height: 45px;
+    margin: 5px;
+    padding: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 15px;
+}
+  
+.navItemAdmin:hover{
+    color: #391694;
+    background-color: #e7e4f1;
+    border-left:4px solid #391694;
+    width: 166px;
+    padding-left: 11px;
+}
+
+.midPartAdmin{
+    background-color: white;
+    flex: 1;
+    color: white;
+    font-size: 24px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.innerDbAdmin{
+    background-color: white;
+    height: calc(100vh - 100px); 
+    overflow-y: scroll; 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-bottom: 20px;
 }
