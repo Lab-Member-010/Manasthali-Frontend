@@ -1,7 +1,7 @@
 /* Main container */
 .chat-container {
   display: flex;
-  height: 100vh;
+  height: 100%; /* Ensure it takes the height of the parent container */
   background-color: #fafafa;
   flex-wrap: wrap;
 }
@@ -12,8 +12,8 @@
   background-color: #c093fc;
   border-right: 2px solid #d4c7e0;
   padding: 20px;
-  height: 100vh; 
-  position: fixed; 
+  height: 100%; /* Sidebar takes full height of its parent */
+  position: fixed; /* Fixed position on the left */
 }
 
 /* Sidebar wrapper */
@@ -75,6 +75,7 @@
   color: #7c6d96;
 }
 
+/* Chat panel */
 .chat-panel {
   display: flex;
   flex-direction: column;
@@ -82,7 +83,9 @@
   background-color: #fff;
   border-left: 2px solid #d4c7e0;
   margin-left: 300px;
-  overflow: hidden;
+  height: 100%; /* Ensure chat panel takes the height of the parent container */
+  position: relative;
+  overflow: hidden; /* Ensure no scrolling on the panel itself */
 }
 
 /* Chat header */
@@ -95,6 +98,7 @@
   top: 0;
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .chat-user-img {
@@ -104,15 +108,21 @@
   margin-right: 15px;
 }
 
+/* Chat body */
 .chat-body {
   padding: 15px;
-  flex: 1;
-  overflow-y: auto;
+  flex-grow: 1;
+  overflow-y: auto; /* Make chat body scrollable */
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100% - 120px); /* Ensures the chat body scrolls and leaves space for the header and new message section */
 }
 
+/* Ensure messages appear correctly */
 .message-list {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .message {
@@ -122,6 +132,7 @@
   margin-bottom: 10px;
   max-width: 80%;
   position: relative;
+  font-size: 0.95rem;
 }
 
 .sent {
@@ -144,7 +155,6 @@
 
 .message p {
   margin: 0;
-  font-size: 1rem;
 }
 
 .message span {
@@ -171,11 +181,13 @@
   bottom: 0;
   z-index: 10;
   border-top: 2px solid #d4c7e0;
+  width: 100%;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for separation */
 }
 
 .textArea {
   width: 100%;
-  height: 50px;
+  height: 40px;
   padding: 10px;
   border-radius: 20px;
   border: 1px solid #d4c7e0;
