@@ -5,7 +5,6 @@ import styles from "./communityAdmin.module.css";
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-bootstrap';
 
-// Importing all the personality images
 import INFJ from "../../../images/community/infj.png";
 import ISFJ from "../../../images/community/isfj.png";
 import INFP from "../../../images/community/infp.png";
@@ -49,7 +48,6 @@ const CommunityAdmin = () => {
     const fetchPersonalityData = async () => {
       try {
         const response = await axios.get(Api.COMMUNITY_GET_URL);
-        console.log(response.data);
         setPersonalityData(Array.isArray(response.data.data) ? response.data.data : []);
       } catch (err) {
         toast.error("No Community found!");
