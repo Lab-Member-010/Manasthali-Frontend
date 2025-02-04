@@ -14,7 +14,7 @@ import Personality from "./components/Quiz/personality";
 import Profile from "./components/Feed/profile/ProfileSetting";
 import Notification from "./components/Feed/notification/Notification";
 import Admin from "./components/Admin/Admin";
-import CommunityAdmin from "./components/Admin/Community/communityAdmin";
+import AdminLogin from "./components/Admin/AdminLogin";
  
 const App = () => {
   return (
@@ -25,6 +25,9 @@ const App = () => {
         
         {/* Admin Page */}
         <Route path="/admin" element={<Admin/>}/>
+        
+        {/* Community Admin */}
+        <Route path="/admin-login" element={<AdminLogin/>}/>
 
         {/* Signup Page */}
         <Route path="/signup" element={<SignUp />} />
@@ -59,8 +62,6 @@ const App = () => {
         {/* Personality Page */}
         <Route path="/personality" element={<Auth><Personality/></Auth>}/>
     
-        {/* Community Admin */}
-        <Route path="/admin-community" element={<CommunityAdmin/>}/>
       </Routes>
 
     </>

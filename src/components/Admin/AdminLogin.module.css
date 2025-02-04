@@ -1,0 +1,93 @@
+.adminLoginContainer {
+    background-image: url('../../images/spore.gif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 50px;
+  }
+  
+  .adminLoginBox {
+    background-color: transparent !important;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    width: 420px;
+    max-width: 1000px;
+    position: relative;
+    right: 0;
+  }
+  
+  .adminLoginLogo {
+    width: 100px;
+    height: 100px;
+    background-image: url("../../images/Manasthali.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: 10px auto 20px auto;
+    display: block;
+  }
+  
+
+.adminLoginInputContainer {
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .adminLoginInputField {
+    width: 400px;
+    height: auto;
+    background-color: transparent;
+    border-bottom: 1px solid black;
+    font-size: 1rem;
+    transition: font-size 0.3s, transform 0.3s;
+  }
+  
+  .adminLoginInputField:focus {
+    border: 1px solid black; 
+    outline: none; 
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  
+.adminLoginLabelField{
+    height:25px;
+    margin-left: 5px;
+    font-size: 1.2rem;
+    color: black;
+    text-align: left;
+    transition: font-size 0.3s, transform 0.3s, color 0.3s;
+  }
+
+  .verifyAdminLoginBtn {
+    color: black;
+    background-color: transparent !important;
+    font-weight: bold;
+    padding: 14px 24px;
+    width:320px;
+    margin-bottom: 10px;
+    transition: all 0.4s ease;
+    font-size: 1.1rem;
+    border: 1px solid black;
+  }
+  
+  .verifyAdminLoginBtn:hover {
+    background-color: transparent !important;
+    color: black;
+    transform: scale(1.025);
+    border: 1px solid black;
+  }
+  
+  
+  
