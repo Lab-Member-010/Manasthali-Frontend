@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from './FindFriend.module.css';
 import { useSelector } from 'react-redux';
 import { debounce } from 'lodash';
+import Api from "../../../apis/Api";
 
 const FindFriend = () => {
   const [users, setUsers] = useState([]);
@@ -16,7 +17,7 @@ const FindFriend = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/users/get-all-users-except/${userId}`, {
+        const response = await axios.get(`${Api.GET_COMMUNITY_USERS}/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const followingResponse = await axios.get(`http://localhost:3001/users/${userId}/following`, {
@@ -115,7 +116,7 @@ const FindFriend = () => {
               <tr key={user._id}>
                 <td>
                   <img
-                    src={user.profile_picture ? `http://localhost:3001/${user.profile_picture}` : '/user.png'}
+                    src={user.profile_picture ? user.profile_picture : '/user.png'}
                     alt={user.username}
                     className={styles.ProfilePicture}
                     onError={(e) => { e.target.src = '/user.png'; }}

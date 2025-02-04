@@ -18,6 +18,7 @@ const Api = {
     SEND_NOTIFICATION:"http://localhost:3001/notifications/notifications",
     BASIC_POST_ROUTE:"http://localhost:3001/posts/posts",
     ADD_COMMENT:"http://localhost:3001/comments/addComment",
+    GET_COMMUNITY_USERS:"http://localhost:3001/users/get-community-users",
 };
 
 export default Api;
