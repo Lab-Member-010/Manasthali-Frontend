@@ -14,16 +14,26 @@
   border-bottom: 1px solid #ddd;
 }
 
-.profileImage {
+.profileImage{
   flex-shrink: 0;
   position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid black;
 }
 
-.profileImage img {
-  width: 120px;
-  height: 120px;
+.toggleButton{
+  margin: 0;
+}
+
+.profileImageToggle {
+  flex-shrink: 0;
+  position: relative;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  object-fit: cover;
+  border: 1px solid black;
 }
 
 .profileInfo {
@@ -66,12 +76,13 @@
 .followersFollowing span:hover {
   color: #7226d5;
 }
+
 .popup {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -101,25 +112,25 @@
   display: flex;
   align-items: center;
   margin-bottom: 12px;
-  flex-wrap: nowrap; /* Prevent text wrapping */
+  flex-wrap: nowrap;
 }
 
-.popupContent li img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+.profilesDiv{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 390px;
 }
 
 .popupContent li span {
-  margin-left: 10px; /* Space between image and username */
-  text-overflow: ellipsis; /* In case the username is too long */
+  margin-left: 10px;
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
 .popupContent button {
-  background-color: #0095f6;
+  background-color: #ba68f1;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -129,33 +140,22 @@
 }
 
 .popupContent button:hover {
-  background-color: #0078d4;
+  background-color: #9a3ab3;
 }
-/* .ProfileContainer .SearchBarContainer {
-  margin-bottom: 20px;
-}
-
-.ProfileContainer .SearchInput {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-} */
-
 
 .ProfileContainer .SearchBarContainer {
   margin-bottom: 20px;
-  position: relative; /* To position the icon inside the search input */
+  position: relative;
 }
 
 .ProfileContainer .SearchInput {
   width: 100%;
-  padding: 10px 30px; /* Add space to the right for the icon */
+  padding: 10px 30px;
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
 .ProfileContainer .FollowUnfollow {
   background-color:#c093fc;
   color: white;
@@ -191,6 +191,7 @@
   .profileImage img {
     width: 100px;
     height: 100px;
+    border-radius: 50%;
   }
 
   .usernameAndPosts {
@@ -220,7 +221,7 @@
     left: 10px;
     color: gray;
     transition: opacity 0.3s ease;
-    opacity: 1; /* Ensure it is visible by default */
+    opacity: 1;
   }
   
   .SearchInput {
@@ -228,11 +229,11 @@
   }
   
   .SearchInput:focus ~ .searchIcon {
-    opacity: 0; /* Hide the icon when input is focused */
+    opacity: 0; 
   }
   .userListWrapper {
     max-height: 200px;
     overflow-y: auto;
-   scrollbar-width: none;
+    scrollbar-width: none;
   }
- 
+}

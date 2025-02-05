@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import styles from "./Profile.module.css";
 import { debounce } from "lodash";
-import { FaSearch } from "react-icons/fa";
 import defaultUser from "../../../images/default_profile.jpg";
 const Profile = ({ user, loading, updateProfilePicture, updateProfile }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -46,7 +45,7 @@ const Profile = ({ user, loading, updateProfilePicture, updateProfile }) => {
         : `http://localhost:3001/users/${user._id}/following`;
 
       const response = await axios.get(endpoint, {
-        headers: { Authorization: `Bearer ${token} `},
+        headers: { Authorization: `Bearer ${token} ` },
       });
 
 
@@ -73,7 +72,7 @@ const Profile = ({ user, loading, updateProfilePicture, updateProfile }) => {
       await axios.post(
         url,
         { userId: loggedInUserId, userIdToUnfollow: targetUserId, userIdToFollow: targetUserId },
-        { headers: { Authorization: `Bearer ${token} `} }
+        { headers: { Authorization: `Bearer ${token} ` } }
       );
 
       // Update the local state to reflect the following status
@@ -189,14 +188,15 @@ const Profile = ({ user, loading, updateProfilePicture, updateProfile }) => {
         // Main profile display
         <>
           <div className={styles.profileHeader}>
-            <div className={styles.profileImage}>
+            <div>
               <img
                 src={
                   user.profile_picture
                     ? user.profile_picture
-                    : "../../../default_profile.jpg"
+                    : defaultUser
                 }
                 alt={user.username}
+                className={styles.profileImage}
               />
             </div>
             <div className={styles.profileInfo}>
@@ -220,60 +220,59 @@ const Profile = ({ user, loading, updateProfilePicture, updateProfile }) => {
           {/* Display Posts */}
 
           {showPopup && (
-  <div className={styles.popup}>
-    <div className={styles.popupContent}>
-      <h3>{popupType === "followers" ? "Followers" : "Following"}</h3>
-      <div className={styles.searchContainer}>
-        <div className={styles.inputWrapper}>
-          <FaSearch className={styles.searchIcon} />
-          <input
-            type="text"
-            placeholder="Search user"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className={styles.SearchInput}
-          />
-        </div>
-      </div>
-      <div className={styles.userListWrapper} >
-  <table className={styles.userTable}>
-    <tbody>
-      {filteredUsers.length > 0 ? (
-        filteredUsers.map((popupUser) => (
-          <tr key={popupUser._id}>
-            <td>
-              <img height={50} 
-                src={popupUser.profile_picture ? popupUser.profile_picture : "./default_profile.jpg" }
-                alt={popupUser.username}
-                className={styles.profileImage}
-              />
-            </td>
-            <td>{popupUser.username}</td>
-            <td>
-              {popupUser._id !== loggedInUserId && (
-                <button
-                  className={styles.FollowUnfollow}
-                  onClick={() => handleFollowToggle(popupUser._id, popupUser.isFollowing)}
-                >
-                  {popupUser.isFollowing ? "Unfollow" : "Follow"}
-                </button>
-              )}
-            </td>
-          </tr>
-        ))
-      ) : (
-        <tr>
-          <td colSpan="3">No users to display</td>
-        </tr>
-      )}
-    </tbody>
-  </table>
-</div>
+            <div className={styles.popup}>
+              <div className={styles.popupContent}>
+                <h3>{popupType === "followers" ? "Followers" : "Following"}</h3>
+                <div className={styles.searchContainer}>
+                  <div className={styles.inputWrapper}>
+                    <input
+                      type="text"
+                      placeholder="Search user"
+                      value={searchTerm}
+                      onChange={handleSearchChange}
+                      className={styles.SearchInput}
+                    />
+                  </div>
+                </div>
+                <div className={styles.userListWrapper} >
+                  <table className={styles.userTable}>
+                    <tbody>
+                      {filteredUsers.length > 0 ? (
+                        filteredUsers.map((popupUser) => (
+                          <tr key={popupUser._id} className={styles.profilesDiv}>
+                            <td>
+                              <img height={50}
+                                src={popupUser.profile_picture ? popupUser.profile_picture : defaultUser}
+                                alt={popupUser.username}
+                                className={styles.profileImageToggle}
+                              />
+                            </td>
+                            <td>{popupUser.username}</td>
+                            <td>
+                              {popupUser._id !== loggedInUserId && (
+                                <button
+                                  className={styles.FollowUnfollow}
+                                  onClick={() => handleFollowToggle(popupUser._id, popupUser.isFollowing)}
+                                >
+                                  {popupUser.isFollowing ? "Unfollow" : "Follow"}
+                                </button>
+                              )}
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="3">No users to display</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
 
-      <button onClick={closePopup}>Close</button>
-    </div>
-  </div>
-)}
+                <button onClick={closePopup}>Close</button>
+              </div>
+            </div>
+          )}
 
         </>
       )}
