@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from "./Challenge.module.css";
+import Api from "../../../apis/Api";
 
 const Challenge = () => {
     const [challenge, setChallenge] = useState(null);
@@ -28,7 +29,7 @@ const Challenge = () => {
     const handleChallenge = async () => {
 
         try {
-            const response = await axios.get(`http://localhost:3001/challenge/daily-challenge/${userId}`, {
+            const response = await axios.get(`${Api.GET_DAILY_CHALLENGE}/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

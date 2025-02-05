@@ -201,4 +201,38 @@
   .followersFollowing {
     justify-content: center;
   }
-}
+ 
+  .searchIcon {
+    position: absolute;
+    left: 10px;
+    color: gray;
+    transition: opacity 0.3s ease;
+  }
+  
+  .SearchInput {
+    padding-left: 30px;
+  }
+  
+  .SearchInput:focus + .searchIcon {
+    opacity: 0;
+  }.searchIcon {
+    position: absolute;
+    left: 10px;
+    color: gray;
+    transition: opacity 0.3s ease;
+    opacity: 1; /* Ensure it is visible by default */
+  }
+  
+  .SearchInput {
+    padding-left: 30px;
+  }
+  
+  .SearchInput:focus ~ .searchIcon {
+    opacity: 0; /* Hide the icon when input is focused */
+  }
+  .userListWrapper {
+    max-height: 200px;
+    overflow-y: auto;
+   scrollbar-width: none;
+  }
+ 
