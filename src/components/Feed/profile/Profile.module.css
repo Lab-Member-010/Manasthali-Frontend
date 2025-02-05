@@ -1,209 +1,207 @@
 .ProfileContainer {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 10px;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-  }
-  
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 10px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 30px; 
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.profileImage {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.profileImage img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profileInfo {
+  flex-grow: 1;
+}
+
+.usernameAndPosts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.userName {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+  text-align: left;
+}
+
+.userBio {
+  font-size: 14px;
+  color: #8e8e8e;
+  margin: 10px 0;
+}
+
+.followersFollowing {
+  display: flex;
+  gap: 30px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.followersFollowing span {
+  cursor: pointer;
+  color: #9b7bc4;
+  transition: color 0.2s ease;
+}
+
+.followersFollowing span:hover {
+  color: #7226d5;
+}
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupContent {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popupContent h3 {
+  margin-bottom: 15px;
+}
+
+.popupContent ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popupContent li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: nowrap; /* Prevent text wrapping */
+}
+
+.popupContent li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.popupContent li span {
+  margin-left: 10px; /* Space between image and username */
+  text-overflow: ellipsis; /* In case the username is too long */
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.popupContent button {
+  background-color: #0095f6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.popupContent button:hover {
+  background-color: #0078d4;
+}
+/* .ProfileContainer .SearchBarContainer {
+  margin-bottom: 20px;
+}
+
+.ProfileContainer .SearchInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+} */
+
+
+.ProfileContainer .SearchBarContainer {
+  margin-bottom: 20px;
+  position: relative; /* To position the icon inside the search input */
+}
+
+.ProfileContainer .SearchInput {
+  width: 100%;
+  padding: 10px 30px; /* Add space to the right for the icon */
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.ProfileContainer .FollowUnfollow {
+  background-color:#c093fc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  width:100px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ProfileContainer .FollowUnfollow:hover {
+  background-color:#ae7af2;
+  transform: translateY(-2px);
+}
+
+.ProfileContainer .FollowUnfollow:active {
+  background-color:#ae7af2;
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+@media (max-width: 768px) {
   .profileHeader {
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 30px; 
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
   }
-  
-  .profileImage {
-    flex-shrink: 0;
-    position: relative;
-  }
-  
+
   .profileImage img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 100px;
+    height: 100px;
   }
-  
-  .profileInfo {
-    flex-grow: 1;
-  }
-  
+
   .usernameAndPosts {
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
   }
-  
-  .userName {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 0;
-    text-align: left;
-  }
-  
-  .userBio {
-    font-size: 14px;
-    color: #8e8e8e;
-    margin: 10px 0;
-  }
-  
+
   .followersFollowing {
-    display: flex;
-    gap: 30px;
-    font-size: 16px;
-    font-weight: 600;
-  }
-  
-  .followersFollowing span {
-    cursor: pointer;
-    color: #9b7bc4;
-    transition: color 0.2s ease;
-  }
-  
-  .followersFollowing span:hover {
-    color: #7226d5;
-  }
-  .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
     justify-content: center;
-    align-items: center;
   }
-  
-  .popupContent {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    max-width: 450px;
-    width: 100%;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .popupContent h3 {
-    margin-bottom: 15px;
-  }
-  
-  .popupContent ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .popupContent li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-    flex-wrap: nowrap; /* Prevent text wrapping */
-  }
-  
-  .popupContent li img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .popupContent li span {
-    margin-left: 10px; /* Space between image and username */
-    text-overflow: ellipsis; /* In case the username is too long */
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  
-  .popupContent button {
-    background-color: #0095f6;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  .popupContent button:hover {
-    background-color: #0078d4;
-  }
-  /* .ProfileContainer .SearchBarContainer {
-    margin-bottom: 20px;
-  }
-  
-  .ProfileContainer .SearchInput {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  } */
-
-
-  .ProfileContainer .SearchBarContainer {
-    margin-bottom: 20px;
-    position: relative; /* To position the icon inside the search input */
-  }
-  
-  .ProfileContainer .SearchInput {
-    width: 100%;
-    padding: 10px 30px; /* Add space to the right for the icon */
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  .ProfileContainer .FollowUnfollow {
-    background-color:#c093fc;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    width:100px;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .ProfileContainer .FollowUnfollow:hover {
-    background-color:#ae7af2;
-    transform: translateY(-2px);
-  }
-  
-  .ProfileContainer .FollowUnfollow:active {
-    background-color:#ae7af2;
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-
-  @media (max-width: 768px) {
-    .profileHeader {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .profileImage img {
-      width: 100px;
-      height: 100px;
-    }
-  
-    .usernameAndPosts {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .followersFollowing {
-      justify-content: center;
-    }
-  }
-  
-  
+ 
   .searchIcon {
     position: absolute;
     left: 10px;
@@ -237,8 +235,4 @@
     overflow-y: auto;
    scrollbar-width: none;
   }
-  
-  
-
-
-  
+ 

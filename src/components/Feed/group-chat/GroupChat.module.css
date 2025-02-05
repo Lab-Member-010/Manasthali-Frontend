@@ -1,4 +1,4 @@
-.groupChatContainer {
+ /* .groupChatContainer {
     display: flex;
     height: 100vh;
     overflow: hidden;
@@ -36,11 +36,11 @@
   }
   
   .groupItem:hover {
-    background-color: #d1c1e0; /* Light lavender hover effect */
-  }
+    background-color: #d1c1e0;  
+  }  
   
   .groupItem h3 {
-    color: #6a4c93; /* Dark lavender */
+    color: #6a4c93;  
     font-size: 1.2em;
   }
   
@@ -128,7 +128,7 @@
   
   .textArea:focus {
     outline: none;
-    border-color: #6a4c93; /* Dark lavender focus */
+    border-color: #6a4c93;  
   }
   
   .sendButton {
@@ -179,4 +179,241 @@
       max-width: 100%;
     }
   }
-  
+    */
+
+    /* Main container */
+.chat-container {
+  display: flex;
+  height: 100%; 
+  background-color: #fafafa;
+  flex-wrap: wrap;
+  border: 1px solid black;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 20%;
+  padding: 20px;
+  position: fixed;
+  border-right: 1px solid lightgray;
+}
+
+/* Sidebar wrapper */
+.sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-header {
+  background-color: white;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  font-size: 1.5em;
+  text-align: center;
+  color: #5f4b8b;
+}
+
+.user-list {
+  max-height: 520px;
+  overflow-y: auto;
+  flex: 1;
+  padding: 10px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid lightgray;
+  height: 80px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.user-item:hover {
+  background-color: #e6c9f7;
+}
+
+.user-img {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.username {
+  font-weight: bold;
+  color: #463961;
+  font-size: 20px;
+}
+
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #fff;
+  margin-left: 28%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Chat header */
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  position: sticky;
+  color: black;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.chat-user-img {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+/* Chat body */
+.chat-body {
+  padding: 15px;
+  height: 460px;
+  flex-grow: 1;
+  overflow-y: auto; 
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100% - 120px); 
+}
+
+/* Ensure messages appear correctly */
+.message-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  max-width: 80%;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.sent {
+  border: 1px solid lightgray;
+  background-color: #f4f4f4;
+  width:40%;
+  height: auto;
+  align-self: flex-end;
+}
+
+.received {
+  border: 1px solid gray;
+  background-color: #e5daf6;
+  color: gray;
+  width:40%;
+  height: auto;
+  align-self: flex-start;
+}
+
+.read {
+  color: #4bb543;
+}
+
+.unread {
+  color: black;
+}
+
+.message p {
+  margin: 0;
+}
+
+.message span {
+  font-size: 0.6rem;
+  color: gray;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+
+.no-chat-selected {
+  text-align: center;
+  padding: 20px;
+  color: #7c6d96;
+}
+
+/* New message input area */
+.newMessage {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  border: 1px solid #d4c7e0;
+  width: 100%;
+}
+
+.textArea {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #d4c7e0;
+  margin-right: 10px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.textArea:focus {
+  border-color: #a47df0;
+}
+
+.sentbutton {
+  background-color: #c093fc;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.sentbutton:hover {
+  background-color: #a47df0;
+}
+
+.emoji-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #675e70;
+}
+
+/* Emoji picker container */
+.emoji-picker-container {
+  position: absolute;
+  bottom: 70px;
+  left: 20px;
+  z-index: 15;
+  background-color: #ffffff;
+  border: 1px solid #d4c7e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
