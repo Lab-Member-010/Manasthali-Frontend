@@ -1,3 +1,136 @@
-.colorDark{
+/* .colorDark{
   color: black;
+} */
+
+
+.FindGroupContainer {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 25px;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.SearchBarContainer {
+  margin-bottom: 20px;
+}
+
+.SearchInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.FindGroupContainer h2 {
+  font-size: 2.2rem;
+  color: #c093fc;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.Table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tHead {
+  background-color: #c093fc;
+  color: white;
+}
+
+.tHead th {
+  padding: 15px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.tBody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.tBody tr:hover {
+  background-color: #f0f0ff;
+}
+
+.tBody td {
+  padding: 15px;
+  text-align: center;
+  font-size: 1rem;
+  color: #444;
+}
+
+.JoinLeaveButton {
+  background-color: #c093fc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  width: 120px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.JoinLeaveButton:hover {
+  background-color: #ae7af2;
+  transform: translateY(-2px);
+}
+
+.JoinLeaveButton:active {
+  background-color: #ae7af2;
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .Table,
+  .tHead,
+  .tBody,
+  th,
+  td,
+  tr {
+      display: block;
+      width: 100%;
+  }
+
+  .tHead tr {
+      display: none;
+  }
+
+  .tBody tr {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 10px;
+  }
+
+  .tBody td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      font-size: 0.95rem;
+  }
+
+  .tBody td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #444;
+  }
 }
