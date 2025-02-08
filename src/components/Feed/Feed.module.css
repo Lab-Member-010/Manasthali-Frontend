@@ -91,7 +91,7 @@
   max-height: 500px; 
   overflow-y: auto;
   -ms-overflow-style: none;
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid lightgray;
 }
 
 .innerDb::-webkit-scrollbar {
