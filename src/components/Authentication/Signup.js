@@ -190,7 +190,7 @@ const SignUp = () => {
           <h5>
             Already have an account?
 
-            <Link to="/signin" style={{ textDecoration: "none" }}> Sign In</Link>
+            <Link to="/signin" style={{ textDecoration: "none" }}>Sign In</Link>
 
           </h5>
         </div>

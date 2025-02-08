@@ -87,22 +87,22 @@
 .upBtn,
 .upBtnOutline {
   color: black;
-  background-color: transparent !important;
+  background-color: #55aafe !important;
   font-weight: bold;
-  padding: 10px 15px;
-  border:1px solid black;
-  width:300px;
-  margin-bottom: 5px;
+  border-bottom:1px solid black;
+  width:200px;
+  height: 40px;
+  margin: 20px;
   transition: all 0.4s ease;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .upBtn:hover,
 .upBtnOutline:hover {
-  background-color: transparent !important;
+  background-color: #5cadfe !important;
   color: black;
   transform: scale(1.025);
-  border: 1px solid black;
+  border:1px solid black;
 }
 .errorText {
   color: rgb(254, 73, 73);
@@ -163,4 +163,3 @@
     width: 100%;
   }
 }
-

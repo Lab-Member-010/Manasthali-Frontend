@@ -157,11 +157,11 @@ const SignIn = () => {
               {errors.password && <span className={styles.errorText}>{errors.password}</span>}
             </div>
 
-            <button type="submit" className={`btn ${styles.inBtn}`}>
+            <button type="submit" className={`btn form-control ${styles.inBtn}`}>
               Sign In
             </button>
 
-            <a className={`${styles.inAnchor} mt-5 w-100`} href={"/forgot-password/"}>
+            <a className={`form-control ${styles.inAnchor}`} href={"/forgot-password/"}>
               Forgot Password?
             </a>
           </form>
