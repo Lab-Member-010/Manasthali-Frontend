@@ -5,6 +5,7 @@ import EmojiPicker from 'emoji-picker-react';
 import io from 'socket.io-client'; 
 import './ChatList.css';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
+import Api from '../../../apis/Api';
 
 const MessageComponent = () => {
   const [dmList, setDmList] = useState([]); 
@@ -21,7 +22,7 @@ const MessageComponent = () => {
   useEffect(() => {
     const fetchDMList = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/users/dmlist/${userId}`, {
+        const response = await axios.get(`${Api.SERVER_URL}/users/dmlist/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setDmList(response.data); 
@@ -35,7 +36,7 @@ const MessageComponent = () => {
   }, [userId, token]);
 
   useEffect(() => {
-    socket.current = io('http://localhost:3001');
+    socket.current = io(Api.SERVER_URL);
     socket.current.emit('join', userId); 
 
     socket.current.on('new_message', (newMessage) => {
@@ -53,7 +54,7 @@ const MessageComponent = () => {
     if (selectedUser) {
       const fetchMessages = async () => {
         try {
-          const response = await axios.get(`http://localhost:3001/message/${selectedUser._id}`, {
+          const response = await axios.get(`${Api.SERVER_URL}/message/${selectedUser._id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           setMessages(response.data.messages);
@@ -76,7 +77,7 @@ const MessageComponent = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/message/send', {
+      const response = await axios.post(Api.SEND_MESSAGE, {
         receiverId: selectedUser._id,
         message,
       }, {
@@ -97,7 +98,7 @@ const MessageComponent = () => {
 
   const handleMarkAsRead = async (messageId) => {
     try {
-      const response = await axios.post('http://localhost:3001/message/read', {
+      const response = await axios.post(Api.READ_MESSAGE, {
         messageId,
       }, {
         headers: { Authorization:` Bearer ${token}` },

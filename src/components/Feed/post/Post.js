@@ -20,7 +20,7 @@ const Post = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/posts/posts",
+        "https://manasthali-backend.onrender.com/posts/posts",
         formData,
         {
           headers: {

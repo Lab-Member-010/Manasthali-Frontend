@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./ResetPassword.module.css";
 import { Visibility, VisibilityOff } from "@mui/icons-material"; 
+import Api from "../../apis/Api";
 
 const ResetPassword = () => {
   const location = useLocation();
@@ -53,7 +54,7 @@ const ResetPassword = () => {
     
     try {
       console.log(password);
-      const response = await axios.post("http://localhost:3001/users/reset-password", {
+      const response = await axios.post(Api.RESET_PASSWORD, {
         token,
         password,
       });

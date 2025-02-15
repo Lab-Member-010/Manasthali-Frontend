@@ -41,15 +41,15 @@ const Profile = ({ user, loading, updateProfilePicture, updateProfile }) => {
       if (!token) return console.error("No token found");
 
       const endpoint = type === "followers"
-        ? `http://localhost:3001/users/${user._id}/followers`
-        : `http://localhost:3001/users/${user._id}/following`;
+        ? `https://manasthali-backend.onrender.com/users/${user._id}/followers`
+        : `https://manasthali-backend.onrender.com/users/${user._id}/following`;
 
       const response = await axios.get(endpoint, {
         headers: { Authorization: `Bearer ${token} ` },
       });
 
 
-      const followingResponse = await axios.get(`http://localhost:3001/users/${loggedInUserId}/following`, {
+      const followingResponse = await axios.get(`https://manasthali-backend.onrender.com/users/${loggedInUserId}/following`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -68,7 +68,7 @@ const Profile = ({ user, loading, updateProfilePicture, updateProfile }) => {
 
   const handleFollowToggle = async (targetUserId, isCurrentlyFollowing) => {
     try {
-      const url = `http://localhost:3001/users/${isCurrentlyFollowing ? 'unfollow' : 'follow'}`;
+      const url = `https://manasthali-backend.onrender.com/users/${isCurrentlyFollowing ? 'unfollow' : 'follow'}`;
       await axios.post(
         url,
         { userId: loggedInUserId, userIdToUnfollow: targetUserId, userIdToFollow: targetUserId },
@@ -132,7 +132,7 @@ const Profile = ({ user, loading, updateProfilePicture, updateProfile }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3001/users/${user._id}/updateProfilePicture`,
+        `https://manasthali-backend.onrender.com/users/${user._id}/updateProfilePicture`,
         formData,
         {
           headers: {

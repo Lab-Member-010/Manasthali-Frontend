@@ -14,7 +14,7 @@ const Story = () => {
   useEffect(() => {
     const fetchStory = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/story/${user._id}`, {
+        const response = await axios.get(`https://manasthali-backend.onrender.com/story/${user._id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
              
@@ -48,7 +48,7 @@ const Story = () => {
     formData.append("userId", user._id);
 
     try {
-      const response = await axios.post("http://localhost:3001/story/stories", formData, {
+      const response = await axios.post("https://manasthali-backend.onrender.com/story/stories", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -89,7 +89,7 @@ const Story = () => {
      
       {showStory && story && (
         <div className={styles.storyViewer} onClick={() => setShowStory(false)}>
-          <img src={`http://localhost:3001/${story.media}`} alt="" />
+          <img src={story.media} alt="" />
         </div>
       )}
     </div>

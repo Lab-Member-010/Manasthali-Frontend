@@ -161,7 +161,7 @@ const SignIn = () => {
               Sign In
             </button>
 
-            <a className={`form-control ${styles.inAnchor}`} href={"/forgot-password/"}>
+            <a className={`${styles.inAnchor}`} href={"/forgot-password/"}>
               Forgot Password?
             </a>
           </form>

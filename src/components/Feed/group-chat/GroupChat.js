@@ -5,6 +5,7 @@ import EmojiPicker from 'emoji-picker-react';
 import io from 'socket.io-client'; 
 import './GroupChat.module.css';
 import EmojiEmotionsOutlinedIcon from '@mui/icons-material/EmojiEmotionsOutlined';
+import Api from '../../../apis/Api';
 
 const GroupChat = () => {
   const [groupList, setGroupList] = useState([]);
@@ -21,7 +22,7 @@ const GroupChat = () => {
   useEffect(() => {
     const fetchGroupList = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/groups`, {
+        const response = await axios.get(`https://manasthali-backend.onrender.com/groups`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setGroupList(response.data);
@@ -35,7 +36,7 @@ const GroupChat = () => {
   }, [token]);
 
   useEffect(() => {
-    socket.current = io('http://localhost:3001');
+    socket.current = io(Api.SERVER_URL);
     if (selectedGroup) {
       socket.current.emit('join_group', selectedGroup._id);
     }
@@ -55,7 +56,7 @@ const GroupChat = () => {
     if (selectedGroup) {
       const fetchMessages = async () => {
         try {
-          const response = await axios.get(`http://localhost:3001/messages/${selectedGroup._id}`, {
+          const response = await axios.get(`https://manasthali-backend.onrender.com/messages/${selectedGroup._id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           setMessages(response.data.messages);
@@ -78,7 +79,7 @@ const GroupChat = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/messages/send', {
+      const response = await axios.post('https://manasthali-backend.onrender.com/messages/send', {
         groupId: selectedGroup._id,
         message,
       }, {

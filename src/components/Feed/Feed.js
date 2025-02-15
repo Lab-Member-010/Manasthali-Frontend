@@ -46,7 +46,7 @@ const Feed = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/users/${userId}`, {
+        const response = await axios.get(`https://manasthali-backend.onrender.com/users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProfileData(response.data.user);

@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Verifyotp.module.css";
+import Api from "../../apis/Api";
 
 const Verifyotp = () => {
   const [otp, setOtp] = useState("");
@@ -15,7 +16,7 @@ const Verifyotp = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/users/verify-otp", {
+      const response = await axios.post(Api.VERIFY_OTP, {
         email,
         otp,
       });

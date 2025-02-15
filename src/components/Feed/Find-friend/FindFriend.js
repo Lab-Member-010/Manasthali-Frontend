@@ -20,7 +20,7 @@ const FindFriend = () => {
         const response = await axios.get(`${Api.GET_COMMUNITY_USERS}/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const followingResponse = await axios.get(`http://localhost:3001/users/${userId}/following`, {
+        const followingResponse = await axios.get(`https://manasthali-backend.onrender.com/users/${userId}/following`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         
@@ -63,7 +63,7 @@ const FindFriend = () => {
 
   const handleFollowToggle = async (targetUserId, isCurrentlyFollowing) => {
     try {
-        const url = `http://localhost:3001/users/${isCurrentlyFollowing ? 'unfollow' : 'follow'}`;
+        const url = `https://manasthali-backend.onrender.com/users/${isCurrentlyFollowing ? 'unfollow' : 'follow'}`;
         await axios.post(
             url,
             { userId, userIdToUnfollow: targetUserId, userIdToFollow: targetUserId }, // Corrected field names

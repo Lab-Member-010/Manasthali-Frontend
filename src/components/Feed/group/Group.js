@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from './Group.module.css';
 import { useSelector } from 'react-redux';
 import { debounce } from 'lodash';
+import Api from '../../../apis/Api';
 
 const Group = () => {
   const [groups, setGroups] = useState([]);
@@ -19,12 +20,12 @@ const Group = () => {
     const fetchGroups = async () => {
       try {
         // Fetch groups based on the user's personality type (e.g., INFJ)
-        const response = await axios.get(`http://localhost:3001/groups/get-groups/${personalityType}`, {
+        const response = await axios.get(`https://manasthali-backend.onrender.com/groups/get-groups/${personalityType}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         // Fetch user's joined groups
-        const joinedResponse = await axios.get(`http://localhost:3001/groups/view/joinedList`, {
+        const joinedResponse = await axios.get(Api.JOINED_LIST, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -67,7 +68,7 @@ const Group = () => {
 
   const handleJoinLeaveToggle = async (groupId, isCurrentlyJoined) => {
     try {
-      const url = `http://localhost:3001/groups/${groupId}/${isCurrentlyJoined ? 'leave' : 'join'}`;
+      const url = `${Api.SERVER_URL}/groups/${groupId}/${isCurrentlyJoined ? 'leave' : 'join'}`;
       await axios.post(
         url,
         { userId },

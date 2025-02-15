@@ -34,7 +34,7 @@ const ProfileSetting= () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3001/users/${userId}`,
+        `https://manasthali-backend.onrender.com/users/${userId}`,
         formData,
         {
           headers: {
@@ -60,7 +60,7 @@ const ProfileSetting= () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3001/users/${userId}/contact`,
+        `https://manasthali-backend.onrender.com/users/${userId}/contact`,
         { contact },
         {
           headers: {
@@ -86,7 +86,7 @@ const ProfileSetting= () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3001/users/${userId}/dob`,
+        `https://manasthali-backend.onrender.com/users/${userId}/dob`,
         { dob },
         {
           headers: {
@@ -112,7 +112,7 @@ const ProfileSetting= () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3001/users/${userId}/gender`,
+        `https://manasthali-backend.onrender.com/users/${userId}/gender`,
         { gender },
         {
           headers: {
@@ -138,7 +138,7 @@ const ProfileSetting= () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:3001/users/${userId}/bio`,
+        `https://manasthali-backend.onrender.com/users/${userId}/bio`,
         { bio },
         {
           headers: {
@@ -163,7 +163,7 @@ const ProfileSetting= () => {
     e.preventDefault();
     try {
       const response = await axios.delete(
-        `http://localhost:3001/users/${userId}/delete`,
+        `https://manasthali-backend.onrender.com/users/${userId}/delete`,
         {
           headers: {
             Authorization: `Bearer ${token}` 

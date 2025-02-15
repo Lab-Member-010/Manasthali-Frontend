@@ -87,9 +87,9 @@
 .upBtn,
 .upBtnOutline {
   color: black;
-  background-color: #55aafe !important;
+  background-color: transparent !important;
   font-weight: bold;
-  border-bottom:1px solid black;
+  border:1px solid black;
   width:200px;
   height: 40px;
   margin: 20px;
@@ -99,7 +99,6 @@
 
 .upBtn:hover,
 .upBtnOutline:hover {
-  background-color: #5cadfe !important;
   color: black;
   transform: scale(1.025);
   border:1px solid black;

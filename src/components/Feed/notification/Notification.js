@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import styles from "./Notification.module.css";
+import Api from "../../../apis/Api";
  
 const NotificationComponent = () => {
   const [notifications, setNotifications] = useState([]);
@@ -13,7 +14,7 @@ const NotificationComponent = () => {
       try {
         console.log("Fetching notifications for User ID:", userId);
         const response = await axios.get(
-          `http://localhost:3001/notifications${userId}`,
+          `${Api.SERVER_URL}/notifications${userId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
